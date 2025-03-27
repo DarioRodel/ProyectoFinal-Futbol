@@ -4,7 +4,7 @@ from .views import (
     SeleccionarEquipoView, AsignarEquipoView, MenuView, FormacionEquipoView,
     NotificacionesView, SimularPartidoView, TablaLigaView, EditarEquipoView,
     GestionarEquipoView, DetallesJugadorView, ResultadoPartidoView,
-    MercadoFichajesView, EstadisticasView
+    MercadoFichajesView, EstadisticasView, GuardarFormacionView
 )
 
 urlpatterns = [
@@ -16,7 +16,8 @@ urlpatterns = [
     path('seleccionar-equipo/', SeleccionarEquipoView.as_view(), name='seleccionar_equipo'),
     path('asignar-equipo/<int:equipo_id>/', AsignarEquipoView.as_view(), name='asignar_equipo'),
     path('menu/', MenuView.as_view(), name='menu'),
-    path('formacion-equipo/', FormacionEquipoView.as_view(), name='formacion_equipo'),
+    path('formacion_equipo/', FormacionEquipoView.as_view(), name='formacion_equipo'),
+    path('guardar-formacion/', GuardarFormacionView.as_view(), name='guardar_formacion'),
     path('notificaciones/', NotificacionesView.as_view(), name='notificaciones'),
     path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
     path('tabla-liga/', TablaLigaView.as_view(), name='tabla_liga'),

@@ -1,15 +1,14 @@
-from django.contrib.auth.models import User
+from django.utils import timezone
 from .models import Logro, UsuarioLogro
 
-def otorgar_logro(usuario, logro_nombre):
-    """
-    Otorga un logro a un usuario si no lo tiene ya.
-    """
+def otorgar_logro(usuario, nombre_logro):
     try:
-        logro = Logro.objects.get(nombre=logro_nombre)
+        logro = Logro.objects.get(nombre=nombre_logro)
+        # Verificar si el usuario ya tiene el logro
         if not UsuarioLogro.objects.filter(usuario=usuario, logro=logro).exists():
             UsuarioLogro.objects.create(usuario=usuario, logro=logro)
-            return True  # Indica que el logro fue otorgado
-        return False  # Indica que el usuario ya tenía el logro
+            return True
+        return False
     except Logro.DoesNotExist:
-        return False  # Indica que el logro no existe
+        print(f"Error: El logro '{nombre_logro}' no existe en la base de datos")
+        return False

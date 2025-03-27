@@ -91,7 +91,16 @@ class UserProfile(models.Model):
     equipo_seleccionado = models.ForeignKey(Equipo, on_delete=models.SET_NULL, null=True, blank=True)
     logros_desbloqueados = models.ManyToManyField('Logro', blank=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
-
+    formacion = models.CharField(
+        max_length=10,
+        default='4-4-2',
+        choices=[
+            ('4-4-2', '4-4-2'),
+            ('4-3-3', '4-3-3'),
+            ('3-5-2', '3-5-2'),
+            ('4-2-3-1', '4-2-3-1')
+        ]
+    )
 
 class Lesion(models.Model):
     TIPOS_LESION = [

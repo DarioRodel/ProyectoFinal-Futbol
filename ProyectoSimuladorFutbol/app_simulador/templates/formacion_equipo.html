@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formación del Equipo - Simulador de Fútbol</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'formacion_equipo.css' %}">
+    <style>
+        .cancha {
+            background-image: url('{% static "images/campo.jpg" %}');
+        }
+        body {
+            background-image: url('{% static "images/campo1.jpg" %}');
+        }
+    </style>
+</head>
+<body>
+<div class="formacion-container">
+    <h2><i class="fas fa-users"></i> Formación del Equipo: {{ equipo.nombre }}</h2>
+    
+    <!-- Selector de formación -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Seleccionar Formación</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'guardar_formacion' %}">
+                {% csrf_token %}
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary formacion-btn" data-formacion="4-4-2">4-4-2</button>
+                    <button type="button" class="btn btn-outline-primary formacion-btn" data-formacion="4-3-3">4-3-3</button>
+                    <button type="button" class="btn btn-outline-primary formacion-btn" data-formacion="3-5-2">3-5-2</button>
+                    <button type="button" class="btn btn-outline-primary formacion-btn" data-formacion="4-2-3-1">4-2-3-1</button>
+                </div>
+                <input type="hidden" name="formacion" id="formacion-input" value="{{ formacion_actual }}">
+                <button type="submit" class="btn btn-success mt-3">Guardar Formación</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Jugadores disponibles -->
+    <div class="row">
+        <!-- Porteros -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5>Porteros</h5>
+                </div>
+                <div class="card-body">
+                    {% for jugador in porteros %}
+                        <div class="jugador-card" draggable="true" data-id="{{ jugador.id }}">
+                            <span>{{ jugador.nombre }} {{ jugador.apellido }}</span>
+                            <small class="text-muted">#{{ jugador.dorsal }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Defensas -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5>Defensas</h5>
+                </div>
+                <div class="card-body">
+                    {% for jugador in defensas %}
+                        <div class="jugador-card" draggable="true" data-id="{{ jugador.id }}">
+                            <span>{{ jugador.nombre }} {{ jugador.apellido }}</span>
+                            <small class="text-muted">#{{ jugador.dorsal }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mediocampistas -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h5>Mediocampistas</h5>
+                </div>
+                <div class="card-body">
+                    {% for jugador in mediocampistas %}
+                        <div class="jugador-card" draggable="true" data-id="{{ jugador.id }}">
+                            <span>{{ jugador.nombre }} {{ jugador.apellido }}</span>
+                            <small class="text-muted">#{{ jugador.dorsal }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Delanteros -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5>Delanteros</h5>
+                </div>
+                <div class="card-body">
+                    {% for jugador in delanteros %}
+                        <div class="jugador-card" draggable="true" data-id="{{ jugador.id }}">
+                            <span>{{ jugador.nombre }} {{ jugador.apellido }}</span>
+                            <small class="text-muted">#{{ jugador.dorsal }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cancha de fútbol -->
+    <div class="cancha-container mt-4">
+        <h4 class="text-center mb-3">Alineación Actual</h4>
+        <div class="cancha" id="cancha">
+            <div class="formacion" id="formacion-preview" data-formacion="{{ formacion_actual }}"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/formacion_equipo.js' %}"></script>
+</body>
+</html>

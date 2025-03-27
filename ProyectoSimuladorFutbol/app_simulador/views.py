@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.views import View
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -111,14 +112,20 @@ class AsignarEquipoView(LoginRequiredMixin, View):
     def get(self, request, equipo_id):
         equipo = get_object_or_404(Equipo, id=equipo_id)
         perfil = request.user.userprofile
+
+        # Verificar si el usuario ya tiene un equipo
+        if perfil.equipo_seleccionado:
+            return redirect(reverse('menu') + '?error=ya_tiene_equipo')
+
+        # Asignar el nuevo equipo
         perfil.equipo_seleccionado = equipo
         perfil.save()
 
         # Otorgar el logro "Primer Equipo"
         otorgar_logro(request.user, "Primer Equipo")
 
-        return redirect('menu')
-
+        # Redirigir a notificaciones para mostrar el logro
+        return redirect('notificaciones')
 
 # Vista para el menú principal
 class MenuView(View):
@@ -127,33 +134,47 @@ class MenuView(View):
         return render(request, 'menu.html', {'equipos': equipos})
 
 
-# Vista para gestionar la formación del equipo
 class FormacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
         equipo = perfil.equipo_seleccionado
-        jugadores = Jugador.objects.filter(equipo=equipo)
+
+        if not equipo:
+            return redirect('seleccionar_equipo')
+
+        jugadores = Jugador.objects.filter(equipo=equipo).order_by('posicion', '-valor_mercado')
+
+        # Usar getattr para evitar errores si el campo no existe
+        formacion_actual = getattr(perfil, 'formacion', '4-4-2') or '4-4-2'
+
         return render(request, 'formacion_equipo.html', {
             'equipo': equipo,
-            'jugadores': jugadores,
+            'porteros': jugadores.filter(posicion='POR'),
+            'defensas': jugadores.filter(posicion='DEF'),
+            'mediocampistas': jugadores.filter(posicion='MED'),
+            'delanteros': jugadores.filter(posicion='DEL'),
+            'formacion_actual': formacion_actual
         })
-
+class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):
         perfil = request.user.userprofile
         formacion = request.POST.get('formacion')
-        perfil.formacion = formacion
-        perfil.save()
-        return redirect('menu')
 
+        if formacion in ['4-4-2', '4-3-3', '3-5-2', '4-2-3-1']:
+            perfil.formacion = formacion
+            perfil.save()
+            # Redirigir con mensaje de éxito
+            return redirect('formacion_equipo')
 
+        # Si la formación no es válida
+        return redirect('formacion_equipo')
 # Vista para ver notificaciones
 class NotificacionesView(LoginRequiredMixin, View):
     def get(self, request):
-        logros_obtenidos = UsuarioLogro.objects.filter(usuario=request.user)
+        logros_obtenidos = UsuarioLogro.objects.filter(usuario=request.user).order_by('-fecha_obtenido')
         return render(request, 'notificaciones.html', {
             'logros_obtenidos': logros_obtenidos,
         })
-
 
 # Vista para simular un partido
 class SimularPartidoView(View):
