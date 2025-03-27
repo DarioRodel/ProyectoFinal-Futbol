@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Simulador de Fútbol</title>
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'inicio.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Bienvenido al Simulador de Fútbol</h1>
+        <p class="lead text-center">¡Has iniciado sesión correctamente!</p>
+        <div class="text-center mt-4">
+            <!-- Botón para seleccionar el equipo -->
+            <a href="{% url 'seleccionar_equipo' %}" class="btn btn-success">Elegir Equipo</a>
+        </div>
+    </div>
+</body>
+</html>

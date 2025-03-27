@@ -1,0 +1,177 @@
+body {
+    background: url('images/campo1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+    max-width: 300px;  /* Limitar el ancho del menú */
+    margin: 0 auto;  /* Centrar el menú */
+}
+
+.menu-item {
+    background-color: rgba(0, 51, 102, 0.6);  /* Más transparente */
+    border: 2px solid #c0c0c0;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(192, 192, 192, 0.5);
+}
+
+.menu-item h3 {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.menu-item p {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    margin-top: 10px;
+    background-color: #003366;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item a:hover {
+    background-color: #002244;
+}
+
+/* Estilos para la tabla de la liga */
+.tabla-liga-container {
+    background-color: rgba(0, 51, 102, 0.6);  /* Más transparente */
+    border: 2px solid #c0c0c0;
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    max-height: 300px;  /* Altura máxima para la tabla */
+    overflow-y: auto;  /* Habilitar scroll vertical */
+    overflow-x: hidden;  /* Deshabilitar scroll horizontal */
+    width: 100%;  /* Ocupar todo el ancho disponible */
+    min-width: 600px;  /* Ancho mínimo para que la tabla sea más ancha */
+}
+
+.tabla-liga-container h3 {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.tabla-liga-container table {
+    width: 100%;  /* Ocupar todo el ancho del contenedor */
+    border-collapse: collapse;
+    color: #e0e0e0;
+}
+
+.tabla-liga-container th, .tabla-liga-container td {
+    padding: 8px;
+    text-align: center;  /* Centrar el contenido de las celdas */
+    border-bottom: 1px solid #c0c0c0;
+    white-space: nowrap;  /* Evitar que el texto se divida en varias líneas */
+}
+
+/* Excepción: Alinear el nombre del equipo a la izquierda */
+.tabla-liga-container td:nth-child(3) {
+    text-align: left;  /* Alinear el nombre del equipo a la izquierda */
+}
+
+.tabla-liga-container th {
+    background-color: rgba(0, 34, 68, 0.8);  /* Fondo azul más oscuro */
+    color: #ffffff;  /* Texto blanco */
+}
+
+/* Estilos para el escudo del equipo */
+.equipo-escudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.escudo-img {
+    width: 40px;  /* Tamaño del escudo */
+    height: 40px;
+    object-fit: contain;  /* Ajustar la imagen sin deformarla */
+}
+
+/* Estilos para el botón "Volver al menú" */
+.btn-ver-tabla {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #003366;  /* Fondo azul oscuro */
+    color: #fff;  /* Texto blanco */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;  /* Bordes redondeados */
+    transition: background-color 0.3s ease;  /* Transición suave */
+}
+
+.btn-ver-tabla:hover {
+    background-color: #002244;  /* Fondo azul más oscuro al hacer hover */
+}
+
+/* Estilos para el equipo asignado */
+.equipo-asignado {
+    background-color: rgba(255, 223, 0, 0.2);  /* Fondo amarillo claro */
+    border-left: 4px solid #ffdf00;  /* Borde izquierdo amarillo */
+}
+
+.equipo-asignado td {
+    font-weight: bold;  /* Texto en negrita */
+}
+
+/* Ícono de estrella para el equipo asignado */
+.equipo-asignado .equipo-escudo::after {
+    content: "★";  /* Ícono de estrella */
+    color: #ffdf00;  /* Color amarillo */
+    margin-left: 5px;  /* Espaciado */
+    font-size: 1.2rem;  /* Tamaño del ícono */
+}
+/* Estilos para el botón "Ver tabla completa" */
+.btn-ver-tabla {
+    display: block;
+    margin-top: 15px;
+    padding: 8px 16px;  /* Mismo padding que el botón de notificaciones */
+    background-color: #003366;  /* Fondo azul oscuro */
+    color: #fff;  /* Texto blanco */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;  /* Bordes redondeados */
+    transition: background-color 0.3s ease;  /* Transición suave */
+    font-size: 1rem;  /* Mismo tamaño de fuente */
+}
+
+.btn-ver-tabla:hover {
+    background-color: #002244;  /* Fondo azul más oscuro al hacer hover */
+}
+.tabla-liga-container td {
+    text-align: center !important;
+}

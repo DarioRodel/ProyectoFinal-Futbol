@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Simulador de Fútbol</title>
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'registro.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<div class="container">
+    <h2 class="text-center">Registro</h2>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+
+        <!-- Campo de nombre de usuario -->
+        <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" class="form-control"
+                   placeholder="Crea un nombre de usuario" required>
+        </div>
+
+        <!-- Campo de correo electrónico -->
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa tu correo electrónico"
+                   required>
+        </div>
+
+        <!-- Campo de contraseña -->
+        <div class="form-group">
+            <label for="password1">Contraseña</label>
+            <input type="password" id="password1" name="password1" class="form-control"
+                   placeholder="Crea una contraseña" required>
+        </div>
+
+        <!-- Campo de confirmación de contraseña -->
+        <div class="form-group">
+            <label for="password2">Confirmar contraseña</label>
+            <input type="password" id="password2" name="password2" class="form-control"
+                   placeholder="Confirma tu contraseña" required>
+        </div>
+
+        <!-- Botón de enviar -->
+        <button type="submit" class="btn btn-success w-100 mt-3">Registrarse</button>
+    </form>
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    {{ error }}<br>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="mt-3 text-center">
+        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    background: url('images/campo1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal de notificaciones */
+.notificaciones-container {
+    background-color: rgba(0, 51, 102, 0.8);  /* Fondo azul oscuro semitransparente */
+    border: 2px solid #c0c0c0;  /* Borde plateado */
+    border-radius: 15px;  /* Bordes redondeados */
+    padding: 20px;  /* Espaciado interno */
+    backdrop-filter: blur(5px);  /* Efecto de desenfoque */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);  /* Sombra */
+    max-width: 800px;  /* Ancho máximo */
+    margin: 20px auto;  /* Centrar el contenedor */
+    color: #ffffff;  /* Texto blanco */
+}
+
+/* Título de la sección de notificaciones */
+.notificaciones-container h3 {
+    font-size: 1.5rem;  /* Tamaño de fuente */
+    color: #ffffff;  /* Texto blanco */
+    margin-bottom: 15px;  /* Espaciado inferior */
+    text-align: center;  /* Centrar el texto */
+}
+
+/* Lista de notificaciones */
+.lista-notificaciones {
+    max-height: 400px;  /* Altura máxima para la lista */
+    overflow-y: auto;  /* Habilitar scroll vertical */
+    padding-right: 10px;  /* Espaciado para el scroll */
+}
+
+/* Estilos para cada ítem de notificación */
+.notificacion-item {
+    background-color: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
+    border-radius: 10px;  /* Bordes redondeados */
+    padding: 15px;  /* Espaciado interno */
+    margin-bottom: 10px;  /* Espaciado entre notificaciones */
+    display: flex;  /* Flexbox para alinear ícono y contenido */
+    align-items: center;  /* Centrar verticalmente */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transición suave */
+}
+
+.notificacion-item:hover {
+    transform: translateY(-3px);  /* Efecto de levantar */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);  /* Sombra al hacer hover */
+}
+
+/* Ícono de la notificación */
+.notificacion-icono {
+    font-size: 1.5rem;  /* Tamaño del ícono */
+    color: #ffdf00;  /* Color amarillo */
+    margin-right: 15px;  /* Espaciado a la derecha */
+}
+
+/* Contenido de la notificación */
+.notificacion-contenido h4 {
+    font-size: 1.2rem;  /* Tamaño de fuente */
+    color: #ffffff;  /* Texto blanco */
+    margin-bottom: 5px;  /* Espaciado inferior */
+}
+
+.notificacion-contenido p {
+    font-size: 0.9rem;  /* Tamaño de fuente */
+    color: #e0e0e0;  /* Texto gris claro */
+    margin-bottom: 5px;  /* Espaciado inferior */
+}
+
+.notificacion-contenido small {
+    font-size: 0.8rem;  /* Tamaño de fuente */
+    color: #c0c0c0;  /* Texto gris más claro */
+}
+
+/* Mensaje cuando no hay notificaciones */
+.sin-notificaciones {
+    text-align: center;  /* Centrar el texto */
+    font-size: 1rem;  /* Tamaño de fuente */
+    color: #e0e0e0;  /* Texto gris claro */
+}
+
+/* Botón "Volver al menú" */
+.btn-volver-menu {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #003366;  /* Fondo azul oscuro */
+    color: #fff;  /* Texto blanco */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;  /* Bordes redondeados */
+    transition: background-color 0.3s ease;  /* Transición suave */
+}
+
+.btn-volver-menu:hover {
+    background-color: #002244;  /* Fondo azul más oscuro al hacer hover */
+}

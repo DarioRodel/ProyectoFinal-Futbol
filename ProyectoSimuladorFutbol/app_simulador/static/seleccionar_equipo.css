@@ -1,0 +1,140 @@
+/* seleccionar_equipo.css */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('images/campos-de-futbol.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: rgba(25, 48, 26, 0.95);  /* Fondo verde oscuro semitransparente */
+    border: 2px solid #1f3a20;  /* Borde verde oscuro */
+    border-radius: 20px;
+    padding: 20px;  /* Reduce el padding para que el contenedor sea más compacto */
+    max-width: 600px;  /* Ajusta el ancho máximo del contenedor */
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);  /* Efecto de desenfoque */
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);  /* Sombra más pronunciada */
+    animation: fadeIn 1.5s ease-in-out;
+    margin: 20px;  /* Añade un margen para que no esté pegado a los bordes */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2, h3,h4 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #00ff88;  /* Verde brillante */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);  /* Sombra de texto */
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-color: rgba(47, 90, 58, 0.8);  /* Verde semitransparente */
+    color: white;
+    cursor: pointer;
+}
+.btn-secondary {
+    margin-top: 20px;  /* Añade un margen superior */
+    margin-bottom: 20px;  /* Añade un margen inferior */
+}
+.btn:hover {
+    background-color: rgba(79, 136, 92, 0.8);  /* Verde más claro */
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 15px rgba(0, 255, 136, 0.3);  /* Sombra neon al hacer hover */
+}
+
+.equipos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;  /* Espacio entre los elementos */
+    margin-bottom: 30px;  /* Añade un margen inferior */
+}
+
+.equipo-item {
+    display: flex;
+    align-items: center;
+    background-color: rgba(47, 90, 58, 0.8);  /* Fondo verde semitransparente */
+    border: 2px solid #1f3a20;  /* Borde verde oscuro */
+    border-radius: 15px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.equipo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 15px rgba(0, 255, 136, 0.3);  /* Sombra neon al hacer hover */
+}
+
+.equipo-escudo img {
+    width: 50px;  /* Tamaño del escudo */
+    height: 50px;
+    object-fit: contain;  /* Ajusta la imagen sin deformarla */
+    margin-right: 15px;
+}
+
+.equipo-detalles {
+    flex: 1;  /* Ocupa el espacio restante */
+    text-align: left;
+}
+
+.equipo-nombre {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #00ff88;  /* Verde brillante */
+    margin-bottom: 5px;
+}
+
+.equipo-info {
+    font-size: 0.9rem;
+    color: #cfcfcf;  /* Gris claro */
+    margin: 0;
+}
+
+.equipo-accion {
+    margin-left: 15px;
+}
+
+.btn-asignar {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    background-color: #00ff88;  /* Verde brillante */
+    color: #1f3a20;  /* Verde oscuro */
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-asignar:hover {
+    background-color: #00cc66;  /* Verde más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 15px rgba(0, 255, 136, 0.3);  /* Sombra neon al hacer hover */
+}
