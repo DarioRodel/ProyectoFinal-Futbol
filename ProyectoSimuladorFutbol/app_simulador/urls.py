@@ -2,9 +2,7 @@ from django.urls import path
 from .views import (
     IndexView, InicioView, RegistroView, LoginView, LogoutView,
     SeleccionarEquipoView, AsignarEquipoView, MenuView, FormacionEquipoView,
-    NotificacionesView, SimularPartidoView, TablaLigaView, EditarEquipoView,
-    GestionarEquipoView, DetallesJugadorView, ResultadoPartidoView,
-    MercadoFichajesView, EstadisticasView, GuardarFormacionView,
+    NotificacionesView, SimularPartidoView, TablaLigaView, GuardarFormacionView,
     EliminarTemporadaView, ConfirmarCambioEquipoView
 )
 
@@ -18,16 +16,11 @@ urlpatterns = [
     path('asignar-equipo/<int:equipo_id>/', AsignarEquipoView.as_view(), name='asignar_equipo'),
     path('confirmar-cambio/<int:equipo_id>/', ConfirmarCambioEquipoView.as_view(), name='confirmar_cambio'),
     path('menu/', MenuView.as_view(), name='menu'),
+    path('eliminar-temporada/', EliminarTemporadaView.as_view(), name='eliminar_temporada'),
+    path('notificaciones/', NotificacionesView.as_view(), name='notificaciones'),
+    path('tabla-liga/', TablaLigaView.as_view(), name='tabla_liga'),
     path('formacion-equipo/', FormacionEquipoView.as_view(), name='formacion_equipo'),
     path('guardar-formacion/', GuardarFormacionView.as_view(), name='guardar_formacion'),
-    path('notificaciones/', NotificacionesView.as_view(), name='notificaciones'),
     path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
-    path('tabla-liga/', TablaLigaView.as_view(), name='tabla_liga'),
-    path('editar-equipo/<int:equipo_id>/', EditarEquipoView.as_view(), name='editar_equipo'),
-    path('gestionar-equipo/<int:equipo_id>/', GestionarEquipoView.as_view(), name='gestionar_equipo'),
-    path('detalles-jugador/<int:jugador_id>/', DetallesJugadorView.as_view(), name='detalles_jugador'),
-    path('resultado-partido/', ResultadoPartidoView.as_view(), name='resultado_partido'),
-    path('mercado-fichajes/', MercadoFichajesView.as_view(), name='mercado_fichajes'),
-    path('estadisticas/', EstadisticasView.as_view(), name='estadisticas'),
-    path('eliminar-temporada/', EliminarTemporadaView.as_view(), name='eliminar_temporada'),
+
 ]

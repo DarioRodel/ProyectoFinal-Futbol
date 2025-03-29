@@ -13,7 +13,7 @@ class EquipoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'ciudad', 'estadio', 'division', 'puntos', 'temporada_finalizada')
     list_filter = ('division', 'temporada_finalizada')
     search_fields = ('nombre', 'ciudad')
-    ordering = ('-puntos',)  # Ordenar por puntos de mayor a menor
+    ordering = ('-puntos',)
 
 
 @admin.register(Jugador)
@@ -29,7 +29,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'equipo_seleccionado', 'fecha_registro')
     list_filter = ('equipo_seleccionado',)
     search_fields = ('user__username', 'equipo_seleccionado__nombre')
-    raw_id_fields = ('user',)  # Para buscar usuarios más fácilmente
+    raw_id_fields = ('user',)
 
 
 @admin.register(Lesion)

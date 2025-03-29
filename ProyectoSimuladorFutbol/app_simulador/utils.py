@@ -1,4 +1,3 @@
-from django.utils import timezone
 from .models import Logro, UsuarioLogro
 
 def otorgar_logro(usuario, nombre_logro):
