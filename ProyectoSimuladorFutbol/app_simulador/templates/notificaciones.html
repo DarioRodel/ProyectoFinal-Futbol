@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="{% static 'notificaciones.css' %}">
 </head>
 <body>
+{% if mostrar_popup %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>¡Logro desbloqueado!</strong> Has obtenido el logro "Primer Equipo".
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 <div class="notificaciones-container">
     <h3><i class="fas fa-bell"></i> Notificaciones</h3>
     
@@ -37,7 +43,14 @@
     </div>
     <a href="{% url 'menu' %}" class="btn btn-primary mt-3">Volver al menú</a>
 </div>
-
+<script>
+// Redirigir después de 3 segundos si hay mensaje especial
+{% if mensaje_especial %}
+setTimeout(function() {
+    window.location.href = "{% url 'tabla_liga' %}";
+}, 3000);
+{% endif %}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

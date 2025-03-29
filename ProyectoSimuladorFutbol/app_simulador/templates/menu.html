@@ -14,6 +14,14 @@
     <div class="menu-grid">
         <!-- Formación del Equipo -->
         <div class="menu-item">
+            <h3><i class="fas fa-trash-alt"></i> Eliminar Temporada</h3>
+            <p>Reinicia tu equipo y selecciona uno nuevo.</p>
+            <form action="{% url 'eliminar_temporada' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Eliminar Temporada</button>
+            </form>
+        </div>
+        <div class="menu-item">
             <h3><i class="fas fa-users"></i> Formación del Equipo</h3>
             <p>Gestiona la alineación de tu equipo.</p>
             <a href="{% url 'formacion_equipo' %}" class="btn">Ir a Formación</a>
@@ -39,22 +47,22 @@
         <h3><i class="fas fa-table"></i> Tabla de la Liga</h3>
         <table>
             <thead>
-                <tr>
-                    <th>Posición</th>
-                    <th>Equipo</th>
-                    <th>Puntos</th>
-                    <th>Ganados</th>
-                </tr>
+            <tr>
+                <th>Posición</th>
+                <th>Equipo</th>
+                <th>Puntos</th>
+                <th>Ganados</th>
+            </tr>
             </thead>
             <tbody>
-                {% for equipo in equipos %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ equipo.nombre }}</td>
-                        <td>{{ equipo.puntos }}</td>
-                        <td>{{ equipo.partidos_ganados }}</td>
-                    </tr>
-                {% endfor %}
+            {% for equipo in equipos %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ equipo.nombre }}</td>
+                    <td>{{ equipo.puntos }}</td>
+                    <td>{{ equipo.partidos_ganados }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
         <a href="{% url 'tabla_liga' %}" class="btn-ver-tabla">Ver tabla completa</a>

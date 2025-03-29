@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import transaction
 from .models import Equipo, Jugador, UserProfile, Lesion, Partido, Transferencia, Logro, UsuarioLogro
 from .forms import CustomUserCreationForm, SeleccionEquipoForm, EditarEquipoForm
 import random
@@ -19,6 +20,11 @@ class IndexView(View):
 # Vista para la página de inicio de sesión
 class InicioView(View):
     def get(self, request):
+        # Redirigir al menú si ya está autenticado y tiene equipo
+        if request.user.is_authenticated:
+            perfil = getattr(request.user, 'userprofile', None)
+            if perfil and perfil.equipo_seleccionado:
+                return redirect('menu')
         return render(request, 'inicio.html')
 
 
@@ -31,10 +37,11 @@ class RegistroView(View):
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            UserProfile.objects.create(user=user)
-            login(request, user)
-            return redirect('inicio')
+            with transaction.atomic():
+                user = form.save()
+                UserProfile.objects.create(user=user)
+                login(request, user)
+            return redirect('menu')
         return render(request, 'registro.html', {'form': form})
 
 
@@ -49,7 +56,7 @@ class LoginView(View):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('inicio')
+            return redirect('menu')
         return render(request, 'login.html', {'form': form})
 
 
@@ -64,6 +71,11 @@ class LogoutView(View):
 class SeleccionarEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
+
+        # Redirigir al menú si ya tiene equipo
+        if perfil.equipo_seleccionado:
+            return redirect('menu')
+
         equipos = Equipo.objects.all()
         imagenes_escudos = {
             "Deportivo Alavés": "images/escudos/alaves.png",
@@ -88,23 +100,13 @@ class SeleccionarEquipoView(LoginRequiredMixin, View):
             "Villarreal CF": "images/escudos/villareal.png",
         }
 
-        # Agregar la ruta de la imagen a cada equipo
         for equipo in equipos:
             equipo.ruta_escudo = imagenes_escudos.get(equipo.nombre, "images/escudos/barca.png")
 
-        form = SeleccionEquipoForm(instance=perfil)
         return render(request, 'seleccion_equipo.html', {
-            'form': form,
             'equipos': equipos,
+            'tiene_equipo': False
         })
-
-    def post(self, request):
-        perfil = request.user.userprofile
-        form = SeleccionEquipoForm(request.POST, instance=perfil)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
-        return render(request, 'seleccion_equipo.html', {'form': form})
 
 
 # Vista para asignar un equipo
@@ -113,27 +115,94 @@ class AsignarEquipoView(LoginRequiredMixin, View):
         equipo = get_object_or_404(Equipo, id=equipo_id)
         perfil = request.user.userprofile
 
-        # Verificar si el usuario ya tiene un equipo
+        # Verificar si ya tiene equipo
         if perfil.equipo_seleccionado:
-            return redirect(reverse('menu') + '?error=ya_tiene_equipo')
+            return render(request, 'confirmar_cambio_equipo.html', {
+                'equipo_actual': perfil.equipo_seleccionado,
+                'nuevo_equipo': equipo
+            })
 
-        # Asignar el nuevo equipo
-        perfil.equipo_seleccionado = equipo
-        perfil.save()
+        # Asignar nuevo equipo
+        with transaction.atomic():
+            perfil.equipo_seleccionado = equipo
+            perfil.save()
+            otorgar_logro(request.user, "Primer Equipo")
 
-        # Otorgar el logro "Primer Equipo"
-        otorgar_logro(request.user, "Primer Equipo")
+        return redirect('menu')
 
-        # Redirigir a notificaciones para mostrar el logro
-        return redirect('notificaciones')
+
+# Vista para confirmar cambio de equipo
+class ConfirmarCambioEquipoView(LoginRequiredMixin, View):
+    def post(self, request, equipo_id):
+        equipo = get_object_or_404(Equipo, id=equipo_id)
+        perfil = request.user.userprofile
+
+        with transaction.atomic():
+            # Resetear estadísticas del equipo actual
+            if perfil.equipo_seleccionado:
+                equipo_actual = perfil.equipo_seleccionado
+                equipo_actual.puntos = 0
+                equipo_actual.partidos_jugados = 0
+                equipo_actual.partidos_ganados = 0
+                equipo_actual.partidos_perdidos = 0
+                equipo_actual.partidos_empatados = 0
+                equipo_actual.temporada_finalizada = False
+                equipo_actual.save()
+
+            # Asignar nuevo equipo
+            perfil.equipo_seleccionado = equipo
+            perfil.save()
+
+        return redirect('menu')
+
 
 # Vista para el menú principal
-class MenuView(View):
+class MenuView(LoginRequiredMixin, View):
     def get(self, request):
-        equipos = Equipo.objects.order_by('-puntos')  # Ordenar por puntos (de mayor a menor)
-        return render(request, 'menu.html', {'equipos': equipos})
+        perfil = request.user.userprofile
+
+        # Redirigir si no hay equipo seleccionado
+        if not perfil.equipo_seleccionado:
+            return redirect('seleccionar_equipo')
+
+        equipos = Equipo.objects.order_by('-puntos')
+
+        # Verificar si el usuario es líder
+        if perfil.equipo_seleccionado == equipos.first():
+            otorgar_logro(request.user, "Líder de la Liga")
+
+        return render(request, 'menu.html', {
+            'equipos': equipos,
+            'equipo_asignado': perfil.equipo_seleccionado
+        })
 
 
+# Vista para eliminar temporada
+class EliminarTemporadaView(LoginRequiredMixin, View):
+    def post(self, request):
+        perfil = request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+
+        with transaction.atomic():
+            if equipo:
+                # Resetear estadísticas del equipo
+                equipo.puntos = 0
+                equipo.partidos_jugados = 0
+                equipo.partidos_ganados = 0
+                equipo.partidos_perdidos = 0
+                equipo.partidos_empatados = 0
+                equipo.temporada_finalizada = False
+                equipo.ya_jugo = False
+                equipo.save()
+
+            # Eliminar equipo seleccionado
+            perfil.equipo_seleccionado = None
+            perfil.save()
+
+        return redirect('seleccionar_equipo')
+
+
+# Vista para la formación del equipo
 class FormacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
@@ -143,8 +212,6 @@ class FormacionEquipoView(LoginRequiredMixin, View):
             return redirect('seleccionar_equipo')
 
         jugadores = Jugador.objects.filter(equipo=equipo).order_by('posicion', '-valor_mercado')
-
-        # Usar getattr para evitar errores si el campo no existe
         formacion_actual = getattr(perfil, 'formacion', '4-4-2') or '4-4-2'
 
         return render(request, 'formacion_equipo.html', {
@@ -155,6 +222,9 @@ class FormacionEquipoView(LoginRequiredMixin, View):
             'delanteros': jugadores.filter(posicion='DEL'),
             'formacion_actual': formacion_actual
         })
+
+
+# Vista para guardar formación
 class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):
         perfil = request.user.userprofile
@@ -163,88 +233,82 @@ class GuardarFormacionView(LoginRequiredMixin, View):
         if formacion in ['4-4-2', '4-3-3', '3-5-2', '4-2-3-1']:
             perfil.formacion = formacion
             perfil.save()
-            # Redirigir con mensaje de éxito
             return redirect('formacion_equipo')
 
-        # Si la formación no es válida
         return redirect('formacion_equipo')
-# Vista para ver notificaciones
+
+
+# Vista para notificaciones
 class NotificacionesView(LoginRequiredMixin, View):
     def get(self, request):
-        logros_obtenidos = UsuarioLogro.objects.filter(usuario=request.user).order_by('-fecha_obtenido')
+        logros = UsuarioLogro.objects.filter(usuario=request.user).order_by('-fecha_obtenido')
         return render(request, 'notificaciones.html', {
-            'logros_obtenidos': logros_obtenidos,
+            'logros_obtenidos': logros,
+            'mostrar_popup': False
         })
 
-# Vista para simular un partido
-class SimularPartidoView(View):
+
+# Vista para simular partido
+class SimularPartidoView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'simular_partido.html')
 
     def post(self, request):
-        # Obtener el equipo del usuario
         perfil = request.user.userprofile
         equipo_usuario = perfil.equipo_seleccionado
 
-        # Obtener los equipos que no han jugado aún
-        equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id).filter(ya_jugo=False)
+        if not equipo_usuario:
+            return redirect('seleccionar_equipo')
 
-        if not equipos_disponibles:
-            # Si todos los equipos ya jugaron, reiniciar el estado
-            Equipo.objects.update(ya_jugo=False)
-            equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id)
+        with transaction.atomic():
+            # Lógica de simulación de partido
+            equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id).filter(ya_jugo=False)
 
-        # Seleccionar un oponente aleatorio
-        oponente = random.choice(equipos_disponibles)
+            if not equipos_disponibles:
+                Equipo.objects.update(ya_jugo=False)
+                equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id)
 
-        # Simular un resultado aleatorio
-        goles_usuario = random.randint(0, 5)  # Goles del equipo del usuario
-        goles_oponente = random.randint(0, 5)  # Goles del oponente
+            oponente = random.choice(equipos_disponibles)
+            goles_usuario = random.randint(0, 5)
+            goles_oponente = random.randint(0, 5)
 
-        # Actualizar puntos según el resultado
-        if goles_usuario > goles_oponente:
-            equipo_usuario.puntos += 3  # Victoria del equipo del usuario
-            equipo_usuario.partidos_ganados += 1  # Incrementar partidos ganados
-        elif goles_usuario < goles_oponente:
-            oponente.puntos += 3  # Victoria del oponente
-        else:
-            equipo_usuario.puntos += 1  # Empate
-            oponente.puntos += 1  # Empate
+            # Actualizar resultados
+            if goles_usuario > goles_oponente:
+                equipo_usuario.puntos += 3
+                equipo_usuario.partidos_ganados += 1
+            elif goles_usuario < goles_oponente:
+                oponente.puntos += 3
+            else:
+                equipo_usuario.puntos += 1
+                oponente.puntos += 1
 
-        # Marcar los equipos como que ya jugaron
-        equipo_usuario.ya_jugo = True
-        oponente.ya_jugo = True
+            equipo_usuario.ya_jugo = True
+            oponente.ya_jugo = True
+            equipo_usuario.save()
+            oponente.save()
 
-        # Guardar los cambios en la base de datos
-        equipo_usuario.save()
-        oponente.save()
+            # Otorgar logros
+            if not UsuarioLogro.objects.filter(usuario=request.user, logro__nombre="Primer Partido").exists():
+                otorgar_logro(request.user, "Primer Partido")
 
-        # Otorgar el logro "Primer Partido" si es el primer partido
-        if not UsuarioLogro.objects.filter(usuario=request.user, logro__nombre="Primer Partido").exists():
-            otorgar_logro(request.user, "Primer Partido")
+            if equipo_usuario.partidos_ganados >= 10:
+                otorgar_logro(request.user, "10 Victorias")
 
-        # Otorgar el logro "10 Victorias" si el usuario ha ganado 10 partidos
-        if equipo_usuario.partidos_ganados >= 10:
-            otorgar_logro(request.user, "10 Victorias")
-
-        # Redirigir al menú después de simular el partido
         return redirect('menu')
 
 
-# Vista para mostrar la tabla de la liga
+# Vista para tabla de liga
 class TablaLigaView(LoginRequiredMixin, View):
     def get(self, request):
-        equipos = Equipo.objects.order_by('-puntos')  # Ordenar por puntos (de mayor a menor)
-
-        # Obtener el equipo asignado por el usuario
+        equipos = Equipo.objects.order_by('-puntos')
         perfil = request.user.userprofile
         equipo_asignado = perfil.equipo_seleccionado
 
         # Verificar si el equipo del usuario está en primer lugar
-        if equipos.first() == equipo_asignado:
+        if equipo_asignado and equipos.first() == equipo_asignado:
             otorgar_logro(request.user, "Líder de la Liga")
 
-        # Diccionario con las rutas de los escudos
+        # Agregar escudos
         imagenes_escudos = {
             "Deportivo Alavés": "images/escudos/alaves.png",
             "Athletic Club": "images/escudos/bilbao.png",
@@ -268,79 +332,62 @@ class TablaLigaView(LoginRequiredMixin, View):
             "Villarreal CF": "images/escudos/villareal.png",
         }
 
-        # Agregar la ruta de la imagen a cada equipo
         for equipo in equipos:
             equipo.ruta_escudo = imagenes_escudos.get(equipo.nombre, "images/escudos/barca.png")
 
-        return render(request, 'tabla_liga.html', {
+        response = render(request, 'tabla_liga.html', {
             'equipos': equipos,
-            'equipo_asignado': equipo_asignado,  # Pasar el equipo asignado a la plantilla
+            'equipo_asignado': equipo_asignado
         })
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response['Pragma'] = 'no-cache'
+        response['Expires'] = '0'
+        return response
 
 
+# Vista para finalizar temporada
 class FinalizarTemporadaView(LoginRequiredMixin, View):
     def get(self, request):
-        # Obtener el equipo del usuario
         perfil = request.user.userprofile
         equipo_asignado = perfil.equipo_seleccionado
 
-        # Marcar la temporada como finalizada
-        equipo_asignado.temporada_finalizada = True
-        equipo_asignado.save()
+        if not equipo_asignado:
+            return redirect('seleccionar_equipo')
 
-        # Otorgar el logro "Temporada Completa"
-        otorgar_logro(request.user, "Temporada Completa")
+        with transaction.atomic():
+            equipo_asignado.temporada_finalizada = True
+            equipo_asignado.save()
+            otorgar_logro(request.user, "Temporada Completa")
 
-        # Verificar si el equipo del usuario está en primer lugar
-        equipos = Equipo.objects.order_by('-puntos')
-        if equipos.first() == equipo_asignado:
-            otorgar_logro(request.user, "Campeón de la Liga")
+            if Equipo.objects.order_by('-puntos').first() == equipo_asignado:
+                otorgar_logro(request.user, "Campeón de la Liga")
 
         return redirect('menu')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Vista para editar un equipo
 class EditarEquipoView(LoginRequiredMixin, View):
     def get(self, request, equipo_id):
-        perfil_usuario = request.user.userprofile
+        perfil = request.user.userprofile
         equipo = get_object_or_404(Equipo, pk=equipo_id)
 
-        if equipo != perfil_usuario.equipo_seleccionado:
-            return redirect('dashboard')
+        if equipo != perfil.equipo_seleccionado:
+            return redirect('menu')
 
         form = EditarEquipoForm(instance=equipo)
         return render(request, 'editar_equipo.html', {'form': form})
 
     def post(self, request, equipo_id):
-        perfil_usuario = request.user.userprofile
+        perfil = request.user.userprofile
         equipo = get_object_or_404(Equipo, pk=equipo_id)
 
-        if equipo != perfil_usuario.equipo_seleccionado:
-            return redirect('dashboard')
+        if equipo != perfil.equipo_seleccionado:
+            return redirect('menu')
 
         form = EditarEquipoForm(request.POST, instance=equipo)
         if form.is_valid():
             form.save()
-            return redirect('detalle_equipo', equipo_id=equipo.id)
+            return redirect('menu')
         return render(request, 'editar_equipo.html', {'form': form})
 
 
@@ -349,12 +396,17 @@ class GestionarEquipoView(LoginRequiredMixin, View):
     def get(self, request, equipo_id):
         perfil = request.user.userprofile
         equipo = get_object_or_404(Equipo, id=equipo_id)
+
+        if equipo != perfil.equipo_seleccionado:
+            return redirect('menu')
+
         jugadores = Jugador.objects.filter(equipo=equipo)
         formaciones = [
             {'id': 1, 'nombre': '4-3-3'},
             {'id': 2, 'nombre': '4-4-2'},
             {'id': 3, 'nombre': '3-5-2'}
         ]
+
         return render(request, 'gestion_equipo.html', {
             'equipo': equipo,
             'jugadores': jugadores,
@@ -366,10 +418,10 @@ class GestionarEquipoView(LoginRequiredMixin, View):
 class DetallesJugadorView(LoginRequiredMixin, View):
     def get(self, request, jugador_id):
         jugador = get_object_or_404(Jugador, id=jugador_id)
-        perfil_usuario = request.user.userprofile
+        perfil = request.user.userprofile
 
-        if jugador.equipo != perfil_usuario.equipo_seleccionado:
-            return redirect('dashboard')
+        if jugador.equipo != perfil.equipo_seleccionado:
+            return redirect('menu')
 
         return render(request, 'detalles_jugador.html', {'jugador': jugador})
 
@@ -383,16 +435,26 @@ class ResultadoPartidoView(LoginRequiredMixin, View):
 # Vista para el mercado de fichajes
 class MercadoFichajesView(LoginRequiredMixin, View):
     def get(self, request):
-        jugadores = Jugador.objects.filter(equipo__division=1).exclude(equipo=request.user.userprofile.equipo_seleccionado)
+        perfil = request.user.userprofile
+        if not perfil.equipo_seleccionado:
+            return redirect('seleccionar_equipo')
+
+        jugadores = Jugador.objects.filter(equipo__division=1).exclude(equipo=perfil.equipo_seleccionado)
         return render(request, 'mercado_fichajes.html', {'jugadores': jugadores})
 
 
 # Vista para ver estadísticas
 class EstadisticasView(LoginRequiredMixin, View):
     def get(self, request):
-        equipo = request.user.userprofile.equipo_seleccionado
+        perfil = request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+
+        if not equipo:
+            return redirect('seleccionar_equipo')
+
         goleadores = Jugador.objects.filter(equipo=equipo).order_by('-goles')[:5]
         lesiones = Lesion.objects.filter(jugador__equipo=equipo)
+
         return render(request, 'estadisticas.html', {
             'goleadores': goleadores,
             'lesiones': lesiones
