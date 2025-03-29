@@ -68,14 +68,7 @@ class Jugador(models.Model):
     nacionalidad = models.CharField(max_length=50)
     posicion = models.CharField(max_length=3, choices=POSICIONES)
     valor_mercado = models.DecimalField(max_digits=10, decimal_places=2)
-    salario = models.DecimalField(max_digits=10, decimal_places=2)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='jugadores')
-    lesionado = models.BooleanField(default=False)
-    suspendido = models.BooleanField(default=False)
-    habilidad_ataque = models.IntegerField(default=50)
-    habilidad_defensa = models.IntegerField(default=50)
-    condicion_fisica = models.IntegerField(default=100)
-    es_extranjero = models.BooleanField(default=False)
     dorsal = models.IntegerField(
         validators=[
             MinValueValidator(1),
@@ -84,7 +77,8 @@ class Jugador(models.Model):
         null=True,
         blank=True
     )
-    imagen = models.ImageField(upload_to='jugadores/', null=True, blank=True)
+    lesionado = models.BooleanField(default=False)
+    suspendido = models.BooleanField(default=False)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

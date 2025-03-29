@@ -1,114 +1,55 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Configuraciones de posición para cada formación
-    const formacionesConfig = {
-        '4-4-2': {
-            descripcion: "Clásica formación balanceada",
-            posiciones: [
-                { top: '85%', left: '50%', rol: 'Portero' },
-                { top: '65%', left: '20%', rol: 'Defensa' },
-                { top: '65%', left: '35%', rol: 'Defensa' },
-                { top: '65%', left: '65%', rol: 'Defensa' },
-                { top: '65%', left: '80%', rol: 'Defensa' },
-                { top: '45%', left: '15%', rol: 'Mediocampista' },
-                { top: '45%', left: '35%', rol: 'Mediocampista' },
-                { top: '45%', left: '65%', rol: 'Mediocampista' },
-                { top: '45%', left: '85%', rol: 'Mediocampista' },
-                { top: '25%', left: '35%', rol: 'Delantero' },
-                { top: '25%', left: '65%', rol: 'Delantero' }
-            ]
-        },
-        '4-3-3': {
-            descripcion: "Formación ofensiva con tres delanteros",
-            posiciones: [
-                // ... configura posiciones similares para 4-3-3
-            ]
-        },
-        '3-5-2': {
-            descripcion: "Formación con énfasis en el mediocampo",
-            posiciones: [
-                // ... configura posiciones similares para 3-5-2
-            ]
-        },
-        '4-2-3-1': {
-            descripcion: "Formación moderna con mediocampista ofensivo",
-            posiciones: [
-                // ... configura posiciones similares para 4-2-3-1
-            ]
-        }
-    };
-
-    // Elementos del DOM
-    const formacionBtns = document.querySelectorAll('.formacion-btn');
-    const formacionInput = document.getElementById('formacion-input');
+// Función para actualizar la formación visible
+function actualizarFormacion(formacion) {
     const formacionPreview = document.getElementById('formacion-preview');
-    const cancha = document.getElementById('cancha');
-    const jugadoresCards = document.querySelectorAll('.jugador-card');
+    formacionPreview.className = `formacion-${formacion}`;
 
-    // Inicializar con la formación actual
-    const formacionActual = formacionInput.value;
-    actualizarFormacion(formacionActual);
+    // Ocultar todos los puntos primero
+    const puntos = document.querySelectorAll('.punto-alineacion');
+    puntos.forEach(punto => punto.style.display = 'none');
 
-    // Event listeners para botones de formación
-    formacionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const nuevaFormacion = this.dataset.formacion;
-            formacionInput.value = nuevaFormacion;
-            actualizarFormacion(nuevaFormacion);
+    // Mostrar solo los puntos necesarios para esta formación
+    let puntosAMostrar = [];
 
-            // Actualizar estado activo de los botones
-            formacionBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    // Función para actualizar la vista de la formación
-    function actualizarFormacion(formacion) {
-        formacionPreview.innerHTML = '';
-        formacionPreview.dataset.formacion = formacion;
-
-        const config = formacionesConfig[formacion];
-
-        config.posiciones.forEach((pos, index) => {
-            const posicionElement = document.createElement('div');
-            posicionElement.className = 'posicion-jugador';
-            posicionElement.style.top = pos.top;
-            posicionElement.style.left = pos.left;
-            posicionElement.dataset.posicion = index + 1;
-            posicionElement.dataset.rol = pos.rol;
-            posicionElement.textContent = index + 1;
-            posicionElement.title = `${pos.rol} - Posición ${index + 1}`;
-
-            formacionPreview.appendChild(posicionElement);
-        });
+    if (formacion === '4-4-2') {
+        puntosAMostrar = ['portero', 'defensa-1', 'defensa-2', 'defensa-3', 'defensa-4',
+                         'mediocampista-1', 'mediocampista-2', 'mediocampista-3', 'mediocampista-4',
+                         'delantero-1', 'delantero-2'];
+    } else if (formacion === '4-3-3') {
+        puntosAMostrar = ['portero', 'defensa-1', 'defensa-2', 'defensa-3', 'defensa-4',
+                         'mediocampista-1', 'mediocampista-2', 'mediocampista-3',
+                         'delantero-1', 'delantero-2', 'delantero-3'];
+    } else if (formacion === '3-5-2') {
+        puntosAMostrar = ['portero', 'defensa-1', 'defensa-2', 'defensa-3',
+                         'mediocampista-1', 'mediocampista-2', 'mediocampista-3', 'mediocampista-4', 'mediocampista-5',
+                         'delantero-1', 'delantero-2'];
+    } else if (formacion === '4-2-3-1') {
+        puntosAMostrar = ['portero', 'defensa-1', 'defensa-2', 'defensa-3', 'defensa-4',
+                         'mediocampista-defensivo-1', 'mediocampista-defensivo-2',
+                         'mediocampista-ofensivo-1', 'mediocampista-ofensivo-2', 'mediocampista-ofensivo-3',
+                         'delantero'];
     }
 
-    // Implementación básica de drag and drop
-    jugadoresCards.forEach(jugador => {
-        jugador.addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/plain', this.dataset.id);
-            setTimeout(() => this.classList.add('dragging'), 0);
-        });
-
-        jugador.addEventListener('dragend', function() {
-            this.classList.remove('dragging');
-        });
+    puntosAMostrar.forEach(punto => {
+        document.querySelector(`.punto-${punto}`).style.display = 'flex';
     });
+}
 
-    cancha.addEventListener('dragover', function(e) {
-        e.preventDefault();
-    });
+// Manejar selección de formación
+const formacionBtns = document.querySelectorAll('.btn-formacion');
+const formacionInput = document.getElementById('formacion-input');
 
-    cancha.addEventListener('drop', function(e) {
-        e.preventDefault();
-        const jugadorId = e.dataTransfer.getData('text/plain');
-        const jugadorCard = document.querySelector(`.jugador-card[data-id="${jugadorId}"]`);
-        const posicionJugador = e.target.closest('.posicion-jugador');
+formacionBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        formacionBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
 
-        if (posicionJugador) {
-            // Aquí puedes implementar la lógica para asignar el jugador a la posición
-            console.log(`Asignar jugador ${jugadorId} a posición ${posicionJugador.dataset.posicion}`);
-            posicionJugador.textContent = jugadorCard.textContent;
-            posicionJugador.style.backgroundColor = 'rgba(255, 193, 7, 0.7)';
-        }
+        const formacion = this.dataset.formacion;
+        formacionInput.value = formacion;
+        actualizarFormacion(formacion);
     });
 });
+
+// Inicializar con la formación actual
+const formacionActual = formacionInput.value || '4-4-2';
+document.querySelector(`.btn-formacion[data-formacion="${formacionActual}"]`).classList.add('active');
+actualizarFormacion(formacionActual);
