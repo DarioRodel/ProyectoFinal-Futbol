@@ -297,22 +297,27 @@ class TablaLigaView(LoginRequiredMixin, View):
 # Vista para finalizar temporada
 class FinalizarTemporadaView(LoginRequiredMixin, View):
     def get(self, request):
+        # Obtener el perfil del usuario y su equipo
         perfil = request.user.userprofile
         equipo_asignado = perfil.equipo_seleccionado
 
+        # Verificar si el usuario tiene equipo asignado
         if not equipo_asignado:
             return redirect('seleccionar_equipo')
 
-        with transaction.atomic():
-            equipo_asignado.temporada_finalizada = True
-            equipo_asignado.save()
-            otorgar_logro(request.user, "Temporada Completa")
+        # Marcar la temporada como finalizada
+        equipo_asignado.temporada_finalizada = True
+        equipo_asignado.save()
 
-            if Equipo.objects.order_by('-puntos').first() == equipo_asignado:
-                otorgar_logro(request.user, "Campeón de la Liga")
+        # Otorgar logro por completar temporada
+        otorgar_logro(request.user, "Temporada Completa")
+
+        # Verificar si el equipo es campeón
+        equipos_ordenados = Equipo.objects.order_by('-puntos')
+        if equipos_ordenados.first() == equipo_asignado:
+            otorgar_logro(request.user, "Campeón de la Liga")
 
         return redirect('menu')
-
 
 # Vista para simular partido
 class SimularPartidoView(LoginRequiredMixin, View):
