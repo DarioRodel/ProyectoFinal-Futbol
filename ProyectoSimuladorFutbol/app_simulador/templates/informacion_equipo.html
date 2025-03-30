@@ -1,0 +1,66 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'informacion_equipo.css' %}">
+{% block content %}
+<div class="team-info-container">
+    <a href="{% url 'menu' %}" class="btn-back">← Volver al Menú</a>
+    
+    <div class="team-header">
+        <div class="team-logo">
+            <img src="{% static ruta_escudo %}" alt="Logo del equipo" class="logo-img">
+        </div>
+        <div class="team-name">
+            <h2>{{ equipo.nombre }}</h2>
+            <p>Fundado en {{ equipo.fundacion }}</p>
+        </div>
+    </div>
+
+    <div class="team-details">
+        <div class="detail-row">
+            <span class="detail-label">Ciudad:</span>
+            <span class="detail-value">{{ equipo.ciudad }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Estadio:</span>
+            <span class="detail-value">{{ equipo.estadio }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Equipación Principal:</span>
+            <span class="detail-value">{{ equipo.equipacion_principal }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Equipación Alternativa:</span>
+            <span class="detail-value">{{ equipo.equipacion_alternativa }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Presupuesto:</span>
+            <span class="detail-value">€{{ equipo.presupuesto|floatformat:"0" }}</span>
+        </div>
+    </div>
+
+    <div class="team-stats">
+        <h3>Estadísticas de la Temporada</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">{{ equipo.puntos }}</span>
+                <span class="stat-label">Puntos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ equipo.partidos_jugados }}</span>
+                <span class="stat-label">Partidos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ equipo.partidos_ganados }}</span>
+                <span class="stat-label">Victorias</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ equipo.partidos_empatados }}</span>
+                <span class="stat-label">Empates</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ equipo.partidos_perdidos }}</span>
+                <span class="stat-label">Derrotas</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

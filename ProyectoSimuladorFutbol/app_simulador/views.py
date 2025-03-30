@@ -319,6 +319,45 @@ class FinalizarTemporadaView(LoginRequiredMixin, View):
 
         return redirect('menu')
 
+
+class InformacionEquipoView(LoginRequiredMixin, View):
+    def get(self, request):
+        perfil = request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+
+        if not equipo:
+            return redirect('seleccionar_equipo')
+
+        # Obtener escudo del equipo
+        imagenes_escudos = {
+            "Deportivo Alavés": "images/escudos/alaves.png",
+            "Athletic Club": "images/escudos/bilbao.png",
+            "Atlético de Madrid": "images/escudos/atletico.png",
+            "Barcelona": "images/escudos/barca.png",
+            "Real Betis": "images/escudos/betis.png",
+            "Celta de Vigo": "images/escudos/celta.png",
+            "Getafe CF": "images/escudos/getafe.png",
+            "Girona FC": "images/escudos/girona.png",
+            "UD Las Palmas": "images/escudos/palmas.png",
+            "RCD Mallorca": "images/escudos/mallorca.png",
+            "CA Osasuna": "images/escudos/osasuna.png",
+            "CD Leganés": "images/escudos/leganes.png",
+            "Rayo Vallecano": "images/escudos/rayo.png",
+            "Real Madrid": "images/escudos/realmadrid.png",
+            "Real Sociedad": "images/escudos/realsociedad.png",
+            "Sevilla FC": "images/escudos/sevilla.png",
+            "Real Valladolid": "images/escudos/valladolid.png",
+            "Valencia CF": "images/escudos/valencia.png",
+            "RCD Espanyol": "images/escudos/espanyol.png",
+            "Villarreal CF": "images/escudos/villareal.png",
+        }
+        ruta_escudo = imagenes_escudos.get(equipo.nombre, "images/escudos/default.png")
+
+        return render(request, 'informacion_equipo.html', {
+            'equipo': equipo,
+            'ruta_escudo': ruta_escudo
+        })
+
 # Vista para simular partido
 class SimularPartidoView(LoginRequiredMixin, View):
     def get(self, request):

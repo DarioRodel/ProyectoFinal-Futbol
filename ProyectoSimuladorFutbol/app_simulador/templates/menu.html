@@ -12,6 +12,11 @@
 </head>
 <body>
 <div class="main-container">
+    <header class="menu-header">
+        <h1><i class="fas fa-futbol"></i> Simulador de Fútbol</h1>
+        <p class="subtitle">Gestiona tu equipo y compite en la liga</p>
+    </header>
+
     <div class="menu-grid">
         <!-- Formación del Equipo -->
         <div class="menu-item">
@@ -22,10 +27,18 @@
                 <button type="submit" class="btn btn-danger">Eliminar Temporada</button>
             </form>
         </div>
+        
         <div class="menu-item">
             <h3><i class="fas fa-users"></i> Formación del Equipo</h3>
             <p>Gestiona la alineación de tu equipo.</p>
             <a href="{% url 'formacion_equipo' %}" class="btn">Ir a Formación</a>
+        </div>
+
+        <!-- Información del Equipo -->
+        <div class="menu-item">
+            <h3><i class="fas fa-info-circle"></i> Información del Equipo</h3>
+            <p>Consulta los detalles de tu equipo.</p>
+            <a href="{% url 'informacion_equipo' %}" class="btn">Ver Información</a>
         </div>
 
         <!-- Simular Partido -->
