@@ -13,15 +13,23 @@
 <body>
 <div class="formacion-container">
     <h2><i class="fas fa-users"></i> Formación del Equipo: {{ equipo.nombre }}</h2>
-    
+
     <!-- Selector de formación -->
     <div class="selector-formacion">
         <h4>Seleccionar Formación</h4>
         <div class="formaciones-grid">
-            <button type="button" class="btn-formacion {% if formacion_actual == '4-4-2' %}active{% endif %}" data-formacion="4-4-2">4-4-2</button>
-            <button type="button" class="btn-formacion {% if formacion_actual == '4-3-3' %}active{% endif %}" data-formacion="4-3-3">4-3-3</button>
-            <button type="button" class="btn-formacion {% if formacion_actual == '3-5-2' %}active{% endif %}" data-formacion="3-5-2">3-5-2</button>
-            <button type="button" class="btn-formacion {% if formacion_actual == '4-2-3-1' %}active{% endif %}" data-formacion="4-2-3-1">4-2-3-1</button>
+            <button type="button" class="btn-formacion {% if formacion_actual == '4-4-2' %}active{% endif %}"
+                    data-formacion="4-4-2">4-4-2
+            </button>
+            <button type="button" class="btn-formacion {% if formacion_actual == '4-3-3' %}active{% endif %}"
+                    data-formacion="4-3-3">4-3-3
+            </button>
+            <button type="button" class="btn-formacion {% if formacion_actual == '3-5-2' %}active{% endif %}"
+                    data-formacion="3-5-2">3-5-2
+            </button>
+            <button type="button" class="btn-formacion {% if formacion_actual == '4-2-3-1' %}active{% endif %}"
+                    data-formacion="4-2-3-1">4-2-3-1
+            </button>
         </div>
         <form method="post" action="{% url 'guardar_formacion' %}">
             {% csrf_token %}
@@ -31,7 +39,7 @@
             </button>
         </form>
     </div>
-    
+
     <!-- Jugadores disponibles -->
     <div class="jugadores-container">
         <!-- Porteros -->
@@ -46,7 +54,7 @@
                 {% endfor %}
             </div>
         </div>
-        
+
         <!-- Defensas -->
         <div class="posicion-jugadores">
             <h5><i class="fas fa-shield-alt"></i> Defensas</h5>
@@ -59,7 +67,7 @@
                 {% endfor %}
             </div>
         </div>
-        
+
         <!-- Mediocampistas -->
         <div class="posicion-jugadores">
             <h5><i class="fas fa-running"></i> Mediocampistas</h5>
@@ -72,7 +80,7 @@
                 {% endfor %}
             </div>
         </div>
-        
+
         <!-- Delanteros -->
         <div class="posicion-jugadores">
             <h5><i class="fas fa-futbol"></i> Delanteros</h5>
@@ -86,29 +94,17 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Cancha de fútbol -->
     <div class="cancha-container">
-    <h4><i class="fas fa-map-marked-alt"></i> Alineación Actual</h4>
-    <div class="cancha" id="cancha">
-        <div class="formacion-{{ formacion_actual|default:'4-4-2' }}" id="formacion-preview">
-            <!-- Puntos de alineación para 4-4-2 -->
-            <div class="punto-alineacion punto-portero">1</div>
-            
-            <div class="punto-alineacion punto-defensa punto-defensa-1">2</div>
-            <div class="punto-alineacion punto-defensa punto-defensa-2">3</div>
-            <div class="punto-alineacion punto-defensa punto-defensa-3">4</div>
-            <div class="punto-alineacion punto-defensa punto-defensa-4">5</div>
-            
-            <div class="punto-alineacion punto-mediocampista punto-mediocampista-1">6</div>
-            <div class="punto-alineacion punto-mediocampista punto-mediocampista-2">7</div>
-            <div class="punto-alineacion punto-mediocampista punto-mediocampista-3">8</div>
-            <div class="punto-alineacion punto-mediocampista punto-mediocampista-4">9</div>
-            
-            <div class="punto-alineacion punto-delantero punto-delantero-1">10</div>
-            <div class="punto-alineacion punto-delantero punto-delantero-2">11</div>
+        <h4><i class="fas fa-map-marked-alt"></i> Alineación Actual: {{ formacion_actual }}</h4>
+        <div class="cancha" id="cancha">
+            <div class="formacion-{{ formacion_actual|default:'4-4-2' }}" id="formacion-preview">
+                <!-- Los puntos de formación se generarán dinámicamente con JavaScript -->
+            </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 

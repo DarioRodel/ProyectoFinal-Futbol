@@ -204,17 +204,62 @@ body {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
 }
-.formacion-4-4-2 .portero { bottom: 30px; left: 50%; transform: translateX(-50%); }
-        .formacion-4-4-2 .defensa1 { bottom: 100px; left: 25%; }
-        .formacion-4-4-2 .defensa2 { bottom: 100px; left: 40%; }
-        .formacion-4-4-2 .defensa3 { bottom: 100px; right: 40%; }
-        .formacion-4-4-2 .defensa4 { bottom: 100px; right: 25%; }
-        .formacion-4-4-2 .medio1 { bottom: 170px; left: 20%; }
-        .formacion-4-4-2 .medio2 { bottom: 170px; left: 35%; }
-        .formacion-4-4-2 .medio3 { bottom: 170px; right: 35%; }
-        .formacion-4-4-2 .medio4 { bottom: 170px; right: 20%; }
-        .formacion-4-4-2 .delantero1 { bottom: 240px; left: 35%; }
-        .formacion-4-4-2 .delantero2 { bottom: 240px; right: 35%; }
+
+.formacion-4-4-2 .portero {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-4-4-2 .defensa1 {
+    bottom: 100px;
+    left: 25%;
+}
+
+.formacion-4-4-2 .defensa2 {
+    bottom: 100px;
+    left: 40%;
+}
+
+.formacion-4-4-2 .defensa3 {
+    bottom: 100px;
+    right: 40%;
+}
+
+.formacion-4-4-2 .defensa4 {
+    bottom: 100px;
+    right: 25%;
+}
+
+.formacion-4-4-2 .medio1 {
+    bottom: 170px;
+    left: 20%;
+}
+
+.formacion-4-4-2 .medio2 {
+    bottom: 170px;
+    left: 35%;
+}
+
+.formacion-4-4-2 .medio3 {
+    bottom: 170px;
+    right: 35%;
+}
+
+.formacion-4-4-2 .medio4 {
+    bottom: 170px;
+    right: 20%;
+}
+
+.formacion-4-4-2 .delantero1 {
+    bottom: 240px;
+    left: 35%;
+}
+
+.formacion-4-4-2 .delantero2 {
+    bottom: 240px;
+    right: 35%;
+}
 
 /* Formación 4-3-3 */
 .formacion-4-3-3 .punto-portero {
@@ -227,26 +272,55 @@ body {
     bottom: 100px;
 }
 
-.formacion-4-3-3 .punto-defensa-1 { left: 25%; }
-.formacion-4-3-3 .punto-defensa-2 { left: 40%; }
-.formacion-4-3-3 .punto-defensa-3 { right: 40%; }
-.formacion-4-3-3 .punto-defensa-4 { right: 25%; }
+.formacion-4-3-3 .punto-defensa-1 {
+    left: 25%;
+}
+
+.formacion-4-3-3 .punto-defensa-2 {
+    left: 40%;
+}
+
+.formacion-4-3-3 .punto-defensa-3 {
+    right: 40%;
+}
+
+.formacion-4-3-3 .punto-defensa-4 {
+    right: 25%;
+}
 
 .formacion-4-3-3 .punto-mediocampista {
     bottom: 170px;
 }
 
-.formacion-4-3-3 .punto-mediocampista-1 { left: 30%; }
-.formacion-4-3-3 .punto-mediocampista-2 { left: 50%; transform: translateX(-50%); }
-.formacion-4-3-3 .punto-mediocampista-3 { right: 30%; }
+.formacion-4-3-3 .punto-mediocampista-1 {
+    left: 30%;
+}
+
+.formacion-4-3-3 .punto-mediocampista-2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-4-3-3 .punto-mediocampista-3 {
+    right: 30%;
+}
 
 .formacion-4-3-3 .punto-delantero {
     bottom: 240px;
 }
 
-.formacion-4-3-3 .punto-delantero-1 { left: 25%; }
-.formacion-4-3-3 .punto-delantero-2 { left: 50%; transform: translateX(-50%); }
-.formacion-4-3-3 .punto-delantero-3 { right: 25%; }
+.formacion-4-3-3 .punto-delantero-1 {
+    left: 25%;
+}
+
+.formacion-4-3-3 .punto-delantero-2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-4-3-3 .punto-delantero-3 {
+    right: 25%;
+}
 
 /* 3-5-2 */
 .formacion-3-5-2 .portero {
@@ -397,6 +471,328 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para los puntos de formación */
+.punto-alineacion {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 255, 136, 0.8);
+    border: 2px solid #1f3a20;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #1f3a20;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
+
+/* Posiciones específicas para cada formación */
+/* Formación 4-4-2 */
+/* 1*/
+.formacion-4-4-2 .punto-portero {
+    bottom: 220px;
+    left: 2%;
+    transform: translateX(50%);
+}
+
+.formacion-4-4-2 .punto-defensa {
+    bottom: 300px;
+    left: 90%;
+    transform: translateX(20%);
+}
+
+/* 2 */
+.formacion-4-4-2 .punto-defensa-1 {
+    left: 20%;
+    bottom: 400px;
+    transform: translateX(50%);
+}
+
+/* 3 */
+.formacion-4-4-2 .punto-defensa-2 {
+    left: 20%;
+    bottom: 15px;
+    transform: translateX(50%);
+}
+
+/* 4 */
+.formacion-4-4-2 .punto-defensa-3 {
+    left: 20%;
+    bottom: 120px;
+    transform: translateX(50%);
+}
+
+/* 5 */
+.formacion-4-4-2 .punto-defensa-4 {
+    left: 20%;
+    bottom: 270px;
+    transform: translateX(50%);
+}
+
+/*9*/
+.formacion-4-4-2 .punto-mediocampista {
+    left: 50%;
+    bottom: 400px;
+    transform: translateX(50%);
+}
+
+/*6*/
+.formacion-4-4-2 .punto-mediocampista-1 {
+    left: 40%;
+    bottom: 120px;
+    transform: translateX(50%);
+}
+
+/*7*/
+.formacion-4-4-2 .punto-mediocampista-2 {
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(50%);
+}
+/*8*/
+.formacion-4-4-2 .punto-mediocampista-3 {
+    left: 40%;
+    bottom: 270px;
+    transform: translateX(50%);
+}
+
+
+.formacion-4-4-2 .punto-mediocampista-4 {
+    right: 20%;
+
+}
+
+.formacion-4-4-2 .punto-delantero {
+    bottom: 240px;
+}
+/*10*/
+.formacion-4-4-2 .punto-delantero-1 {
+    left: 70%;
+    bottom: 270px;
+    transform: translateX(50%);
+}
+/*11*/
+.formacion-4-4-2 .punto-delantero-2 {
+    right: 26%;
+    bottom: 170px;
+    transform: translateX(50%);
+}
+
+/* Formación 4-3-3 */
+/* Formación 4-3-3 con estilo similar a la 4-4-2 */
+.formacion-4-3-3 .punto-portero {
+    bottom: 220px;
+    left: 2%;
+    transform: translateX(50%);
+}
+
+.formacion-4-3-3 .punto-defensa {
+    bottom: 300px;
+    left: 90%;
+    transform: translateX(20%);
+}
+
+/* Defensas */
+.formacion-4-3-3 .punto-defensa-1 {
+    left: 20%;
+    bottom: 400px;
+    transform: translateX(50%);
+}
+
+.formacion-4-3-3 .punto-defensa-2 {
+    left: 20%;
+    bottom: 15px;
+    transform: translateX(50%);
+}
+
+.formacion-4-3-3 .punto-defensa-3 {
+    left: 20%;
+    bottom: 120px;
+    transform: translateX(50%);
+}
+
+.formacion-4-3-3 .punto-defensa-4 {
+    left: 20%;
+    bottom: 270px;
+    transform: translateX(50%);
+}
+
+/* Mediocampistas */
+.formacion-4-3-3 .punto-mediocampista {
+    left: 40%;
+    bottom: 100px;
+    transform: translateX(50%);
+}
+/*6*/
+.formacion-4-3-3 .punto-mediocampista-1 {
+    left: 40%;
+    bottom: 100px;
+    transform: translateX(50%);
+}
+/*7*/
+.formacion-4-3-3 .punto-mediocampista-2 {
+    left: 80%;
+    bottom: 220px;
+    transform: translateX(50%);
+}
+/*8*/
+.formacion-4-3-3 .punto-mediocampista-3 {
+    left: 40%;
+    bottom: 340px;
+    transform: translateX(50%);
+}
+
+/* Delanteros */
+/*9*/
+.formacion-4-3-3 .punto-delantero-1 {
+    left: 65%;
+    bottom: 50px;
+    transform: translateX(50%);
+}
+
+.formacion-4-3-3 .punto-delantero-2 {
+    right: 90%;
+    bottom: 170px;
+    transform: translateX(50%);
+}
+/*11*/
+.formacion-4-3-3 .punto-delantero-3 {
+    left: 65%;
+    bottom: 400px;
+    transform: translateX(50%);
+}
+
+/* Formación 3-5-2 */
+.formacion-3-5-2 .punto-portero {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-3-5-2 .punto-defensa {
+    bottom: 100px;
+}
+
+.formacion-3-5-2 .punto-defensa-1 {
+    left: 30%;
+}
+
+.formacion-3-5-2 .punto-defensa-2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-3-5-2 .punto-defensa-3 {
+    right: 30%;
+}
+
+.formacion-3-5-2 .punto-mediocampista {
+    bottom: 170px;
+}
+
+.formacion-3-5-2 .punto-mediocampista-1 {
+    left: 15%;
+}
+
+.formacion-3-5-2 .punto-mediocampista-2 {
+    left: 30%;
+}
+
+.formacion-3-5-2 .punto-mediocampista-3 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-3-5-2 .punto-mediocampista-4 {
+    right: 30%;
+}
+
+.formacion-3-5-2 .punto-mediocampista-5 {
+    right: 15%;
+}
+
+.formacion-3-5-2 .punto-delantero {
+    bottom: 240px;
+}
+
+.formacion-3-5-2 .punto-delantero-1 {
+    left: 35%;
+}
+
+.formacion-3-5-2 .punto-delantero-2 {
+    right: 35%;
+}
+
+/* Formación 4-2-3-1 */
+.formacion-4-2-3-1 .punto-portero {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-4-2-3-1 .punto-defensa {
+    bottom: 100px;
+}
+
+.formacion-4-2-3-1 .punto-defensa-1 {
+    left: 25%;
+}
+
+.formacion-4-2-3-1 .punto-defensa-2 {
+    left: 40%;
+}
+
+.formacion-4-2-3-1 .punto-defensa-3 {
+    right: 40%;
+}
+
+.formacion-4-2-3-1 .punto-defensa-4 {
+    right: 25%;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-defensivo {
+    bottom: 170px;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-defensivo-1 {
+    left: 35%;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-defensivo-2 {
+    right: 35%;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-ofensivo {
+    bottom: 210px;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-ofensivo-1 {
+    left: 25%;
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-ofensivo-2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.formacion-4-2-3-1 .punto-mediocampista-ofensivo-3 {
+    right: 25%;
+}
+
+.formacion-4-2-3-1 .punto-delantero {
+    bottom: 270px;
+    left: 50%;
+    transform: translateX(-50%);
 }

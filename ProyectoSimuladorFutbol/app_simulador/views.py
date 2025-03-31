@@ -222,7 +222,6 @@ class FormacionEquipoView(LoginRequiredMixin, View):
             'formacion_actual': formacion_actual
         })
 
-
 # Vista para guardar formación
 class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):

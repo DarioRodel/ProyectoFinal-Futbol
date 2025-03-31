@@ -22,6 +22,5 @@ urlpatterns = [
     path('formacion-equipo/', FormacionEquipoView.as_view(), name='formacion_equipo'),
     path('guardar-formacion/', GuardarFormacionView.as_view(), name='guardar_formacion'),
     path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
-
     path('informacion-equipo/', InformacionEquipoView.as_view(), name='informacion_equipo'),
 ]
