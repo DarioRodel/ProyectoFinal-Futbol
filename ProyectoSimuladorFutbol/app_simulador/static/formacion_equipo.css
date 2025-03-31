@@ -591,7 +591,6 @@ body {
 }
 
 /* Formación 4-3-3 */
-/* Formación 4-3-3 con estilo similar a la 4-4-2 */
 .formacion-4-3-3 .punto-portero {
     bottom: 220px;
     left: 2%;
@@ -631,22 +630,25 @@ body {
 
 /* Mediocampistas */
 .formacion-4-3-3 .punto-mediocampista {
-    left: 40%;
+    left: 90%;
     bottom: 100px;
     transform: translateX(50%);
 }
+
 /*6*/
 .formacion-4-3-3 .punto-mediocampista-1 {
     left: 40%;
     bottom: 100px;
     transform: translateX(50%);
 }
+
 /*7*/
 .formacion-4-3-3 .punto-mediocampista-2 {
     left: 80%;
     bottom: 220px;
     transform: translateX(50%);
 }
+
 /*8*/
 .formacion-4-3-3 .punto-mediocampista-3 {
     left: 40%;
@@ -655,13 +657,34 @@ body {
 }
 
 /* Delanteros */
+/*9 (izquierda) - misma altura que el 7, misma anchura que el 8*/
+.formacion-4-3-3 .punto-delantero-1 {
+    left: 40%;
+    bottom: 220px;
+    transform: translateX(50%);
+}
+
+/*10 (centro) - altura del 7, anchura del 8*/
+.formacion-4-3-3 .punto-delantero-2 {
+    left: 40%;
+    bottom: 250px;  /* Misma altura que el 7 */
+    transform: translateX(50%);
+}
+
+/*11 (derecha)*/
+.formacion-4-3-3 .punto-delantero-3 {
+    left: 80%;
+    bottom: 340px;
+    transform: translateX(50%);
+}
+/* Delanteros */
 /*9*/
 .formacion-4-3-3 .punto-delantero-1 {
     left: 65%;
     bottom: 50px;
     transform: translateX(50%);
 }
-
+/*7*/
 .formacion-4-3-3 .punto-delantero-2 {
     right: 90%;
     bottom: 170px;
