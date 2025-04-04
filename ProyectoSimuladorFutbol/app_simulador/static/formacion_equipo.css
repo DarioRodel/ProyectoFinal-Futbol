@@ -1,8 +1,6 @@
-/* Estilos base mejorados */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('images/campo1.jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/campo1.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     margin: 0;
@@ -13,7 +11,6 @@ body {
     align-items: center;
 }
 
-/* Contenedor principal mejorado */
 .formacion-container {
     background: linear-gradient(145deg, rgba(25, 48, 26, 0.95), rgba(15, 38, 16, 0.95));
     border: 3px solid #00ff88;
@@ -27,7 +24,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* Títulos mejorados */
 .formacion-container h2 {
     color: #00ff88;
     font-size: 2.2rem;
@@ -44,7 +40,6 @@ body {
     font-size: 1.8rem;
 }
 
-/* Selector de formación mejorado */
 .selector-formacion {
     background: rgba(47, 90, 58, 0.6);
     border: 2px solid #00ff88;
@@ -114,7 +109,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 255, 136, 0.6);
 }
 
-/* Cancha de fútbol mejorada */
+
 .cancha-container {
     background: rgba(47, 90, 58, 0.6);
     border: 2px solid #00ff88;
@@ -139,8 +134,7 @@ body {
     position: relative;
     width: 100%;
     height: 500px;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                url('images/campo3.jpg') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/campo3.jpg') no-repeat center center;
     background-size: cover;
     margin: 0 auto;
     border: 3px solid #00ff88;
@@ -148,7 +142,6 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Jugadores en cancha mejorados */
 .punto {
     position: absolute;
     width: 80px;
@@ -201,7 +194,6 @@ body {
     border: 2px solid #2c3e50;
 }
 
-/* Botón Volver al Menú */
 .btn-volver-menu {
     background: linear-gradient(to right, #ff3366, #ff6b6b);
     color: white;
@@ -228,7 +220,6 @@ body {
     background: linear-gradient(to right, #ff6b6b, #ff3366);
 }
 
-/* Responsive mejorado */
 @media (max-width: 768px) {
     .formacion-container {
         padding: 20px;
@@ -281,9 +272,7 @@ body {
         font-size: 1.8rem;
     }
 }
-/* POSICIONES PARA TODAS LAS FORMACIONES */
 
-/* Portero (común a todas las formaciones) */
 .punto-portero {
     bottom: 5%;
     left: 50%;

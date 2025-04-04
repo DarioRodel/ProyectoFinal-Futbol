@@ -8,11 +8,11 @@ from .models import Equipo, UserProfile
 class SeleccionEquipoForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['equipo_seleccionado']  # Campo que permite seleccionar un equipo
+        fields = ['equipo_seleccionado']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['equipo_seleccionado'].queryset = Equipo.objects.all()  # Mostrar todos los equipos
+        self.fields['equipo_seleccionado'].queryset = Equipo.objects.all()
 
 class EditarEquipoForm(forms.ModelForm):
     class Meta:

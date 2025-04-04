@@ -195,4 +195,4 @@ class Command(BaseCommand):
                 defaults=datos
             )
 
-        self.stdout.write(self.style.SUCCESS('✅ Equipos cargados exitosamente!'))
+        self.stdout.write(self.style.SUCCESS('Equipos cargados exitosamente!'))

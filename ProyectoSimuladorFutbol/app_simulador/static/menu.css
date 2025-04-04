@@ -1,4 +1,3 @@
-/* Estilos generales */
 body {
     background: url('images/campo1.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -21,7 +20,7 @@ body {
     padding: 20px;
 }
 
-/* Grid de elementos del menú */
+
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -29,7 +28,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Elementos del menú */
+
 .menu-item {
     background-color: rgba(0, 51, 102, 0.8);
     border: 2px solid #c0c0c0;
@@ -80,7 +79,7 @@ body {
     background-color: #002244;
 }
 
-/* Tabla de la liga */
+
 .tabla-liga-container {
     background-color: rgba(0, 51, 102, 0.8);
     border: 2px solid #c0c0c0;
@@ -137,7 +136,7 @@ body {
     background-color: #002244;
 }
 
-/* Responsive */
+
 @media (max-width: 992px) {
     .menu-grid {
         grid-template-columns: 1fr 1fr;

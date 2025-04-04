@@ -7,7 +7,6 @@ from django.db import transaction
 from .models import Equipo, UserProfile, UsuarioLogro
 from .forms import CustomUserCreationForm
 import random
-from . import data
 from app_simulador.data.jugadores_equipos import jugadores as jugadores_equipos
 from .utils import otorgar_logro
 
@@ -216,7 +215,6 @@ class FormacionEquipoView(LoginRequiredMixin, View):
         jugadores = jugadores_equipos.get(equipo.nombre, {})
 
         # Organizar jugadores por posición según la formación seleccionada
-        # En tu vista, por ejemplo:
         jugadores_por_posicion = {
             'portero': jugadores.get('PORTERO', [])[0] if jugadores.get('PORTERO') else 'Sin portero',
             'defensas': jugadores.get('DEFENSA', []),
@@ -318,10 +316,8 @@ class FinalizarTemporadaView(LoginRequiredMixin, View):
         equipo_asignado.temporada_finalizada = True
         equipo_asignado.save()
 
-        # Otorgar logro por completar temporada
         otorgar_logro(request.user, "Temporada Completa")
 
-        # Verificar si el equipo es campeón
         equipos_ordenados = Equipo.objects.order_by('-puntos')
         if equipos_ordenados.first() == equipo_asignado:
             otorgar_logro(request.user, "Campeón de la Liga")

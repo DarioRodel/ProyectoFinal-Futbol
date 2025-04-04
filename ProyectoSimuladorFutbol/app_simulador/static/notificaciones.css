@@ -1,4 +1,3 @@
-/* Estilos generales para el cuerpo de la página */
 body {
     background: url('images/campo1.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -8,92 +7,90 @@ body {
     padding: 0;
 }
 
-/* Contenedor principal de notificaciones */
 .notificaciones-container {
-    background-color: rgba(0, 51, 102, 0.8);  /* Fondo azul oscuro semitransparente */
-    border: 2px solid #c0c0c0;  /* Borde plateado */
-    border-radius: 15px;  /* Bordes redondeados */
-    padding: 20px;  /* Espaciado interno */
-    backdrop-filter: blur(5px);  /* Efecto de desenfoque */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);  /* Sombra */
-    max-width: 800px;  /* Ancho máximo */
-    margin: 20px auto;  /* Centrar el contenedor */
-    color: #ffffff;  /* Texto blanco */
+    background-color: rgba(0, 51, 102, 0.8);/
+    border: 2px solid #c0c0c0;
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    margin: 20px auto;
+    color: #ffffff;
 }
 
-/* Título de la sección de notificaciones */
+
 .notificaciones-container h3 {
-    font-size: 1.5rem;  /* Tamaño de fuente */
-    color: #ffffff;  /* Texto blanco */
-    margin-bottom: 15px;  /* Espaciado inferior */
-    text-align: center;  /* Centrar el texto */
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-/* Lista de notificaciones */
 .lista-notificaciones {
-    max-height: 400px;  /* Altura máxima para la lista */
-    overflow-y: auto;  /* Habilitar scroll vertical */
-    padding-right: 10px;  /* Espaciado para el scroll */
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Estilos para cada ítem de notificación */
+
 .notificacion-item {
-    background-color: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
-    border-radius: 10px;  /* Bordes redondeados */
-    padding: 15px;  /* Espaciado interno */
-    margin-bottom: 10px;  /* Espaciado entre notificaciones */
-    display: flex;  /* Flexbox para alinear ícono y contenido */
-    align-items: center;  /* Centrar verticalmente */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transición suave */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .notificacion-item:hover {
-    transform: translateY(-3px);  /* Efecto de levantar */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);  /* Sombra al hacer hover */
+    transform: translateY(-3px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Ícono de la notificación */
+
 .notificacion-icono {
-    font-size: 1.5rem;  /* Tamaño del ícono */
-    color: #ffdf00;  /* Color amarillo */
-    margin-right: 15px;  /* Espaciado a la derecha */
+    font-size: 1.5rem;
+    color: #ffdf00;
+    margin-right: 15px;
 }
 
-/* Contenido de la notificación */
+
 .notificacion-contenido h4 {
-    font-size: 1.2rem;  /* Tamaño de fuente */
-    color: #ffffff;  /* Texto blanco */
-    margin-bottom: 5px;  /* Espaciado inferior */
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 5px;
 }
 
 .notificacion-contenido p {
-    font-size: 0.9rem;  /* Tamaño de fuente */
-    color: #e0e0e0;  /* Texto gris claro */
-    margin-bottom: 5px;  /* Espaciado inferior */
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    margin-bottom: 5px;
 }
 
 .notificacion-contenido small {
-    font-size: 0.8rem;  /* Tamaño de fuente */
-    color: #c0c0c0;  /* Texto gris más claro */
+    font-size: 0.8rem;
+    color: #c0c0c0;
 }
 
-/* Mensaje cuando no hay notificaciones */
+
 .sin-notificaciones {
-    text-align: center;  /* Centrar el texto */
-    font-size: 1rem;  /* Tamaño de fuente */
-    color: #e0e0e0;  /* Texto gris claro */
+    text-align: center;
+    font-size: 1rem;
+    color: #e0e0e0;
 }
-/* Estilos para el botón "Volver al menú" */
+
 .btn-volver-menu {
     display: block;
     margin: 15px auto 0;
     padding: 10px 20px;
-    background-color: #003366;  /* Fondo azul oscuro */
-    color: #fff;  /* Texto blanco */
+    background-color: #003366;
+    color: #fff;
     text-align: center;
     text-decoration: none;
-    border-radius: 20px;  /* Bordes redondeados */
-    transition: all 0.3s ease;  /* Transición suave */
+    border-radius: 20px;
+    transition: all 0.3s ease;
     width: fit-content;
     border: none;
     cursor: pointer;
@@ -102,7 +99,7 @@ body {
 }
 
 .btn-volver-menu:hover {
-    background-color: #002244;  /* Fondo azul más oscuro al hacer hover */
+    background-color: #002244;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -112,7 +109,7 @@ body {
     box-shadow: none;
 }
 
-/* Para centrar el botón correctamente */
+
 .notificaciones-container {
     display: flex;
     flex-direction: column;
