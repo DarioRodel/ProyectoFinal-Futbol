@@ -4,9 +4,11 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
-from .models import Equipo, Jugador, UserProfile, UsuarioLogro
+from .models import Equipo, UserProfile, UsuarioLogro
 from .forms import CustomUserCreationForm
 import random
+from . import data
+from app_simulador.data.jugadores_equipos import jugadores as jugadores_equipos
 from .utils import otorgar_logro
 
 
@@ -201,7 +203,7 @@ class EliminarTemporadaView(LoginRequiredMixin, View):
         return redirect('seleccionar_equipo')
 
 
-# Vista para la formación del equipo
+
 class FormacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
@@ -210,19 +212,26 @@ class FormacionEquipoView(LoginRequiredMixin, View):
         if not equipo:
             return redirect('seleccionar_equipo')
 
-        jugadores = Jugador.objects.filter(equipo=equipo).order_by('posicion', '-valor_mercado')
+        # Obtener jugadores del diccionario importado correctamente
+        jugadores = jugadores_equipos.get(equipo.nombre, {})
+
+        # Organizar jugadores por posición según la formación seleccionada
+        # En tu vista, por ejemplo:
+        jugadores_por_posicion = {
+            'portero': jugadores.get('PORTERO', [])[0] if jugadores.get('PORTERO') else 'Sin portero',
+            'defensas': jugadores.get('DEFENSA', []),
+            'mediocampistas': jugadores.get('MEDIOCAMPISTA', []),
+            'delanteros': jugadores.get('DELANTERO', [])
+        }
+
         formacion_actual = getattr(perfil, 'formacion', '4-4-2') or '4-4-2'
 
         return render(request, 'formacion_equipo.html', {
             'equipo': equipo,
-            'porteros': jugadores.filter(posicion='POR'),
-            'defensas': jugadores.filter(posicion='DEF'),
-            'mediocampistas': jugadores.filter(posicion='MED'),
-            'delanteros': jugadores.filter(posicion='DEL'),
+            'jugadores_por_posicion': jugadores_por_posicion,
             'formacion_actual': formacion_actual
         })
 
-# Vista para guardar formación
 class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):
         perfil = request.user.userprofile
@@ -231,10 +240,11 @@ class GuardarFormacionView(LoginRequiredMixin, View):
         if formacion in ['4-4-2', '4-3-3', '3-5-2', '4-2-3-1']:
             perfil.formacion = formacion
             perfil.save()
-            return redirect('formacion_equipo')
+            request.session['formacion_mensaje'] = f"Formación cambiada a {formacion}"
+        else:
+            request.session['formacion_mensaje'] = "Formación no válida"
 
         return redirect('formacion_equipo')
-
 
 # Vista para notificaciones
 class NotificacionesView(LoginRequiredMixin, View):
