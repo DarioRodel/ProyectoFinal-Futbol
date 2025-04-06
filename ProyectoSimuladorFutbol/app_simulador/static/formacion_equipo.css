@@ -132,30 +132,35 @@ body {
 
 .cancha {
     position: relative;
-    width: 100%;
-    height: 500px;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/campo3.jpg') no-repeat center center;
-    background-size: cover;
+
+
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('images/campo3.jpg') no-repeat center center;
+    background-size: contain;
     margin: 0 auto;
     border: 3px solid #00ff88;
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    background-color: #0a3a20;
+    width: 800px;
+    height: 500px;
+    background-size: 100% 100%;
 }
+
 
 .punto {
     position: absolute;
     width: 80px;
     height: 80px;
-    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    background: linear-gradient(145deg, #ffffff, #f8f8f8);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     border: 3px solid #2c3e50;
     z-index: 10;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 2px #00ff88;
 }
 
 .punto:hover {
@@ -173,17 +178,17 @@ body {
     font-size: 11px;
     font-weight: 700;
     display: block;
-    color: #2c3e50;
     margin-bottom: 5px;
     line-height: 1.2;
     text-transform: uppercase;
+    color: #1a3a20;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .jugador-dorsal {
     font-size: 20px;
     font-weight: bold;
-    color: #2c3e50;
-    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+    background: linear-gradient(to bottom, #00ff88, #00cc6a);
     border-radius: 50%;
     width: 35px;
     height: 35px;
@@ -192,32 +197,47 @@ body {
     justify-content: center;
     margin: 0 auto;
     border: 2px solid #2c3e50;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn-volver-menu {
-    background: linear-gradient(to right, #ff3366, #ff6b6b);
-    color: white;
+    background: linear-gradient(to right, #00cc6a, #00a855);
+    color: #1f3a20;
     border: none;
     padding: 14px 30px;
     border-radius: 30px;
     font-weight: 700;
     cursor: pointer;
     display: block;
-    margin: 30px auto 0;
+    margin: 20px auto 0;
+    margin-bottom: 20px;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 200, 106, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
     text-align: center;
     width: fit-content;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-volver-menu:hover {
+    background: linear-gradient(to right, #00ff88, #00cc6a);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 51, 102, 0.6);
-    background: linear-gradient(to right, #ff6b6b, #ff3366);
+    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.6);
+    color: #1f3a20;
+}
+
+.btn-volver-menu i {
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-volver-menu:hover i {
+    transform: translateX(-5px);
 }
 
 @media (max-width: 768px) {
@@ -274,7 +294,7 @@ body {
 }
 
 .punto-portero {
-    bottom: 5%;
+    bottom: 2%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -428,12 +448,12 @@ body {
 
 .formacion-3-5-2 .punto-delantero-1 {
     bottom: 65%;
-    left: 40%;
+    left: 38%;
 }
 
 .formacion-3-5-2 .punto-delantero-2 {
     bottom: 65%;
-    right: 40%;
+    right: 38%;
 }
 
 /* ---------- FORMACIÓN 4-2-3-1 ---------- */
