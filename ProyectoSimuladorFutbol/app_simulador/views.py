@@ -4,7 +4,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
-from .models import Equipo, UserProfile, UsuarioLogro
+from django.views.generic import ListView, DetailView
+
+from .models import Equipo, UserProfile, UsuarioLogro, Jugador
 from .forms import CustomUserCreationForm
 import random
 from app_simulador.data.jugadores_equipos import jugadores as jugadores_equipos
@@ -363,6 +365,45 @@ class InformacionEquipoView(LoginRequiredMixin, View):
             'ruta_escudo': ruta_escudo
         })
 
+
+class JugadoresEquipoView(LoginRequiredMixin, ListView):
+    model = Jugador
+    template_name = 'jugadores_equipo.html'
+    context_object_name = 'jugadores'
+
+    def get_queryset(self):
+        perfil = self.request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+        return Jugador.objects.filter(equipo=equipo).order_by('posicion', 'dorsal')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        perfil = self.request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+
+        # Obtener el queryset base
+        jugadores = self.get_queryset()
+
+        # Agrupar por posiciones usando select_related/prefetch
+        context.update({
+            'equipo': equipo,
+            'porteros': jugadores.filter(posicion='POR'),
+            'defensas': jugadores.filter(posicion='DEF'),
+            'mediocampistas': jugadores.filter(posicion='MED'),
+            'delanteros': jugadores.filter(posicion='DEL')
+        })
+
+        return context
+
+class DetalleJugadorView(LoginRequiredMixin, DetailView):
+    model = Jugador
+    template_name = 'detalle_jugador.html'
+    context_object_name = 'jugador'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['equipo'] = self.request.user.userprofile.equipo_seleccionado
+        return context
 # Vista para simular partido
 class SimularPartidoView(LoginRequiredMixin, View):
     def get(self, request):

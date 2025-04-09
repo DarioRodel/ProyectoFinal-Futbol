@@ -11,51 +11,75 @@
     <link rel="stylesheet" href="{% static 'menu.css' %}">
 </head>
 <body>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ... (head sin cambios) ... -->
+</head>
+<body>
 <div class="main-container">
+    <!-- Botón Eliminar en esquina -->
+    <div class="btn-eliminar-container">
+        <form action="{% url 'eliminar_temporada' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-eliminar">
+                <i class="fas fa-trash-alt"></i> Eliminar Temporada
+            </button>
+        </form>
+    </div>
+
     <header class="menu-header">
         <h1><i class="fas fa-futbol"></i> Simulador de Fútbol</h1>
         <p class="subtitle">Gestiona tu equipo y compite en la liga</p>
     </header>
 
-    <div class="menu-grid">
-        <!-- Formación del Equipo -->
-        <div class="menu-item">
-            <h3><i class="fas fa-trash-alt"></i> Eliminar Temporada</h3>
-            <p>Reinicia tu equipo y selecciona uno nuevo.</p>
-            <form action="{% url 'eliminar_temporada' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Eliminar Temporada</button>
-            </form>
-        </div>
-        
-        <div class="menu-item">
-            <h3><i class="fas fa-users"></i> Formación del Equipo</h3>
-            <p>Gestiona la alineación de tu equipo.</p>
-            <a href="{% url 'formacion_equipo' %}" class="btn">Ir a Formación</a>
-        </div>
+    <!-- Sección de Información -->
+    <div class="menu-section">
+        <h2 class="section-title"><i class="fas fa-info-circle"></i> Información</h2>
+        <div class="section-grid">
+            <!-- Información del Equipo -->
+            <div class="section-item">
+                <h3><i class="fas fa-info-circle"></i> Información del Equipo</h3>
+                <p>Consulta los detalles de tu equipo.</p>
+                <a href="{% url 'informacion_equipo' %}" class="btn">Ver Información</a>
+            </div>
 
-        <!-- Información del Equipo -->
-        <div class="menu-item">
-            <h3><i class="fas fa-info-circle"></i> Información del Equipo</h3>
-            <p>Consulta los detalles de tu equipo.</p>
-            <a href="{% url 'informacion_equipo' %}" class="btn">Ver Información</a>
-        </div>
+            <!-- Notificaciones -->
+            <div class="section-item">
+                <h3><i class="fas fa-bell"></i> Notificaciones</h3>
+                <p>Revisa tus logros y notificaciones.</p>
+                <a href="{% url 'notificaciones' %}" class="btn">Ver Notificaciones</a>
+            </div>
 
-        <!-- Simular Partido -->
-        <div class="menu-item">
-            <h3><i class="fas fa-futbol"></i> Simular Partido</h3>
-            <p>Simula un partido y avanza en la liga.</p>
-            <a href="{% url 'simular_partido' %}" class="btn">Simular Partido</a>
-        </div>
-
-        <!-- Notificaciones -->
-        <div class="menu-item">
-            <h3><i class="fas fa-bell"></i> Notificaciones</h3>
-            <p>Revisa tus logros y notificaciones.</p>
-            <a href="{% url 'notificaciones' %}" class="btn">Ver Notificaciones</a>
+            <!-- Jugadores -->
+            <div class="section-item">
+                <h3><i class="fas fa-users"></i> Jugadores</h3>
+                <p>Consulta la información detallada de cada jugador.</p>
+                <a href="{% url 'jugadores_equipo' %}" class="btn">Ver Jugadores</a>
+            </div>
         </div>
     </div>
 
+    <!-- Sección de Acciones -->
+    <div class="menu-section">
+        <h2 class="section-title"><i class="fas fa-tools"></i> Acciones</h2>
+        <div class="section-grid">
+            <!-- Simular Partido -->
+            <div class="section-item">
+                <h3><i class="fas fa-futbol"></i> Simular Partido</h3>
+                <p>Simula un partido y avanza en la liga.</p>
+                <a href="{% url 'simular_partido' %}" class="btn">Simular Partido</a>
+            </div>
+
+            <!-- Formación del Equipo -->
+            <div class="section-item">
+                <h3><i class="fas fa-chess-board"></i> Formación del Equipo</h3>
+                <p>Gestiona la alineación de tu equipo.</p>
+                <a href="{% url 'formacion_equipo' %}" class="btn">Ir a Formación</a>
+            </div>
+        </div>
+    </div>
     <!-- Tabla de la Liga -->
     <div class="tabla-liga-container">
         <h3><i class="fas fa-table"></i> Tabla de la Liga</h3>
@@ -82,6 +106,11 @@
         <a href="{% url 'tabla_liga' %}" class="btn-ver-tabla">Ver tabla completa</a>
     </div>
 </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

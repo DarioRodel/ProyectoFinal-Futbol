@@ -3,7 +3,7 @@ from .views import (
     IndexView, InicioView, RegistroView, LoginView, LogoutView,
     SeleccionarEquipoView, AsignarEquipoView, MenuView, FormacionEquipoView,
     NotificacionesView, SimularPartidoView, TablaLigaView, GuardarFormacionView,
-    EliminarTemporadaView, ConfirmarCambioEquipoView, InformacionEquipoView
+    EliminarTemporadaView, ConfirmarCambioEquipoView, InformacionEquipoView, DetalleJugadorView, JugadoresEquipoView
 )
 
 urlpatterns = [
@@ -23,4 +23,7 @@ urlpatterns = [
     path('guardar-formacion/', GuardarFormacionView.as_view(), name='guardar_formacion'),
     path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
     path('informacion-equipo/', InformacionEquipoView.as_view(), name='informacion_equipo'),
+    path('equipo/jugadores/', JugadoresEquipoView.as_view(), name='jugadores_equipo'),
+
+    path('jugador/<int:pk>/', DetalleJugadorView.as_view(), name='detalle_jugador'),
 ]

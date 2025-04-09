@@ -1,0 +1,30 @@
+<div class="col-md-4 mb-3">
+    <div class="card h-100 {% if jugador.lesionado %}border-danger{% elif jugador.suspendido %}border-warning{% endif %}">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ jugador.nombre }} {{ jugador.apellido }}
+            </h5>
+            
+            <div class="card-text">
+                <p class="mb-1">
+                    <strong>Edad:</strong> {{ jugador.edad }}<br>
+                    <strong>Posición:</strong> {{ jugador.get_posicion_display }}<br>
+                    <strong>Valor:</strong> €{{ jugador.valor_mercado|floatformat:2 }}M
+                </p>
+                
+                <div class="mt-2">
+                    {% if jugador.lesionado %}
+                        <span class="badge bg-danger">Lesionado</span>
+                    {% endif %}
+                    {% if jugador.suspendido %}
+                        <span class="badge bg-warning text-dark">Suspendido</span>
+                    {% endif %}
+                </div>
+                
+                <a href="{% url 'detalle_jugador' jugador.pk %}" class="btn btn-sm btn-primary mt-2">
+                    Ver detalles
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

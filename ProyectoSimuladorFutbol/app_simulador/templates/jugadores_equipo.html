@@ -1,0 +1,51 @@
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'jugadores_equipo.css' %}">
+<div class="container mt-4">
+    <h2 class="mb-4">Jugadores de {{ equipo.nombre }}</h2>
+
+    <div class="row">
+        <div class="col-md-9">
+            <!-- Porteros -->
+            <div class="mb-4">
+                <h4 class="posicion-titulo">Porteros</h4>
+                <div class="row">
+                    {% for jugador in porteros %}
+                        {% include 'partials/jugador_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Defensas -->
+            <div class="mb-4">
+                <h4 class="posicion-titulo">Defensas</h4>
+                <div class="row">
+                    {% for jugador in defensas %}
+                        {% include 'partials/jugador_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Mediocampistas -->
+            <div class="mb-4">
+                <h4 class="posicion-titulo">Mediocampistas</h4>
+                <div class="row">
+                    {% for jugador in mediocampistas %}
+                        {% include 'partials/jugador_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Delanteros -->
+            <div class="mb-4">
+                <h4 class="posicion-titulo">Delanteros</h4>
+                <div class="row">
+                    {% for jugador in delanteros %}
+                        {% include 'partials/jugador_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

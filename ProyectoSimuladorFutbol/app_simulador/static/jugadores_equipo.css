@@ -1,0 +1,234 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Exo+2:wght@300;600&display=swap');
+
+/* Colores base */
+body {
+    background: radial-gradient(circle at center, rgba(0, 18, 34, 0.95) 20%, rgba(0, 10, 20, 0.95)),
+                url('images/campo1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Exo 2', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    line-height: 1.7;
+    overflow-x: hidden;
+    padding: 15px;
+}
+
+/* Fondo matrix animado */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent 0px, rgba(0, 255, 65, 0.2) 3px, transparent 6px);
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Tarjetas generales */
+.card {
+    background: rgba(0, 34, 68, 0.8);
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05);
+    backdrop-filter: blur(12px) saturate(180%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 60px rgba(0, 255, 136, 0.2), inset 0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+/* Efecto holográfico */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+    transition: 0.5s;
+}
+.card:hover::before {
+    left: 100%;
+}
+
+/* Encabezado de tarjeta */
+.card-header h2 {
+    font-family: 'Audiowide', cursive;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #00ff88;
+    position: relative;
+    padding-bottom: 15px;
+}
+.card-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+}
+
+/* Tabla */
+.jugadores-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 34, 68, 0.85);
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+.jugadores-table th {
+    background: linear-gradient(45deg, rgba(0, 51, 102, 0.9), rgba(0, 34, 68, 0.9));
+    color: #00ff88;
+    padding: 12px;
+    text-align: left;
+    font-family: 'Audiowide', cursive;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+.jugadores-table td {
+    padding: 12px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+    transition: background 0.3s;
+}
+.jugadores-table tr:hover td {
+    background: rgba(0, 255, 136, 0.03);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.5s;
+}
+.badge:hover::before {
+    left: 100%;
+}
+.bg-danger {
+    background: #ff1a4a;
+    border-color: #ff1a4a;
+}
+.bg-success {
+    background: #00cc66;
+    border-color: #00cc66;
+}
+.posicion-titulo {
+    color: #00ff88;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 8px;
+    margin: 15px 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.mb-4 {
+    margin-bottom: 2rem !important;
+    border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+    padding-bottom: 1.5rem;
+}
+.card {
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+/* Botón */
+.btn-primary {
+    background: linear-gradient(45deg, #001220, #6a00ff);
+    border: 1px solid #00ff88;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+    transform: rotate(45deg);
+    animation: btnGlow 3s infinite;
+}
+@keyframes btnGlow {
+    0% { transform: rotate(45deg) translateX(-200%); }
+    100% { transform: rotate(45deg) translateX(200%); }
+}
+
+/* Otros estilos */
+.text-primary {
+    text-shadow: 0 0 15px currentColor;
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        padding: 12px;
+        margin: 8px 0;
+    }
+
+    .jugadores-table {
+        font-size: 0.85rem;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .badge {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+
+    .btn-primary {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
