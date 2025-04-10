@@ -2,56 +2,90 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'detalle_jugador.css' %}">
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h2>{{ jugador.nombre }} {{ jugador.apellido }}</h2>
+    <div class="player-card" style="background-image: url('{% static 'images/stadium_bg.jpg' %}');">
+        <div class="card-overlay"></div>
+        
+        <div class="player-header">
+            <div class="dorsal-glow">{{ jugador.dorsal|default:"00" }}</div>
+            <h1 class="player-name">
+                <span class="first-name">{{ jugador.nombre }}</span>
+                <span class="last-name">{{ jugador.apellido }}</span>
+            </h1>
+            <div class="position-badge">{{ jugador.get_posicion_display }}</div>
         </div>
         
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="text-center">
-                        <div class="mb-3">
-                            <span class="display-4">#{{ jugador.dorsal|default:"-" }}</span>
+        <div class="player-content">
+            <div class="player-profile">
+                <div class="avatar-container">
+                    <div class="avatar-frame">
+                        <div class="avatar-initials">{{ jugador.nombre|first }}{{ jugador.apellido|first }}</div>
+                        <div class="nationality-flag">
+                            <img src="{% static 'flags/'|add:jugador.nacionalidad|lower|add:'.png' %}" alt="{{ jugador.nacionalidad }}">
                         </div>
+                    </div>
+                    <div class="status-indicators">
                         {% if jugador.lesionado %}
-                            <span class="badge bg-danger mb-2">Lesionado</span>
+                        <div class="status injury" data-tooltip="Lesionado por 2 semanas">
+                            <i class="fas fa-briefcase-medical"></i>
+                        </div>
                         {% endif %}
                         {% if jugador.suspendido %}
-                            <span class="badge bg-warning text-dark mb-2">Suspendido</span>
+                        <div class="status suspension" data-tooltip="Suspendido 1 partido">
+                            <i class="fas fa-ban"></i>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
                 
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Edad:</strong> {{ jugador.edad }}</p>
-                            <p><strong>Nacionalidad:</strong> {{ jugador.nacionalidad }}</p>
-                            <p><strong>Posición:</strong> {{ jugador.get_posicion_display }}</p>
+                <div class="player-details">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-birthday-cake"></i></div>
+                            <div class="stat-value">{{ jugador.edad }} años</div>
+                            <div class="stat-label">Edad</div>
                         </div>
                         
-                        <div class="col-md-6">
-                            <p><strong>Valor de mercado:</strong> €{{ jugador.valor_mercado|floatformat:2 }}M</p>
-                            <p><strong>Equipo:</strong> {{ jugador.equipo.nombre }}</p>
-                            <p><strong>Estado:</strong> 
-                                {% if jugador.lesionado %}
-                                    Lesionado
-                                {% elif jugador.suspendido %}
-                                    Suspendido
-                                {% else %}
-                                    Disponible
-                                {% endif %}
-                            </p>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                            <div class="stat-value">€{{ jugador.valor_mercado|floatformat:2 }}M</div>
+                            <div class="stat-label">Valor de mercado</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección de Nacionalidad Destacada -->
+                    <div class="nationality-card">
+                        <div class="flag-container">
+                            <img src="{% static 'flags/'|add:jugador.nacionalidad|lower|add:'.png' %}" 
+                                 alt="{{ jugador.nacionalidad }}" 
+                                 class="large-flag">
+                        </div>
+                        <div class="nationality-info">
+                            <h3>Nacionalidad</h3>
+                            <div class="country-name">{{ jugador.nacionalidad }}</div>
+                            <div class="fifa-code">Código FIFA: {{ jugador.nacionalidad|slice:":3"|upper }}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="additional-info">
+                        <div class="info-card">
+                            <h4><i class="fas fa-info-circle"></i> Información Adicional</h4>
+                            <ul>
+                                <li><strong>Equipo:</strong> {{ jugador.equipo.nombre }}</li>
+                                <li><strong>Dorsal:</strong> #{{ jugador.dorsal|default:"Sin asignar" }}</li>
+                                <li><strong>Debuta:</strong> 2018</li>
+                                <li><strong>Partidos:</strong> 120</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="action-buttons">
+            <a href="{% url 'jugadores_equipo' %}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Volver al equipo
+            </a>
+        </div>
     </div>
-    
-    <a href="{% url 'jugadores_equipo' %}" class="btn btn-primary mt-3">
-        Volver a la lista de jugadores
-    </a>
 </div>
 {% endblock %}

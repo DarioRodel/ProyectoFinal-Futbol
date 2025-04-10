@@ -5,12 +5,13 @@ from django.db import migrations
 def actualizar_posiciones_faltantes(apps, schema_editor):
     Jugador = apps.get_model('app_simulador', 'Jugador')
 
-    # Mapeo de nombres a claves correctas
     mapeo = {
-        'Mediocampista': 'MED',
-        'Delantero': 'DEL',
-        'Medio': 'MED',
-        'Atacante': 'DEL'
+        'PORTERO': 'POR',
+        'DEFENSA': 'DEF',
+        'MEDIOCAMPISTA': 'MED',  # ← Nueva entrada
+        'DELANTERO': 'DEL',  # ← Nueva entrada
+        'Mediocampista': 'MED',  # Para mayúsculas/minúsculas
+        'Delantero': 'DEL'
     }
 
     for jugador in Jugador.objects.all():
@@ -18,10 +19,9 @@ def actualizar_posiciones_faltantes(apps, schema_editor):
             jugador.posicion = mapeo[jugador.posicion]
             jugador.save(update_fields=['posicion'])
 
-
 class Migration(migrations.Migration):
     dependencies = [
-        ('app_simulador', '000x_previous_migration'),
+        ('app_simulador', '0009_remove_jugador_condicion_fisica_and_more'),
     ]
 
     operations = [

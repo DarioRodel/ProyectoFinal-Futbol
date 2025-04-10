@@ -378,19 +378,28 @@ class JugadoresEquipoView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        perfil = self.request.user.userprofile
-        equipo = perfil.equipo_seleccionado
-
-        # Obtener el queryset base
         jugadores = self.get_queryset()
 
-        # Agrupar por posiciones usando select_related/prefetch
+        # Separar jugadores por posición base
+        porteros = list(jugadores.filter(posicion='POR'))
+        defensas_raw = list(jugadores.filter(posicion='DEF'))
+        mediocampistas_raw = list(jugadores.filter(posicion='MED'))
+        delanteros_raw = list(jugadores.filter(posicion='DEL'))
+
+        # 1. Mover defensas excedentes a mediocampistas
+        defensas_final = defensas_raw[:5]
+        mediocampistas_temp = mediocampistas_raw + defensas_raw[5:]  # Combinar con originales
+
+        # 2. Mover mediocampistas excedentes a delanteros
+        mediocampistas_final = mediocampistas_temp[:5]
+        delanteros_final = delanteros_raw + mediocampistas_temp[5:]  # Combinar con originales
+
         context.update({
-            'equipo': equipo,
-            'porteros': jugadores.filter(posicion='POR'),
-            'defensas': jugadores.filter(posicion='DEF'),
-            'mediocampistas': jugadores.filter(posicion='MED'),
-            'delanteros': jugadores.filter(posicion='DEL')
+            'equipo': self.request.user.userprofile.equipo_seleccionado,
+            'porteros': porteros,
+            'defensas': defensas_final,
+            'mediocampistas': mediocampistas_final,
+            'delanteros': delanteros_final
         })
 
         return context
