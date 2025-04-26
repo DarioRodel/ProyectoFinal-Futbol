@@ -15,11 +15,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ... (head sin cambios) ... -->
 </head>
 <body>
 <div class="main-container">
-    <!-- Botón Eliminar en esquina -->
+    <!-- Botón Eliminar -->
     <div class="btn-eliminar-container">
         <form action="{% url 'eliminar_temporada' %}" method="post">
             {% csrf_token %}

@@ -1,13 +1,17 @@
 /* detalle_jugador.css */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@400;600;700&display=swap');
+body{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/campo1.jpg') no-repeat center center fixed;
+
+}
 .player-card {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
     min-height: 600px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('images/stadium_bg.jpg') center/cover;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card-overlay {
@@ -36,6 +40,7 @@
     left: 50%;
     transform: translateX(-50%);
     text-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+    font-weight: bold;
 }
 
 .player-name {
@@ -50,6 +55,7 @@
     color: #fff;
     font-size: 2.5rem;
     display: block;
+    letter-spacing: 2px;
 }
 
 .last-name {
@@ -57,6 +63,8 @@
     font-size: 3.5rem;
     display: block;
     text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    letter-spacing: 3px;
+    margin-top: -10px;
 }
 
 .position-badge {
@@ -68,6 +76,8 @@
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .player-profile {
@@ -77,6 +87,13 @@
     padding: 2rem;
     position: relative;
     z-index: 2;
+}
+
+.avatar-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .avatar-frame {
@@ -97,6 +114,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: 'Audiowide', cursive;
 }
 
 .nationality-flag {
@@ -117,12 +135,11 @@
 }
 
 .status-indicators {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     display: flex;
     gap: 1rem;
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .status {
@@ -135,6 +152,7 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
 }
 
 .status.injury {
@@ -149,6 +167,21 @@
     border: 1px solid #ffaa00;
 }
 
+.status:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -161,11 +194,26 @@
     padding: 1.5rem;
     border-radius: 15px;
     border: 1px solid rgba(0, 255, 136, 0.1);
-    transition: transform 0.3s;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, transparent 100%);
+    z-index: -1;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+    border-color: rgba(0, 255, 136, 0.3);
 }
 
 .stat-icon {
@@ -185,50 +233,160 @@
     color: #aaa;
     font-size: 0.9rem;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.skill-chart {
+.nationality-card {
     background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
     border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
     margin-bottom: 2rem;
+    border: 1px solid rgba(0, 255, 136, 0.1);
 }
 
-.chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.overall-rating {
-    width: 60px;
+.flag-container {
+    width: 80px;
     height: 60px;
-    border-radius: 50%;
-    background: #00ff88;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.large-flag {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nationality-info h3 {
+    color: #00ff88;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.country-name {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
+    color: white;
+    margin-bottom: 0.3rem;
+}
+
+.fifa-code {
+    color: #aaa;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.additional-info {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.info-card h4 {
+    color: #00ff88;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card li {
+    margin-bottom: 0.8rem;
+    color: #ddd;
+    display: flex;
+}
+
+.info-card li strong {
+    color: white;
+    min-width: 100px;
+    display: inline-block;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .btn-back {
     display: inline-flex;
     align-items: center;
+    justify-content: space-between;
     padding: 12px 25px;
-    background: rgba(0, 255, 136, 0.1);
+    background: linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.2) 100%);
     border: 1px solid #00ff88;
     color: #00ff88;
     text-decoration: none;
     border-radius: 30px;
     transition: all 0.3s;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    min-width: 250px;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+    transition: all 0.5s;
 }
 
 .btn-back:hover {
-    background: rgba(0, 255, 136, 0.2);
-    letter-spacing: 1px;
+    background: linear-gradient(90deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 255, 136, 0.3) 100%);
+    letter-spacing: 1.5px;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+}
+
+.btn-back:hover::before {
+    left: 100%;
+}
+
+.btn-back i:first-child {
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+.btn-back i:last-child {
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+
+.btn-back:hover i:first-child {
+    transform: translateX(-5px);
+}
+
+.btn-back:hover i:last-child {
+    transform: translateX(5px);
+}
+
+.btn-back span {
+    transition: all 0.3s;
+}
+
+.btn-back:hover span {
+    letter-spacing: 1.5px;
 }
 
 /* Responsive Design */
@@ -250,5 +408,18 @@
     .dorsal-glow {
         font-size: 5rem;
         top: -20px;
+    }
+
+    .nationality-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .first-name {
+        font-size: 2rem;
+    }
+
+    .last-name {
+        font-size: 2.5rem;
     }
 }

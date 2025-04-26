@@ -1,0 +1,219 @@
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'simular_partido.css' %}">
+
+    <div class="result-card">
+        <div class="match-header">
+            <div class="team-container">
+                <div class="team-logo">
+                    {% if equipo_usuario.imagen_escudo %}
+                        <img src="{{ equipo_usuario.imagen_escudo.url }}" alt="Escudo {{ equipo_usuario.nombre }}">
+                    {% else %}
+                        <img src="{% static 'images/escudos/realmadrid.png' %}" alt="Escudo predeterminado">
+                    {% endif %}
+                </div>
+                <h3>{{ equipo_usuario.nombre }}</h3>
+            </div>
+
+            <div class="score-display" id="score-display">
+                0 - 0
+            </div>
+
+            <div class="team-container">
+                <div class="team-logo">
+                    {% if oponente.imagen_escudo %}
+                        <img src="{{ oponente.imagen_escudo.url }}" alt="Escudo {{ oponente.nombre }}">
+                    {% else %}
+                        <img src="{% static 'images/escudos/realmadrid.png' %}" alt="Escudo predeterminado">
+                    {% endif %}
+                </div>
+                <h3>{{ oponente.nombre }}</h3>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h4 class="timeline-header">📝 Cronología del Partido</h4>
+            <button id="iniciar-partido" class="btn-menu">Iniciar Partido</button>
+            <div id="tiempo-partido" class="tiempo-partido" style="font-size: 1.5rem; margin: 1rem 0;">⏱️ 00:00</div>
+            <div id="timeline-events" style="display:none;"></div>
+        </div>
+
+        <h4 class="timeline-header">📈 Estadísticas</h4>
+        <div class="stats-grid">
+            <div class="stat-item"><strong>Posesión:</strong> {{ partido.estadisticas.posesion_local }}%
+                - {{ partido.estadisticas.posesion_visitante }}%
+            </div>
+            <div class="stat-item"><strong>Disparos:</strong> {{ partido.estadisticas.disparos_local }}
+                - {{ partido.estadisticas.disparos_visitante }}</div>
+            <div class="stat-item"><strong>Faltas:</strong> {{ partido.estadisticas.faltas_local }}
+                - {{ partido.estadisticas.faltas_visitante }}</div>
+            <div class="stat-item"><strong>Amarillas:</strong> {{ partido.estadisticas.amarillas_local }}
+                - {{ partido.estadisticas.amarillas_visitante }}</div>
+            <div class="stat-item"><strong>Rojas:</strong> {{ partido.estadisticas.rojas_local }}
+                - {{ partido.estadisticas.rojas_visitante }}</div>
+            <div class="stat-item"><strong>Paradas:</strong> {{ partido.estadisticas.paradas_local }}
+                - {{ partido.estadisticas.paradas_visitante }}</div>
+            <div class="stat-item"><strong>Córners:</strong> {{ partido.estadisticas.corners_local }}
+                - {{ partido.estadisticas.corners_visitante }}</div>
+        </div>
+
+        <a href="{% url 'menu' %}" class="btn-menu">Volver al Menú Principal</a>
+    </div>
+
+    <script id="eventos-json" type="application/json">
+        {{ eventos_json|escapejs }}
+    </script>
+{% endblock %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let eventos = [];
+    let golesLocal = 0;
+    let golesVisitante = 0;
+    let minutos = 0;
+    const fin = 90;
+
+    const container = document.getElementById('timeline-events');
+    const btnIniciar = document.getElementById('iniciar-partido');
+    const tiempo = document.getElementById('tiempo-partido');
+    const marcador = document.getElementById('score-display');
+
+    // Función que renderiza un evento en el timeline
+    function renderEvent(evento) {
+        const eventDiv = document.createElement('div');
+        eventDiv.className = 'timeline-event';
+        eventDiv.innerHTML = `
+            <span class="event-time">${evento.minuto}'</span>
+            <div class="event-icon">${getIcon(evento.tipo)}</div>
+            <div class="event-description">${getDescripcion(evento)}</div>
+        `;
+
+        if (evento.tipo === 'gol') {
+            if (evento.equipo === 'local') {
+                golesLocal++;
+            } else {
+                golesVisitante++;
+            }
+            marcador.textContent = `${golesLocal} - ${golesVisitante}`;
+        }
+
+        container.appendChild(eventDiv);
+        eventDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    // Función para obtener el icono asociado a cada tipo de evento
+    function getIcon(tipo) {
+        const icons = {
+            'gol': '⚽',
+            'falta': '🟨',
+            'tarjeta_amarilla': '⚠️',
+            'tarjeta_roja': '🟥',
+            'tiro_esquina': '↗️',
+            'parada_portero': '🧤',
+            'lesion': '🤕',
+            'poste': '🥅'
+        };
+        return icons[tipo] || '❓';
+    }
+
+    // Función para obtener la descripción del evento
+    function getDescripcion(evento) {
+        const equipo = evento.equipo === 'local' ? "{{ equipo_usuario.nombre }}" : "{{ oponente.nombre }}";
+        const descripciones = {
+            'gol': `Gol de ${evento.jugador} (${equipo})`,
+            'falta': `Falta cometida por ${equipo}`,
+            'tarjeta_amarilla': `Tarjeta amarilla para ${equipo}`,
+            'tarjeta_roja': `¡Tarjeta roja directa para ${equipo}!`,
+            'tiro_esquina': `Tiro de esquina a favor de ${equipo}`,
+            'parada_portero': `Gran parada del portero de ${equipo}`,
+            'lesion': `Jugador lesionado en ${equipo}`,
+            'poste': `¡Tiro al poste por parte de ${equipo}!`
+        };
+        return descripciones[evento.tipo] || `Evento desconocido de ${equipo}`;
+    }
+
+    // Función para actualizar el tiempo y mostrar eventos en el timeline
+    function actualizarTiempo() {
+        if (minutos <= fin) {
+            const minStr = minutos.toString().padStart(2, '0');
+            tiempo.textContent = `⏱️ ${minStr}:00`;
+
+            // Ejecutar eventos que ocurren en el minuto actual
+            const eventosMinuto = eventos.filter(e => e.minuto === minutos);
+            eventosMinuto.forEach((evento, index) => {
+                setTimeout(() => renderEvent(evento), index * 500); // Atrasar eventos para que se vean uno a uno
+            });
+
+            minutos++;
+            setTimeout(actualizarTiempo, 1000); // Llamar a la función nuevamente cada segundo
+        } else {
+            tiempo.textContent = "🏁 ¡Final del Partido!";
+            const resultado = document.createElement('div');
+            resultado.className = 'score-display final';
+            resultado.innerHTML = `<strong>Resultado Final:</strong> ${golesLocal} - ${golesVisitante}`;
+            container.appendChild(resultado);
+        }
+    }
+
+    // Función para obtener el valor de la cookie CSRF
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Acción al hacer clic en el botón para iniciar el partido
+    btnIniciar.addEventListener('click', () => {
+        btnIniciar.disabled = true; // Deshabilitar el botón para evitar múltiples clics
+        fetch("", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({ iniciar: true }) // Enviar solicitud para iniciar el partido
+        })
+        .then(res => res.text()) // Obtenemos la respuesta como texto
+        .then(text => {
+            console.log("Texto de la respuesta:", text); // Mostrar el texto recibido
+            try {
+                const data = JSON.parse(text);
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Si todo está correcto, actualizar los eventos y mostrar el marcador
+                eventos = data.eventos;
+                marcador.textContent = "0 - 0";
+                container.innerHTML = "";
+                container.style.display = 'block';
+                btnIniciar.style.display = 'none';
+
+                golesLocal = 0;
+                golesVisitante = 0;
+                minutos = 0;
+
+                actualizarTiempo(); // Comienza a mostrar el partido
+            } catch (err) {
+                console.error("Error al analizar el JSON:", err);
+                alert("Ocurrió un error al procesar la respuesta del servidor.");
+            }
+        })
+        .catch(err => {
+            console.error("Error en la simulación del partido:", err);
+            alert("Ocurrió un error al iniciar el partido.");
+        });
+    });
+});
+
+</script>

@@ -21,9 +21,8 @@ urlpatterns = [
     path('tabla-liga/', TablaLigaView.as_view(), name='tabla_liga'),
     path('formacion-equipo/', FormacionEquipoView.as_view(), name='formacion_equipo'),
     path('guardar-formacion/', GuardarFormacionView.as_view(), name='guardar_formacion'),
-    path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
     path('informacion-equipo/', InformacionEquipoView.as_view(), name='informacion_equipo'),
     path('equipo/jugadores/', JugadoresEquipoView.as_view(), name='jugadores_equipo'),
-
     path('jugador/<int:pk>/', DetalleJugadorView.as_view(), name='detalle_jugador'),
+    path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
 ]

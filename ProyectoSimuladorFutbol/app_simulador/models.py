@@ -11,6 +11,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     ciudad = models.CharField(max_length=100)
     estadio = models.CharField(max_length=100)
+    ya_jugo = models.BooleanField(default=False)
     fundacion = models.IntegerField(
         validators=[
             MinValueValidator(1800),
@@ -111,20 +112,24 @@ class Lesion(models.Model):
     descripcion = models.TextField()
 
 class Partido(models.Model):
-    ESTADOS_PARTIDO = [
-        ('Pendiente', 'Pendiente'),
-        ('En juego', 'En juego'),
-        ('Finalizado', 'Finalizado')
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('jugando', 'Jugando'),
+        ('finalizado', 'Finalizado'),
     ]
 
-    equipo_local = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='partidos_local')
-    equipo_visitante = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='partidos_visitante')
-    fecha = models.DateTimeField()
-    goles_local = models.IntegerField(default=0)
-    goles_visitante = models.IntegerField(default=0)
-    eventos = models.JSONField(default=dict)
-    jornada = models.IntegerField(default=1)
-    estado = models.CharField(max_length=50, choices=ESTADOS_PARTIDO, default='Pendiente')
+    equipo_local = models.ForeignKey('Equipo', on_delete=models.CASCADE, related_name='partidos_como_local')
+    equipo_visitante = models.ForeignKey('Equipo', on_delete=models.CASCADE, related_name='partidos_como_visitante')
+    fecha = models.DateTimeField(auto_now_add=True)
+    goles_local = models.PositiveIntegerField(default=0)
+    goles_visitante = models.PositiveIntegerField(default=0)
+    eventos = models.JSONField(default=dict, blank=True)
+    estadisticas = models.JSONField(default=dict, blank=True)
+    jornada = models.PositiveIntegerField(default=1)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+
+    def __str__(self):
+        return f"{self.equipo_local} vs {self.equipo_visitante} (Jornada {self.jornada})"
 
 class Transferencia(models.Model):
     TIPOS_TRANSFERENCIA = [

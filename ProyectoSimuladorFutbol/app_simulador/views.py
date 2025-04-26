@@ -1,3 +1,6 @@
+import json
+
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth import login, logout
@@ -6,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from django.views.generic import ListView, DetailView
 
-from .models import Equipo, UserProfile, UsuarioLogro, Jugador
+from .models import Equipo, UserProfile, UsuarioLogro, Jugador, Partido
 from .forms import CustomUserCreationForm
 import random
 from app_simulador.data.jugadores_equipos import jugadores as jugadores_equipos
@@ -414,50 +417,154 @@ class DetalleJugadorView(LoginRequiredMixin, DetailView):
         context['equipo'] = self.request.user.userprofile.equipo_seleccionado
         return context
 # Vista para simular partido
+
 class SimularPartidoView(LoginRequiredMixin, View):
+    template_name = 'simular_partido.html'
+
     def get(self, request):
-        return render(request, 'simular_partido.html')
+        perfil = request.user.userprofile
+        equipo = perfil.equipo_seleccionado
+        return render(request, self.template_name, {
+            'equipo_usuario': equipo,
+            'oponente': None,
+            'eventos_json': json.dumps([]),
+            'partido': {'estadisticas': self.estadisticas_base()}
+        })
 
     def post(self, request):
         perfil = request.user.userprofile
         equipo_usuario = perfil.equipo_seleccionado
 
         if not equipo_usuario:
-            return redirect('seleccionar_equipo')
+            return JsonResponse({'error': 'Debes seleccionar un equipo'}, status=400)
 
-        with transaction.atomic():
-            # Lógica de simulación de partido
-            equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id).filter(ya_jugo=False)
+        oponente = self.seleccionar_oponente(equipo_usuario)
 
-            if not equipos_disponibles:
-                Equipo.objects.update(ya_jugo=False)
-                equipos_disponibles = Equipo.objects.exclude(id=equipo_usuario.id)
+        fuerza_local = self.calcular_fuerza(equipo_usuario, perfil.formacion)
+        fuerza_visitante = self.calcular_fuerza(oponente, '4-4-2')
 
-            oponente = random.choice(equipos_disponibles)
-            goles_usuario = random.randint(0, 5)
-            goles_oponente = random.randint(0, 5)
+        goles_local = self.generar_goles(fuerza_local, fuerza_visitante)
+        goles_visitante = self.generar_goles(fuerza_visitante, fuerza_local)
 
-            # Actualizar resultados
-            if goles_usuario > goles_oponente:
-                equipo_usuario.puntos += 3
-                equipo_usuario.partidos_ganados += 1
-            elif goles_usuario < goles_oponente:
-                oponente.puntos += 3
-            else:
-                equipo_usuario.puntos += 1
-                oponente.puntos += 1
+        eventos_data = self.simular_eventos(goles_local, goles_visitante)
 
-            equipo_usuario.ya_jugo = True
-            oponente.ya_jugo = True
-            equipo_usuario.save()
-            oponente.save()
+        partido = Partido.objects.create(
+            equipo_local=equipo_usuario,
+            equipo_visitante=oponente,
+            goles_local=goles_local,
+            goles_visitante=goles_visitante,
+            eventos=eventos_data['eventos'],
+            estadisticas=eventos_data['estadisticas'],
+            estado='finalizado'
+        )
 
-            # Otorgar logros
-            if not UsuarioLogro.objects.filter(usuario=request.user, logro__nombre="Primer Partido").exists():
-                otorgar_logro(request.user, "Primer Partido")
+        self.actualizar_estadisticas_equipos(equipo_usuario, oponente, goles_local, goles_visitante)
 
-            if equipo_usuario.partidos_ganados >= 10:
-                otorgar_logro(request.user, "10 Victorias")
+        return JsonResponse({
+            'oponente': oponente.nombre,
+            'goles_usuario': goles_local,
+            'goles_oponente': goles_visitante,
+            'eventos': eventos_data['eventos'],
+            'estadisticas': eventos_data['estadisticas'],
+            'resultado': self.definir_resultado(goles_local, goles_visitante),
+        })
 
-        return redirect('menu')
+    def seleccionar_oponente(self, equipo_usuario):
+        candidatos = Equipo.objects.exclude(id=equipo_usuario.id).filter(ya_jugo=False)
+        if not candidatos.exists():
+            Equipo.objects.exclude(id=equipo_usuario.id).update(ya_jugo=False)
+            candidatos = Equipo.objects.exclude(id=equipo_usuario.id)
+        return random.choice(candidatos)
 
+    def calcular_fuerza(self, equipo, formacion):
+        bonificaciones = {'4-3-3': 10, '4-4-2': 8, '3-5-2': 7, '4-2-3-1': 9}
+        base = 50
+        return base + bonificaciones.get(formacion, 5)
+
+    def generar_goles(self, ataque, defensa):
+        ventaja = ataque - defensa
+        probabilidad = max(0, ventaja) // 10 + random.randint(-1, 2)
+        return max(0, probabilidad)
+
+    def simular_eventos(self, goles_local, goles_visitante):
+        eventos = []
+        estadisticas = self.estadisticas_base()
+        minutos_disponibles = list(range(1, 91))
+
+        tipos = ['gol', 'falta', 'amarilla', 'roja', 'corner', 'parada', 'lesion', 'poste']
+
+        for _ in range(random.randint(10, 20)):
+            if not minutos_disponibles:
+                break
+            minuto = minutos_disponibles.pop(random.randint(0, len(minutos_disponibles)-1))
+            tipo = random.choice(tipos)
+            equipo = random.choice(['local', 'visitante'])
+            jugador = f"Jugador {random.randint(1, 11)}"
+
+            eventos.append({'minuto': minuto, 'tipo': tipo, 'equipo': equipo, 'jugador': jugador})
+            self.actualizar_estadisticas_evento(estadisticas, tipo, equipo)
+
+        eventos.sort(key=lambda e: e['minuto'])
+
+        return {'eventos': eventos, 'estadisticas': estadisticas}
+
+    def actualizar_estadisticas_evento(self, estadisticas, tipo, equipo):
+        claves = {
+            'gol': f'disparos_{equipo}',
+            'falta': f'faltas_{equipo}',
+            'amarilla': f'amarillas_{equipo}',
+            'roja': f'rojas_{equipo}',
+            'corner': f'corners_{equipo}',
+            'parada': f'paradas_{equipo}',
+        }
+        if tipo in claves:
+            estadisticas[claves[tipo]] += 1
+
+    def actualizar_estadisticas_equipos(self, local, visitante, goles_local, goles_visitante):
+        local.partidos_jugados += 1
+        visitante.partidos_jugados += 1
+
+        if goles_local > goles_visitante:
+            local.puntos += 3
+            local.partidos_ganados += 1
+            visitante.partidos_perdidos += 1
+        elif goles_local < goles_visitante:
+            visitante.puntos += 3
+            visitante.partidos_ganados += 1
+            local.partidos_perdidos += 1
+        else:
+            local.puntos += 1
+            visitante.puntos += 1
+            local.partidos_empatados += 1
+            visitante.partidos_empatados += 1
+
+        local.ya_jugo = True
+        visitante.ya_jugo = True
+
+        local.save()
+        visitante.save()
+
+    def definir_resultado(self, goles_local, goles_visitante):
+        if goles_local > goles_visitante:
+            return 'victoria'
+        elif goles_local < goles_visitante:
+            return 'derrota'
+        return 'empate'
+
+    def estadisticas_base(self):
+        return {
+            'posesion_local': random.randint(55, 70),
+            'posesion_visitante': 0,
+            'disparos_local': 0,
+            'disparos_visitante': 0,
+            'faltas_local': 0,
+            'faltas_visitante': 0,
+            'amarillas_local': 0,
+            'amarillas_visitante': 0,
+            'rojas_local': 0,
+            'rojas_visitante': 0,
+            'paradas_local': 0,
+            'paradas_visitante': 0,
+            'corners_local': 0,
+            'corners_visitante': 0,
+        }
