@@ -46,9 +46,13 @@ class Equipo(models.Model):
     partidos_ganados = models.IntegerField(default=0)
     partidos_perdidos = models.IntegerField(default=0)
     partidos_empatados = models.IntegerField(default=0)
+    goles_favor = models.IntegerField(default=0)  # Goles a favor
+    goles_contra = models.IntegerField(default=0)  # Goles en contra
     temporada_finalizada = models.BooleanField(default=False)
+
     def __str__(self):
         return self.nombre
+
 class Jugador(models.Model):
     POSICIONES = [
         ('POR', 'Portero'),
@@ -84,6 +88,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     equipo_seleccionado = models.ForeignKey(Equipo, on_delete=models.SET_NULL, null=True, blank=True)
     logros_desbloqueados = models.ManyToManyField('Logro', blank=True)
+    jornada_actual = models.IntegerField(default=1)
     fecha_registro = models.DateTimeField(auto_now_add=True)
     formacion = models.CharField(
         max_length=10,
