@@ -302,7 +302,7 @@ body {
 /* ---------- FORMACIÓN 4-4-2 ---------- */
 .formacion-4-4-2 .punto-defensa-1 {
     bottom: 20%;
-    left: 10%;
+    right: 10%;
 }
 
 .formacion-4-4-2 .punto-defensa-2 {
@@ -317,7 +317,7 @@ body {
 
 .formacion-4-4-2 .punto-defensa-4 {
     bottom: 20%;
-    right: 10%;
+    left: 10%;
 }
 
 .formacion-4-4-2 .punto-mediocampista-1 {
@@ -353,7 +353,7 @@ body {
 /* ---------- FORMACIÓN 4-3-3 ---------- */
 .formacion-4-3-3 .punto-defensa-1 {
     bottom: 20%;
-    left: 20%;
+    right: 20%;
 }
 
 .formacion-4-3-3 .punto-defensa-2 {
@@ -368,7 +368,7 @@ body {
 
 .formacion-4-3-3 .punto-defensa-4 {
     bottom: 20%;
-    right: 20%;
+    left: 20%;
 }
 
 .formacion-4-3-3 .punto-mediocampista-1 {
@@ -459,7 +459,7 @@ body {
 /* ---------- FORMACIÓN 4-2-3-1 ---------- */
 .formacion-4-2-3-1 .punto-defensa-1 {
     bottom: 20%;
-    left: 20%;
+    right: 20%;
 }
 
 .formacion-4-2-3-1 .punto-defensa-2 {
@@ -474,7 +474,7 @@ body {
 
 .formacion-4-2-3-1 .punto-defensa-4 {
     bottom: 20%;
-    right: 20%;
+    left: 20%;
 }
 
 .formacion-4-2-3-1 .punto-mediocampista-1 {
@@ -508,4 +508,3 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
-

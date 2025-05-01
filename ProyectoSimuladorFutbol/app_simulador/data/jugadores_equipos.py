@@ -1,752 +1,1023 @@
 jugadores = {
     'Real Madrid': {
-        'PORTERO': [
+        'fundacion': 1902,
+        'presupuesto': 800_000_000,
+        'POR': [
             {'nombre': 'Thibaut Courtois', 'apellido': 'Courtois', 'edad': 31, 'nacionalidad': 'Bélgica',
-             'valor_mercado': 50.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 50.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'},
             {'nombre': 'Andriy Lunin', 'apellido': 'Lunin', 'edad': 24, 'nacionalidad': 'Ucrania',
-             'valor_mercado': 10.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 10.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Dani Carvajal', 'apellido': 'Carvajal', 'edad': 31, 'nacionalidad': 'España',
-             'valor_mercado': 25.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Éder Militão', 'apellido': 'Militão', 'edad': 25, 'nacionalidad': 'Brasil',
-             'valor_mercado': 70.0, 'dorsal': 3, 'lesionado': True, 'suspendido': False},
+             'valor_mercado': 70.0, 'dorsal': 3, 'lesionado': True, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Antonio Rüdiger', 'apellido': 'Rüdiger', 'edad': 30, 'nacionalidad': 'Alemania',
-             'valor_mercado': 40.0, 'dorsal': 22, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 22, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Ferland Mendy', 'apellido': 'Mendy', 'edad': 28, 'nacionalidad': 'Francia',
-             'valor_mercado': 30.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'David Alaba', 'apellido': 'Alaba', 'edad': 31, 'nacionalidad': 'Austria', 'valor_mercado': 45.0,
-             'dorsal': 4, 'lesionado': True, 'suspendido': False}
+             'valor_mercado': 30.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'},
+            {'nombre': 'David Alaba', 'apellido': 'Alaba', 'edad': 31, 'nacionalidad': 'Austria',
+             'valor_mercado': 45.0,
+             'dorsal': 4, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Luka Modrić', 'apellido': 'Modrić', 'edad': 38, 'nacionalidad': 'Croacia',
-             'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Jude Bellingham', 'apellido': 'Bellingham', 'edad': 20, 'nacionalidad': 'Inglaterra',
-             'valor_mercado': 120.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 120.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'},
             {'nombre': 'Federico Valverde', 'apellido': 'Valverde', 'edad': 25, 'nacionalidad': 'Uruguay',
-             'valor_mercado': 100.0, 'dorsal': 15, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 100.0, 'dorsal': 15, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Daniel Ceballos', 'apellido': 'Ceballos', 'edad': 28, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Eduardo Camavinga', 'apellido': 'Camavinga', 'edad': 21, 'nacionalidad': 'Francia',
-             'valor_mercado': 90.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 90.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Vinicius Jr', 'apellido': 'Vinicius', 'edad': 23, 'nacionalidad': 'Brasil',
-             'valor_mercado': 150.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 150.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
             {'nombre': 'Kylian Mbappé', 'apellido': 'Mbappé', 'edad': 25, 'nacionalidad': 'Francia',
-             'valor_mercado': 180.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Rodrygo', 'apellido': 'Rodrygo', 'edad': 23, 'nacionalidad': 'Brasil', 'valor_mercado': 100.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 180.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'CD'},
+            {'nombre': 'Rodrygo', 'apellido': 'Rodrygo', 'edad': 23, 'nacionalidad': 'Brasil',
+             'valor_mercado': 100.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
         ]
     },
     'FC Barcelona': {
-        'PORTERO': [
+        'fundacion': 1899,
+        'presupuesto': 700_000_000,
+        'POR': [
             {'nombre': 'Marc-André ter Stegen', 'apellido': 'ter Stegen', 'edad': 31, 'nacionalidad': 'Alemania',
-             'valor_mercado': 60.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 60.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'},
             {'nombre': 'Iñaki Peña', 'apellido': 'Peña', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False}
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Jules Koundé', 'apellido': 'Koundé', 'edad': 25, 'nacionalidad': 'Francia',
-             'valor_mercado': 60.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 60.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Ronald Araújo', 'apellido': 'Araújo', 'edad': 24, 'nacionalidad': 'Uruguay',
-             'valor_mercado': 70.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 70.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Andreas Christensen', 'apellido': 'Christensen', 'edad': 27, 'nacionalidad': 'Dinamarca',
-             'valor_mercado': 40.0, 'dorsal': 15, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 15, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Alejandro Balde', 'apellido': 'Balde', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 50.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 50.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'},
             {'nombre': 'Mika', 'apellido': 'Faye', 'edad': 19, 'nacionalidad': 'Senegal', 'valor_mercado': 12.0,
-             'dorsal': 35, 'lesionado': False, 'suspendido': False}
+             'dorsal': 35, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Pedri', 'apellido': 'Pedri', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 100.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Frenkie de Jong', 'apellido': 'de Jong', 'edad': 26, 'nacionalidad': 'Países Bajos',
-             'valor_mercado': 90.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 90.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Gavi', 'apellido': 'Gavi', 'edad': 19, 'nacionalidad': 'España', 'valor_mercado': 90.0,
-             'dorsal': 6, 'lesionado': True, 'suspendido': False},
+             'dorsal': 6, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Marc', 'apellido': 'Casadó', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 33, 'lesionado': False, 'suspendido': False},
+             'dorsal': 33, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Dani', 'apellido': 'Olmo', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False}
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Robert Lewandowski', 'apellido': 'Lewandowski', 'edad': 35, 'nacionalidad': 'Polonia',
-             'valor_mercado': 40.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Raphinha', 'apellido': 'Raphinha', 'edad': 27, 'nacionalidad': 'Brasil', 'valor_mercado': 60.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Lamine Yamal', 'apellido': 'Yamal', 'edad': 16, 'nacionalidad': 'España', 'valor_mercado': 75.0,
-             'dorsal': 27, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Raphinha', 'apellido': 'Raphinha', 'edad': 27, 'nacionalidad': 'Brasil',
+             'valor_mercado': 60.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
+            {'nombre': 'Lamine Yamal', 'apellido': 'Yamal', 'edad': 16, 'nacionalidad': 'España',
+             'valor_mercado': 75.0,
+             'dorsal': 27, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Ferran Torres', 'apellido': 'Torres', 'edad': 24, 'nacionalidad': 'España',
-             'valor_mercado': 35.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Fermin', 'apellido': 'Lopez', 'edad': 19, 'nacionalidad': 'España', 'valor_mercado': 50.0,
-             'dorsal': 20, 'lesionado': True, 'suspendido': False}
+             'valor_mercado': 35.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
+            {'nombre': 'Fermin', 'apellido': 'Lopez', 'edad': 19, 'nacionalidad': 'España',
+             'valor_mercado': 50.0,
+             'dorsal': 20, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'MC'}
         ]
     },
     'Atlético de Madrid': {
-        'PORTERO': [
-            {'nombre': 'Jan Oblak', 'apellido': 'Oblak', 'edad': 31, 'nacionalidad': 'Eslovenia', 'valor_mercado': 45.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False},
+        'fundacion': 1895,
+        'presupuesto': 600_000_000,
+        'POR': [
+            {'nombre': 'Jan Oblak', 'apellido': 'Oblak', 'edad': 31, 'nacionalidad': 'Eslovenia',
+             'valor_mercado': 45.0,
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'},
             {'nombre': 'Ivo Grbić', 'apellido': 'Grbić', 'edad': 27, 'nacionalidad': 'Croacia', 'valor_mercado': 8.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Nahuel Molina', 'apellido': 'Molina', 'edad': 25, 'nacionalidad': 'Argentina',
-             'valor_mercado': 40.0, 'dorsal': 16, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 16, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'José María Giménez', 'apellido': 'Giménez', 'edad': 28, 'nacionalidad': 'Uruguay',
-             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Le Normand', 'apellido': 'Normand', 'edad': 26, 'nacionalidad': 'Francia',
-             'valor_mercado': 30.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 30.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Reinildo Mandava', 'apellido': 'Reinildo', 'edad': 29, 'nacionalidad': 'Mozambique',
-             'valor_mercado': 20.0, 'dorsal': 23, 'lesionado': True, 'suspendido': False}
+             'valor_mercado': 20.0, 'dorsal': 23, 'lesionado': True, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Koke', 'apellido': 'Koke', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Rodrigo De Paul', 'apellido': 'De Paul', 'edad': 29, 'nacionalidad': 'Argentina',
-             'valor_mercado': 40.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Marcos Llorente', 'apellido': 'Llorente', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 35.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Saúl Ñíguez', 'apellido': 'Saúl', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 17, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Pablo', 'apellido': 'Barrios', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 30.0,
-             'dorsal': 24, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 35.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MD'},
+            {'nombre': 'Saúl Ñíguez', 'apellido': 'Saúl', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 20.0,
+             'dorsal': 17, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Pablo', 'apellido': 'Barrios', 'edad': 20, 'nacionalidad': 'España',
+             'valor_mercado': 30.0,
+             'dorsal': 24, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Antoine Griezmann', 'apellido': 'Griezmann', 'edad': 33, 'nacionalidad': 'Francia',
-             'valor_mercado': 35.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 35.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'},
             {'nombre': 'Julian Álvarez', 'apellido': 'Álvarez', 'edad': 24, 'nacionalidad': 'Argentina',
-             'valor_mercado': 80.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 80.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Samu Lino', 'apellido': 'Lino', 'edad': 24, 'nacionalidad': 'Brasil', 'valor_mercado': 25.0,
-             'dorsal': 12, 'lesionado': False, 'suspendido': False},
+             'dorsal': 12, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
             {'nombre': 'Ángel Correa', 'apellido': 'Correa', 'edad': 28, 'nacionalidad': 'Argentina',
-             'valor_mercado': 25.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'SD'},
         ]
     },
     'Sevilla FC': {
-        'PORTERO': [
+        'fundacion': 1900,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Ørjan Nyland', 'apellido': 'Nyland', 'edad': 33, 'nacionalidad': 'Noruega',
-             'valor_mercado': 3.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 3.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'},
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Kike Salas', 'apellido': 'Salas', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False},
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Loïc Badé', 'apellido': 'Badé', 'edad': 23, 'nacionalidad': 'Francia', 'valor_mercado': 20.0,
-             'dorsal': 22, 'lesionado': False, 'suspendido': False},
+             'dorsal': 22, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Marcão', 'apellido': 'Marcão', 'edad': 27, 'nacionalidad': 'Brasil', 'valor_mercado': 12.0,
-             'dorsal': 3, 'lesionado': True, 'suspendido': False},
+             'dorsal': 3, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Adrià Pedrosa', 'apellido': 'Pedrosa', 'edad': 25, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'},
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Nemanja Gudelj', 'apellido': 'Gudelj', 'edad': 32, 'nacionalidad': 'Serbia',
-             'valor_mercado': 8.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Ruben Vargas', 'apellido': 'Vargas', 'edad': 25, 'nacionalidad': 'Suiza', 'valor_mercado': 15.0,
-             'dorsal': 16, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 8.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
+            {'nombre': 'Ruben Vargas', 'apellido': 'Vargas', 'edad': 25, 'nacionalidad': 'Suiza',
+             'valor_mercado': 15.0,
+             'dorsal': 16, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MI'},
             {'nombre': 'Djibril Sow', 'apellido': 'Sow', 'edad': 26, 'nacionalidad': 'Suiza', 'valor_mercado': 18.0,
-             'dorsal': 18, 'lesionado': False, 'suspendido': False},
+             'dorsal': 18, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Ivan ', 'apellido': 'Garcia', 'edad': 35, 'nacionalidad': 'España',
-             'valor_mercado': 5.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 5.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Manu', 'apellido': 'Bueno', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 28, 'lesionado': False, 'suspendido': False}
+             'dorsal': 28, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Suso', 'apellido': 'Suso', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Isaac Romero', 'apellido': 'Romero', 'edad': 23, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 20, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 20, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Dodi Lukebakio', 'apellido': 'Lukebakio', 'edad': 26, 'nacionalidad': 'Bélgica',
-             'valor_mercado': 25.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'ED'},
         ]
     },
     'Real Sociedad': {
-        'PORTERO': [
-            {'nombre': 'Álex Remiro', 'apellido': 'Remiro', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False},
+        'fundacion': 1907,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Álex Remiro', 'apellido': 'Remiro', 'edad': 28, 'nacionalidad': 'España',
+             'valor_mercado': 25.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'},
         ],
-        'DEFENSA': [
-            {'nombre': 'Aihen Muñoz', 'apellido': 'Muñoz', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+        'DEF': [
+            {'nombre': 'Aihen Muñoz', 'apellido': 'Muñoz', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'},
             {'nombre': 'Aritz Elustondo', 'apellido': 'Elustondo', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 18.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 18.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Igor Zubeldia', 'apellido': 'Zubeldia', 'edad': 26, 'nacionalidad': 'España',
-             'valor_mercado': 30.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 30.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Robin ', 'apellido': 'Robin', 'edad': 27, 'nacionalidad': 'Francia',
-             'valor_mercado': 35.0, 'dorsal': 24, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 35.0,
+             'dorsal': 24, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Pablo Marín', 'apellido': 'Marín', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 30, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Pablo Marín', 'apellido': 'Marín', 'edad': 20, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 30, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Martín Zubimendi', 'apellido': 'Zubimendi', 'edad': 24, 'nacionalidad': 'España',
-             'valor_mercado': 60.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 60.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Brais Méndez', 'apellido': 'Méndez', 'edad': 26, 'nacionalidad': 'España',
-             'valor_mercado': 40.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MD'},
             {'nombre': 'Mikel Merino', 'apellido': 'Merino', 'edad': 27, 'nacionalidad': 'España',
-             'valor_mercado': 50.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 50.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Jon Ander', 'apellido': 'Olasagasti', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 25, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 25, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Mikel Oyarzabal', 'apellido': 'Oyarzabal', 'edad': 26, 'nacionalidad': 'España',
-             'valor_mercado': 60.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Takefusa Kubo', 'apellido': 'Kubo', 'edad': 22, 'nacionalidad': 'Japón', 'valor_mercado': 50.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 60.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
+            {'nombre': 'Takefusa Kubo', 'apellido': 'Kubo', 'edad': 22, 'nacionalidad': 'Japón',
+             'valor_mercado': 50.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Ander Barrenetxea', 'apellido': 'Barrenetxea', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 25.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
         ]
     },
     'Villarreal CF': {
-        'PORTERO': [
+        'fundacion': 1912,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Diego Conde', 'apellido': 'Conde', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 35, 'lesionado': False, 'suspendido': False},
+             'dorsal': 35, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'},
             {'nombre': 'Filip Jörgensen', 'apellido': 'Jörgensen', 'edad': 21, 'nacionalidad': 'Dinamarca',
-             'valor_mercado': 15.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Juan Foyth', 'apellido': 'Foyth', 'edad': 25, 'nacionalidad': 'Argentina',
-             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': True, 'suspendido': False},
+             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': True, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Raúl Albiol', 'apellido': 'Albiol', 'edad': 38, 'nacionalidad': 'España', 'valor_mercado': 2.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Eric Bailly', 'apellido': 'Bailly', 'edad': 29, 'nacionalidad': 'Costa de Marfil',
-             'valor_mercado': 8.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 8.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Alfonso Pedraza', 'apellido': 'Pedraza', 'edad': 27, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 24, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 24, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Pape Gueye', 'apellido': 'Gueye', 'edad': 24, 'nacionalidad': 'Senegal', 'valor_mercado': 20.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Dani Parejo', 'apellido': 'Parejo', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Pape Gueye', 'apellido': 'Gueye', 'edad': 24, 'nacionalidad': 'Senegal',
+             'valor_mercado': 20.0,
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
+            {'nombre': 'Dani Parejo', 'apellido': 'Parejo', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 10.0,
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Denis Suárez', 'apellido': 'Suárez', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 12.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Álex Baena', 'apellido': 'Baena', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 40.0,
-             'dorsal': 16, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0,
+             'dorsal': 19, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Álex Baena', 'apellido': 'Baena', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 40.0,
+             'dorsal': 16, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Iker', 'apellido': 'Benito', 'edad': 19, 'nacionalidad': 'España',
-             'valor_mercado': 6.5, 'dorsal': 28, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 6.5,
+             'dorsal': 28, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Gerard Moreno', 'apellido': 'Moreno', 'edad': 31, 'nacionalidad': 'España',
-             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Yeremy Pino', 'apellido': 'Pino', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 45.0,
-             'dorsal': 21, 'lesionado': True, 'suspendido': False},
-            {'nombre': 'Ayoze Pérez', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Yeremy Pino', 'apellido': 'Pino', 'edad': 21, 'nacionalidad': 'España',
+             'valor_mercado': 45.0,
+             'dorsal': 21, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'EI'},
+            {'nombre': 'Ayoze Pérez', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España',
+             'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'SD'},
         ]
     },
     'Real Betis': {
-        'PORTERO': [
+        'fundacion': 1898,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Adrián San Miguel', 'apellido': 'Adrián', 'edad': 37, 'nacionalidad': 'España',
-             'valor_mercado': 1.5, 'dorsal': 13, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Rui Silva', 'apellido': 'Silva', 'edad': 30, 'nacionalidad': 'Portugal', 'valor_mercado': 12.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 1.5, 'dorsal': 13, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'},
+            {'nombre': 'Rui Silva', 'apellido': 'Silva', 'edad': 30, 'nacionalidad': 'Portugal',
+             'valor_mercado': 12.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Youssouf Sabaly', 'apellido': 'Sabaly', 'edad': 30, 'nacionalidad': 'Senegal',
-             'valor_mercado': 10.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Marc Bartra', 'apellido': 'Bartra', 'edad': 33, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Diego Llorente', 'apellido': 'Llorente', 'edad': 30, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Juan Miranda', 'apellido': 'Miranda', 'edad': 24, 'nacionalidad': 'España',
-             'valor_mercado': 12.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 12.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Giovani Lo Celso', 'apellido': 'Lo Celso', 'edad': 28, 'nacionalidad': 'Argentina',
-             'valor_mercado': 25.0, 'dorsal': 18, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 18, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'},
             {'nombre': 'William Carvalho', 'apellido': 'Carvalho', 'edad': 32, 'nacionalidad': 'Portugal',
-             'valor_mercado': 10.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Isco', 'apellido': 'Isco', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 22, 'lesionado': False, 'suspendido': False},
+             'dorsal': 22, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Guido Rodríguez', 'apellido': 'Rodríguez', 'edad': 30, 'nacionalidad': 'Argentina',
-             'valor_mercado': 18.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 18.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Assane', 'apellido': 'Diao', 'edad': 18, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 38, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0,
+             'dorsal': 38, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Antony Lopes', 'apellido': 'Antony', 'edad': 24, 'nacionalidad': 'Brasil',
-             'valor_mercado': 20.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Chimy Ávila', 'apellido': 'Ávila', 'edad': 29, 'nacionalidad': 'Argentina',
-             'valor_mercado': 12.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Cucho Hernández', 'apellido': 'Hernández', 'edad': 25, 'nacionalidad': 'Colombia',
-             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Ayoze Pérez', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Ayoze Pérez', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España',
+             'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'SD'}
         ]
     },
     'Athletic Club': {
-        'PORTERO': [
-            {'nombre': 'Unai Simón', 'apellido': 'Simón', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 35.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False},
+        'fundacion': 1895,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Unai Simón', 'apellido': 'Simón', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 35.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'},
             {'nombre': 'Julen Agirrezabala', 'apellido': 'Agirrezabala', 'edad': 23, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 13, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Óscar de Marcos', 'apellido': 'De Marcos', 'edad': 34, 'nacionalidad': 'España',
-             'valor_mercado': 5.0, 'dorsal': 18, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 5.0,
+             'dorsal': 18, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
             {'nombre': 'Yeray Álvarez', 'apellido': 'Álvarez', 'edad': 28, 'nacionalidad': 'España',
-             'valor_mercado': 25.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Dani Vivian', 'apellido': 'Vivian', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 30.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 25.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Dani Vivian', 'apellido': 'Vivian', 'edad': 24, 'nacionalidad': 'España',
+             'valor_mercado': 30.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Yuri Berchiche', 'apellido': 'Berchiche', 'edad': 34, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 17, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 17, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Mikel Vesga', 'apellido': 'Vesga', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Mikel Vesga', 'apellido': 'Vesga', 'edad': 30, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Oihan Sancet', 'apellido': 'Sancet', 'edad': 23, 'nacionalidad': 'España',
-             'valor_mercado': 40.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Unai Gómez', 'apellido': 'Gómez', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 16, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 40.0,
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
+            {'nombre': 'Unai Gómez', 'apellido': 'Gómez', 'edad': 21, 'nacionalidad': 'España',
+             'valor_mercado': 20.0,
+             'dorsal': 16, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Beñat', 'apellido': 'Prados', 'edad': 25, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 25, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0,
+             'dorsal': 25, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Peio', 'apellido': 'Canales', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 35, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 20.0,
+             'dorsal': 35, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Iñaki Williams', 'apellido': 'Williams', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 35.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 35.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Nico Williams', 'apellido': 'Williams', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 50.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 50.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
             {'nombre': 'Gorka Guruzeta', 'apellido': 'Guruzeta', 'edad': 26, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Álex Berenguer', 'apellido': 'Berenguer', 'edad': 28, 'nacionalidad': 'España',
-             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 25.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'ED'}
         ]
     },
     'Valencia CF': {
-        'PORTERO': [
+        'fundacion': 1897,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Giorgi Mamardashvili', 'apellido': 'Mamardashvili', 'edad': 23, 'nacionalidad': 'Georgia',
-             'valor_mercado': 35.0, 'dorsal': 25, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 35.0, 'dorsal': 25, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'},
             {'nombre': 'Jaume Doménech', 'apellido': 'Doménech', 'edad': 33, 'nacionalidad': 'España',
-             'valor_mercado': 3.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 3.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Thierry Correia', 'apellido': 'Correia', 'edad': 24, 'nacionalidad': 'Portugal',
-             'valor_mercado': 15.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
             {'nombre': 'Mouctar Diakhaby', 'apellido': 'Diakhaby', 'edad': 27, 'nacionalidad': 'Francia',
-             'valor_mercado': 12.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Cristhian Mosquera', 'apellido': 'Mosquera', 'edad': 19, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'José Gayà', 'apellido': 'Gayà', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 14, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 20.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'José Gayà', 'apellido': 'Gayà', 'edad': 28, 'nacionalidad': 'España',
+             'valor_mercado': 25.0,
+             'dorsal': 14, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'André Almeida', 'apellido': 'Almeida', 'edad': 23, 'nacionalidad': 'Portugal',
-             'valor_mercado': 18.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 18.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Hugo Guillamón', 'apellido': 'Guillamón', 'edad': 24, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Javi Guerra', 'apellido': 'Guerra', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 30.0,
-             'dorsal': 18, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Pepelu', 'apellido': 'Pepelu', 'edad': 25, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
+            {'nombre': 'Javi Guerra', 'apellido': 'Guerra', 'edad': 20, 'nacionalidad': 'España',
+             'valor_mercado': 30.0,
+             'dorsal': 18, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Pepelu', 'apellido': 'Pepelu', 'edad': 25, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Javi', 'apellido': 'Garcia', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 30.0, 'dorsal': 31, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 30.0,
+             'dorsal': 31, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Hugo Duro', 'apellido': 'Duro', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Umar Sadiq', 'apellido': 'Sadiq', 'edad': 26, 'nacionalidad': 'Nigeria', 'valor_mercado': 20.0,
-             'dorsal': 17, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Diego López', 'apellido': 'López', 'edad': 19, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 16, 'lesionado': False, 'suspendido': False},
+        'DEL': [
+            {'nombre': 'Hugo Duro', 'apellido': 'Duro', 'edad': 24, 'nacionalidad': 'España',
+             'valor_mercado': 25.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Umar Sadiq', 'apellido': 'Sadiq', 'edad': 26, 'nacionalidad': 'Nigeria',
+             'valor_mercado': 20.0,
+             'dorsal': 17, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Diego López', 'apellido': 'López', 'edad': 19, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 16, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
         ]
     },
     'Celta de Vigo': {
-        'PORTERO': [
-            {'nombre': 'Iván Villar', 'apellido': 'Villar', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False},
+        'fundacion': 1923,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Iván Villar', 'apellido': 'Villar', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'},
             {'nombre': 'Agustín Marchesín', 'apellido': 'Marchesín', 'edad': 35, 'nacionalidad': 'Argentina',
-             'valor_mercado': 5.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 5.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Marcos Alonso', 'apellido': 'Alonso', 'edad': 33, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'},
             {'nombre': 'Carlos Domínguez', 'apellido': 'Domínguez', 'edad': 22, 'nacionalidad': 'España',
-             'valor_mercado': 12.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Carl Starfelt', 'apellido': 'Starfelt', 'edad': 28, 'nacionalidad': 'Suecia',
-             'valor_mercado': 15.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Javier Manquillo', 'apellido': 'Manquillo', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 19, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Fran Beltrán', 'apellido': 'Beltrán', 'edad': 24, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Ilaix Moriba', 'apellido': 'Moriba', 'edad': 21, 'nacionalidad': 'Guinea',
-             'valor_mercado': 15.0, 'dorsal': 14, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Hugo Sotelo', 'apellido': 'Sotelo', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 28, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0,
+             'dorsal': 14, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Hugo Sotelo', 'apellido': 'Sotelo', 'edad': 20, 'nacionalidad': 'España',
+             'valor_mercado': 10.0,
+             'dorsal': 28, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Luca de la Torre', 'apellido': 'De la Torre', 'edad': 25, 'nacionalidad': 'EE.UU.',
-             'valor_mercado': 12.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Hugo', 'apellido': 'Fernandez', 'edad': 22, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 42, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 10.0,
+             'dorsal': 42, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Iago Aspas', 'apellido': 'Aspas', 'edad': 36, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'DEL': [
+            {'nombre': 'Iago Aspas', 'apellido': 'Aspas', 'edad': 36, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Borja Iglesias', 'apellido': 'Iglesias', 'edad': 31, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Hugo Álvarez', 'apellido': 'Álvarez', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 29, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 8.0,
+             'dorsal': 29, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
         ]
     },
     'Getafe CF': {
-        'PORTERO': [
+        'fundacion': 1934,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'David', 'apellido': 'Soria', 'edad': 31, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False}
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Damián', 'apellido': 'Suárez', 'edad': 35, 'nacionalidad': 'Uruguay', 'valor_mercado': 4.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Domingos', 'apellido': 'Duarte', 'edad': 29, 'nacionalidad': 'Portugal', 'valor_mercado': 12.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Stefan', 'apellido': 'Mitrović', 'edad': 32, 'nacionalidad': 'Serbia', 'valor_mercado': 6.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Gastón', 'apellido': 'Álvarez', 'edad': 22, 'nacionalidad': 'Uruguay', 'valor_mercado': 10.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False}
+        'DEF': [
+            {'nombre': 'Damián', 'apellido': 'Suárez', 'edad': 35, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 4.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Domingos', 'apellido': 'Duarte', 'edad': 29, 'nacionalidad': 'Portugal',
+             'valor_mercado': 12.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Stefan', 'apellido': 'Mitrović', 'edad': 32, 'nacionalidad': 'Serbia',
+             'valor_mercado': 6.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Gastón', 'apellido': 'Álvarez', 'edad': 22, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 10.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Nemanja', 'apellido': 'Maksimović', 'edad': 29, 'nacionalidad': 'Serbia', 'valor_mercado': 15.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Nemanja', 'apellido': 'Maksimović', 'edad': 29, 'nacionalidad': 'Serbia',
+             'valor_mercado': 15.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
             {'nombre': 'Luis', 'apellido': 'Milla', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Mauro', 'apellido': 'Arambarri', 'edad': 28, 'nacionalidad': 'Uruguay', 'valor_mercado': 18.0,
-             'dorsal': 14, 'lesionado': False, 'suspendido': False},
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Mauro', 'apellido': 'Arambarri', 'edad': 28, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 18.0,
+             'dorsal': 14, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Óscar', 'apellido': 'Rodríguez', 'edad': 25, 'nacionalidad': 'España',
-             'valor_mercado': 12.0, 'dorsal': 22, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 12.0,
+             'dorsal': 22, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Raul', 'apellido': 'Pérez', 'edad': 25, 'nacionalidad': 'España',
-             'valor_mercado': 12.0, 'dorsal': 25, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 12.0,
+             'dorsal': 25, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Borja', 'apellido': 'Mayoral', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Enes', 'apellido': 'Ünal', 'edad': 27, 'nacionalidad': 'Turquía', 'valor_mercado': 20.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Juanmi', 'apellido': 'Latasa', 'edad': 23, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 19, 'lesionado': False, 'suspendido': False}
+        'DEL': [
+            {'nombre': 'Borja', 'apellido': 'Mayoral', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 25.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Enes', 'apellido': 'Ünal', 'edad': 27, 'nacionalidad': 'Turquía',
+             'valor_mercado': 20.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Juanmi', 'apellido': 'Latasa', 'edad': 23, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 19, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ]
     },
     'CA Osasuna': {
-        'PORTERO': [
+        'fundacion': 1940,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Sergio', 'apellido': 'Herrera', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Jesús', 'apellido': 'Areso', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
             {'nombre': 'David', 'apellido': 'García', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Alejandro', 'apellido': 'Catena', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Juan', 'apellido': 'Cruz', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False}
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Lucas', 'apellido': 'Torró', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Moi', 'apellido': 'Gómez', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Aimar', 'apellido': 'Oroz', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Pablo', 'apellido': 'Ibáñez', 'edad': 19, 'nacionalidad': 'España',
-             'valor_mercado': 7.5, 'dorsal': 34, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 7.5, 'dorsal': 34, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Pablo', 'apellido': 'Romero', 'edad': 19, 'nacionalidad': 'España',
-             'valor_mercado': 7.5, 'dorsal': 32, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 7.5, 'dorsal': 32, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Rubén', 'apellido': 'García', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False},
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
             {'nombre': 'Ante', 'apellido': 'Budimir', 'edad': 32, 'nacionalidad': 'Croacia', 'valor_mercado': 15.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Kike', 'apellido': 'Barja', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 17, 'lesionado': False, 'suspendido': False}
+             'dorsal': 17, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'}
         ]
     },
     'Rayo Vallecano': {
-        'PORTERO': [
+        'fundacion': 1924,
+        'presupuesto': 500_000_000,
+        'POR': [
             {'nombre': 'Augusto', 'apellido': 'Batalla', 'edad': 27, 'nacionalidad': 'Argentina', 'valor_mercado': 3.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
+        'DEF': [
             {'nombre': 'Iván', 'apellido': 'Balliu', 'edad': 31, 'nacionalidad': 'Albania', 'valor_mercado': 5.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
             {'nombre': 'Aridane', 'apellido': 'Hernández', 'edad': 35, 'nacionalidad': 'España', 'valor_mercado': 2.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Abdul', 'apellido': 'Mumin', 'edad': 25, 'nacionalidad': 'Ghana', 'valor_mercado': 8.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Espino', 'apellido': 'Espino', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 4.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False}
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
+        'MED': [
             {'nombre': 'Óscar', 'apellido': 'Valentín', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Pathé', 'apellido': 'Ciss', 'edad': 29, 'nacionalidad': 'Senegal', 'valor_mercado': 12.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Isi', 'apellido': 'Palazón', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Randy', 'apellido': 'Nteka', 'edad': 25, 'nacionalidad': 'Francia',
-             'valor_mercado': 9.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 9.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
             {'nombre': 'Randy', 'apellido': 'Orton', 'edad': 25, 'nacionalidad': 'Francia',
-             'valor_mercado': 9.0, 'dorsal': 43, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 9.0, 'dorsal': 43, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Raúl', 'apellido': 'de Tomás', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sergio', 'apellido': 'Camello', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sergi', 'apellido': 'Guardiola', 'edad': 31, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False}
+        'DEL': [
+            {'nombre': 'Raúl', 'apellido': 'de Tomás', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 20.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Sergio', 'apellido': 'Camello', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Sergi', 'apellido': 'Guardiola', 'edad': 31, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ]
     },
     'RCD Mallorca': {
-        'PORTERO': [
-            {'nombre': 'Predrag', 'apellido': 'Rajković', 'edad': 28, 'nacionalidad': 'Serbia', 'valor_mercado': 10.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1915,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Predrag', 'apellido': 'Rajković', 'edad': 28, 'nacionalidad': 'Serbia',
+             'valor_mercado': 10.0, 'dorsal': 1, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Pablo', 'apellido': 'Maffeo', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Antonio', 'apellido': 'Raíllo', 'edad': 31, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Copete', 'apellido': 'Copete', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Jaume', 'apellido': 'Costa', 'edad': 35, 'nacionalidad': 'España', 'valor_mercado': 3.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False}
+        'DEF': [
+            {'nombre': 'Pablo', 'apellido': 'Maffeo', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 15.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
+            {'nombre': 'Antonio', 'apellido': 'Raíllo', 'edad': 31, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Copete', 'apellido': 'Copete', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 12.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Jaume', 'apellido': 'Costa', 'edad': 35, 'nacionalidad': 'España',
+             'valor_mercado': 3.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Robert', 'apellido': 'Navarro', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 18.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Antonio', 'apellido': 'Sánchez', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Dani', 'apellido': 'Rodríguez', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Robert', 'apellido': 'Navarro', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 18.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'ED'},
+            {'nombre': 'Antonio', 'apellido': 'Sánchez', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 10.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Dani', 'apellido': 'Rodríguez', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Ivan', 'apellido': 'Sánchez', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 24, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 10.0, 'dorsal': 24, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Juan', 'apellido': 'Dominguez', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 34, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 10.0, 'dorsal': 34, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Vedat', 'apellido': 'Muriqi', 'edad': 29, 'nacionalidad': 'Kosovo', 'valor_mercado': 25.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Abdón', 'apellido': 'Prats', 'edad': 31, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+        'DEL': [
+            {'nombre': 'Vedat', 'apellido': 'Muriqi', 'edad': 29, 'nacionalidad': 'Kosovo',
+             'valor_mercado': 25.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Abdón', 'apellido': 'Prats', 'edad': 31, 'nacionalidad': 'España',
+             'valor_mercado': 12.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
             {'nombre': 'Chiquinho', 'apellido': 'Chiquinho', 'edad': 28, 'nacionalidad': 'Portugal',
-             'valor_mercado': 15.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'}
         ]
     },
     'Girona FC': {
-        'PORTERO': [
-            {'nombre': 'Paulo', 'apellido': 'Gazzaniga', 'edad': 32, 'nacionalidad': 'Argentina', 'valor_mercado': 8.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1954,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Paulo', 'apellido': 'Gazzaniga', 'edad': 32, 'nacionalidad': 'Argentina',
+             'valor_mercado': 8.0,
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Arnau', 'apellido': 'Martínez', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'David', 'apellido': 'López', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Juanpe', 'apellido': 'Juanpe', 'edad': 33, 'nacionalidad': 'España', 'valor_mercado': 3.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Miguel', 'apellido': 'Gutiérrez', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False}
+        'DEF': [
+            {'nombre': 'Arnau', 'apellido': 'Martínez', 'edad': 21, 'nacionalidad': 'España',
+             'valor_mercado': 20.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LD'},
+            {'nombre': 'David', 'apellido': 'López', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Juanpe', 'apellido': 'Juanpe', 'edad': 33, 'nacionalidad': 'España',
+             'valor_mercado': 3.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Miguel', 'apellido': 'Gutiérrez', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 25.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Oriol', 'apellido': 'Romeu', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Yangel', 'apellido': 'Herrera', 'edad': 26, 'nacionalidad': 'Venezuela', 'valor_mercado': 25.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Iván', 'apellido': 'Martín', 'edad': 25, 'nacionalidad': 'España', 'valor_mercado': 18.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Oriol', 'apellido': 'Romeu', 'edad': 32, 'nacionalidad': 'España',
+             'valor_mercado': 12.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
+            {'nombre': 'Yangel', 'apellido': 'Herrera', 'edad': 26, 'nacionalidad': 'Venezuela',
+             'valor_mercado': 25.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Iván', 'apellido': 'Martín', 'edad': 25, 'nacionalidad': 'España',
+             'valor_mercado': 18.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'},
             {'nombre': 'Jastin', 'apellido': 'García', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 26, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 15.0, 'dorsal': 26, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'ED'},
             {'nombre': 'Daniel', 'apellido': 'García', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 15.0, 'dorsal': 29, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 29, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Cristhian', 'apellido': 'Stuani', 'edad': 37, 'nacionalidad': 'Uruguay', 'valor_mercado': 4.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Viktor', 'apellido': 'Tsygankov', 'edad': 26, 'nacionalidad': 'Ucrania', 'valor_mercado': 30.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Abel', 'apellido': 'Ruiz', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False}
+        'DEL': [
+            {'nombre': 'Cristhian', 'apellido': 'Stuani', 'edad': 37, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 4.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Viktor', 'apellido': 'Tsygankov', 'edad': 26, 'nacionalidad': 'Ucrania',
+             'valor_mercado': 30.0, 'dorsal': 11, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'ED'},
+            {'nombre': 'Abel', 'apellido': 'Ruiz', 'edad': 24, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ]
     },
     'Real Valladolid': {
-        'PORTERO': [
-            {'nombre': 'Karl', 'apellido': 'Hein', 'edad': 22, 'nacionalidad': 'Estonia', 'valor_mercado': 5.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1900,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Karl', 'apellido': 'Hein', 'edad': 22, 'nacionalidad': 'Estonia',
+             'valor_mercado': 5.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Luis', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 6.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Javi', 'apellido': 'Sánchez', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Joaquín', 'apellido': 'Fernández', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 7.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Lucas', 'apellido': 'Olaza', 'edad': 29, 'nacionalidad': 'Uruguay', 'valor_mercado': 10.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False}
+        'DEF': [
+            {'nombre': 'Luis', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España',
+             'valor_mercado': 6.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Javi', 'apellido': 'Sánchez', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Joaquín', 'apellido': 'Fernández', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 7.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Lucas', 'apellido': 'Olaza', 'edad': 29, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 10.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Mario', 'apellido': 'Martin', 'edad': 21, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Monchu', 'apellido': 'Monchu', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Chuki', 'apellido': 'Chuki', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Mario', 'apellido': 'Martin', 'edad': 21, 'nacionalidad': 'España',
+             'valor_mercado': 12.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Monchu', 'apellido': 'Monchu', 'edad': 24, 'nacionalidad': 'España',
+             'valor_mercado': 15.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Chuki', 'apellido': 'Chuki', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 10.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Iván', 'apellido': 'Sánchez', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 8.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Antonio', 'apellido': 'Recio', 'edad': 29, 'nacionalidad': 'España',
-             'valor_mercado': 8.0, 'dorsal': 45, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 45, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Sergio', 'apellido': 'León', 'edad': 35, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Kenedy', 'apellido': 'Kenedy', 'edad': 28, 'nacionalidad': 'Brasil', 'valor_mercado': 12.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Darwin', 'apellido': 'Machís', 'edad': 31, 'nacionalidad': 'Venezuela', 'valor_mercado': 8.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False}
+        'DEL': [
+            {'nombre': 'Sergio', 'apellido': 'León', 'edad': 35, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Kenedy', 'apellido': 'Kenedy', 'edad': 28, 'nacionalidad': 'Brasil',
+             'valor_mercado': 12.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'EI'},
+            {'nombre': 'Darwin', 'apellido': 'Machís', 'edad': 31, 'nacionalidad': 'Venezuela',
+             'valor_mercado': 8.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ]
     },
     'CD Leganés': {
-        'PORTERO': [
-            {'nombre': 'Andrés', 'apellido': 'Fernández', 'edad': 37, 'nacionalidad': 'España', 'valor_mercado': 2.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1912,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Andrés', 'apellido': 'Fernández', 'edad': 37, 'nacionalidad': 'España',
+             'valor_mercado': 2.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Allan', 'apellido': 'Nyom', 'edad': 35, 'nacionalidad': 'Camerún', 'valor_mercado': 3.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Kenneth', 'apellido': 'Omeruo', 'edad': 30, 'nacionalidad': 'Nigeria', 'valor_mercado': 5.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sergi', 'apellido': 'Palencia', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 6.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+        'DEF': [
+            {'nombre': 'Allan', 'apellido': 'Nyom', 'edad': 35, 'nacionalidad': 'Camerún',
+             'valor_mercado': 3.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Kenneth', 'apellido': 'Omeruo', 'edad': 30, 'nacionalidad': 'Nigeria',
+             'valor_mercado': 5.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Sergi', 'apellido': 'Palencia', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 6.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
             {'nombre': 'Jorge', 'apellido': 'Sáenz', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 7.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False}
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Yacine', 'apellido': 'Qasmi', 'edad': 30, 'nacionalidad': 'Marruecos', 'valor_mercado': 4.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'José', 'apellido': 'Arnáiz', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Raba', 'apellido': 'Raba', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Yacine', 'apellido': 'Qasmi', 'edad': 30, 'nacionalidad': 'Marruecos',
+             'valor_mercado': 4.0,
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'José', 'apellido': 'Arnáiz', 'edad': 28, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
+            {'nombre': 'Raba', 'apellido': 'Raba', 'edad': 28, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Luis', 'apellido': 'Parera', 'edad': 33, 'nacionalidad': 'España',
-             'valor_mercado': 4.5, 'dorsal': 27, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 4.5,
+             'dorsal': 27, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'}
         ],
-        'DELANTERO': [
+        'DEL': [
             {'nombre': 'Miguel', 'apellido': 'de la Fuente', 'edad': 22, 'nacionalidad': 'España',
-             'valor_mercado': 10.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Naim', 'apellido': 'García', 'edad': 25, 'nacionalidad': 'España', 'valor_mercado': 6.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Juan', 'apellido': 'Cruz', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 11, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 10.0, 'dorsal': 9, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Naim', 'apellido': 'García', 'edad': 25, 'nacionalidad': 'España',
+             'valor_mercado': 6.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
+            {'nombre': 'Juan', 'apellido': 'Cruz', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 11, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ]
     },
-
     'RCD Espanyol': {
-        'PORTERO': [
-            {'nombre': 'Fernando', 'apellido': 'Pacheco', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 3.0,
-             'dorsal': 13, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1915,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Fernando', 'apellido': 'Pacheco', 'edad': 32, 'nacionalidad': 'España',
+             'valor_mercado': 3.0,
+             'dorsal': 13, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Óscar', 'apellido': 'Gil', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sergi', 'apellido': 'Gómez', 'edad': 32, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Leandro', 'apellido': 'Cabrera', 'edad': 32, 'nacionalidad': 'Uruguay', 'valor_mercado': 6.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Brian', 'apellido': 'Oliván', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False}
+        'DEF': [
+            {'nombre': 'Óscar', 'apellido': 'Gil', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Sergi', 'apellido': 'Gómez', 'edad': 32, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Leandro', 'apellido': 'Cabrera', 'edad': 32, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 6.0,
+             'dorsal': 5, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Brian', 'apellido': 'Oliván', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Vinicius', 'apellido': 'Souza', 'edad': 25, 'nacionalidad': 'Brasil', 'valor_mercado': 15.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Edu', 'apellido': 'Expósito', 'edad': 23, 'nacionalidad': 'España', 'valor_mercado': 18.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Keidi', 'apellido': 'Bare', 'edad': 26, 'nacionalidad': 'Albania', 'valor_mercado': 10.0,
-             'dorsal': 14, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Vinicius', 'apellido': 'Souza', 'edad': 25, 'nacionalidad': 'Brasil',
+             'valor_mercado': 15.0,
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
+            {'nombre': 'Edu', 'apellido': 'Expósito', 'edad': 23, 'nacionalidad': 'España',
+             'valor_mercado': 18.0,
+             'dorsal': 8, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
+            {'nombre': 'Keidi', 'apellido': 'Bare', 'edad': 26, 'nacionalidad': 'Albania',
+             'valor_mercado': 10.0,
+             'dorsal': 14, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Jofre', 'apellido': 'Carreras', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 9.0, 'dorsal': 27, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 9.0,
+             'dorsal': 27, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'ED'},
             {'nombre': 'Javier', 'apellido': 'Carrero', 'edad': 21, 'nacionalidad': 'España',
-             'valor_mercado': 9.0, 'dorsal': 40, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 9.0,
+             'dorsal': 40, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Joselu', 'apellido': 'Joselu', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
+        'DEL': [
+            {'nombre': 'Joselu', 'apellido': 'Joselu', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Martin', 'apellido': 'Braithwaite', 'edad': 33, 'nacionalidad': 'Dinamarca',
-             'valor_mercado': 8.0, 'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Javi', 'apellido': 'Puado', 'edad': 25, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 17, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 8.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Javi', 'apellido': 'Puado', 'edad': 25, 'nacionalidad': 'España',
+             'valor_mercado': 20.0,
+             'dorsal': 17, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'}
         ]
     },
     'UD Las Palmas': {
-        'PORTERO': [
-            {'nombre': 'Álvaro', 'apellido': 'Valles', 'edad': 26, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1926,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Álvaro', 'apellido': 'Valles', 'edad': 26, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Álex', 'apellido': 'Suárez', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Mika', 'apellido': 'Mármol', 'edad': 22, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+        'DEF': [
+            {'nombre': 'Álex', 'apellido': 'Suárez', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 10.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Mika', 'apellido': 'Mármol', 'edad': 22, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Saúl', 'apellido': 'Coco', 'edad': 21, 'nacionalidad': 'Guinea Ecuatorial',
-             'valor_mercado': 12.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sergi', 'apellido': 'Cardona', 'edad': 25, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 15, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 12.0, 'dorsal': 4, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Sergi', 'apellido': 'Cardona', 'edad': 25, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 15, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Kirian', 'apellido': 'Rodríguez', 'edad': 28, 'nacionalidad': 'España', 'valor_mercado': 25.0,
-             'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Enzo', 'apellido': 'Loiodice', 'edad': 23, 'nacionalidad': 'Francia', 'valor_mercado': 18.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Jonathan', 'apellido': 'Viera', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 10.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Kirian', 'apellido': 'Rodríguez', 'edad': 28, 'nacionalidad': 'España',
+             'valor_mercado': 25.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Enzo', 'apellido': 'Loiodice', 'edad': 23, 'nacionalidad': 'Francia',
+             'valor_mercado': 18.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
+            {'nombre': 'Jonathan', 'apellido': 'Viera', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 10.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCO'},
             {'nombre': 'Alberto', 'apellido': 'Moleiro', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 30.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 30.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Victor', 'apellido': 'Sotelo', 'edad': 20, 'nacionalidad': 'España',
-             'valor_mercado': 30.0, 'dorsal': 28, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 30.0, 'dorsal': 28, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Marc', 'apellido': 'Cardona', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Sandro', 'apellido': 'Ramírez', 'edad': 29, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
+        'DEL': [
+            {'nombre': 'Marc', 'apellido': 'Cardona', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Sandro', 'apellido': 'Ramírez', 'edad': 29, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Munir', 'apellido': 'El Haddadi', 'edad': 29, 'nacionalidad': 'Marruecos',
-             'valor_mercado': 15.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 19, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'SD'}
         ]
     },
     'Deportivo Alavés': {
-        'PORTERO': [
-            {'nombre': 'Antonio', 'apellido': 'Sivera', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 1, 'lesionado': False, 'suspendido': False}
+        'fundacion': 1945,
+        'presupuesto': 500_000_000,
+        'POR': [
+            {'nombre': 'Antonio', 'apellido': 'Sivera', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 1, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'POR'}
         ],
-        'DEFENSA': [
-            {'nombre': 'Rubén', 'apellido': 'Duarte', 'edad': 28, 'nacionalidad': 'Uruguay', 'valor_mercado': 10.0,
-             'dorsal': 3, 'lesionado': False, 'suspendido': False},
+        'DEF': [
+            {'nombre': 'Rubén', 'apellido': 'Duarte', 'edad': 28, 'nacionalidad': 'Uruguay',
+             'valor_mercado': 10.0,
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'},
             {'nombre': 'Abdelkabir', 'apellido': 'Abqar', 'edad': 25, 'nacionalidad': 'Marruecos',
-             'valor_mercado': 15.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Duarte', 'apellido': 'Duarte', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 2, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Javi', 'apellido': 'López', 'edad': 33, 'nacionalidad': 'España', 'valor_mercado': 5.0,
-             'dorsal': 4, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 15.0, 'dorsal': 5, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'},
+            {'nombre': 'Duarte', 'apellido': 'Duarte', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 2, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LD'},
+            {'nombre': 'Javi', 'apellido': 'López', 'edad': 33, 'nacionalidad': 'España',
+             'valor_mercado': 5.0,
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
-        'MEDIOCAMPISTA': [
-            {'nombre': 'Antonio', 'apellido': 'Blanco', 'edad': 24, 'nacionalidad': 'España', 'valor_mercado': 20.0,
-             'dorsal': 6, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Luis', 'apellido': 'Benavídez', 'edad': 27, 'nacionalidad': 'Argentina', 'valor_mercado': 15.0,
-             'dorsal': 8, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Jon', 'apellido': 'Guridi', 'edad': 27, 'nacionalidad': 'España', 'valor_mercado': 12.0,
-             'dorsal': 10, 'lesionado': False, 'suspendido': False},
+        'MED': [
+            {'nombre': 'Antonio', 'apellido': 'Blanco', 'edad': 24, 'nacionalidad': 'España',
+             'valor_mercado': 20.0, 'dorsal': 6, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MCD'},
+            {'nombre': 'Luis', 'apellido': 'Benavídez', 'edad': 27, 'nacionalidad': 'Argentina',
+             'valor_mercado': 15.0, 'dorsal': 8, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
+            {'nombre': 'Jon', 'apellido': 'Guridi', 'edad': 27, 'nacionalidad': 'España',
+             'valor_mercado': 12.0,
+             'dorsal': 10, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCO'},
             {'nombre': 'Antonio', 'apellido': 'Blanco', 'edad': 23, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 16, 'lesionado': False, 'suspendido': False},
+             'valor_mercado': 20.0, 'dorsal': 16, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'MC'},
             {'nombre': 'Alberto', 'apellido': 'Negro', 'edad': 23, 'nacionalidad': 'España',
-             'valor_mercado': 20.0, 'dorsal': 37, 'lesionado': False, 'suspendido': False}
+             'valor_mercado': 20.0,
+             'dorsal': 37, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ],
-        'DELANTERO': [
-            {'nombre': 'Luis', 'apellido': 'Rioja', 'edad': 30, 'nacionalidad': 'España', 'valor_mercado': 15.0,
-             'dorsal': 7, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Kike', 'apellido': 'García', 'edad': 34, 'nacionalidad': 'España', 'valor_mercado': 8.0,
-             'dorsal': 9, 'lesionado': False, 'suspendido': False},
-            {'nombre': 'Mamadou', 'apellido': 'Sylla', 'edad': 28, 'nacionalidad': 'Senegal', 'valor_mercado': 10.0,
-             'dorsal': 12, 'lesionado': False, 'suspendido': False}
+        'DEL': [
+            {'nombre': 'Luis', 'apellido': 'Rioja', 'edad': 30, 'nacionalidad': 'España',
+             'valor_mercado': 15.0,
+             'dorsal': 7, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
+            {'nombre': 'Kike', 'apellido': 'García', 'edad': 34, 'nacionalidad': 'España',
+             'valor_mercado': 8.0,
+             'dorsal': 9, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
+            {'nombre': 'Mamadou', 'apellido': 'Sylla', 'edad': 28, 'nacionalidad': 'Senegal',
+             'valor_mercado': 10.0, 'dorsal': 12, 'lesionado': False, 'suspendido': False,
+             'posicion_especifica': 'DC'}
         ]
     }
-
 }

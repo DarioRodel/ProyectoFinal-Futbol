@@ -1,5 +1,9 @@
 import json
 import logging
+from multiprocessing import Value
+
+from django.db.models import Q, When
+from django.forms import IntegerField
 from django.templatetags.static import static
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -9,6 +13,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from django.views.generic import ListView, DetailView
+from sqlparse.sql import Case
+
 from .models import Equipo, UserProfile, UsuarioLogro, Jugador, Partido
 from .forms import CustomUserCreationForm
 import random
@@ -212,36 +218,57 @@ class FormacionEquipoView(LoginRequiredMixin, View):
         if not equipo:
             return redirect('seleccionar_equipo')
 
-        # Obtener jugadores del diccionario importado correctamente
-        jugadores = jugadores_equipos.get(equipo.nombre, {})
-
-        # Organizar jugadores por posición según la formación seleccionada
-        jugadores_por_posicion = {
-            'portero': jugadores.get('PORTERO', [])[0] if jugadores.get('PORTERO') else 'Sin portero',
-            'defensas': jugadores.get('DEFENSA', []),
-            'mediocampistas': jugadores.get('MEDIOCAMPISTA', []),
-            'delanteros': jugadores.get('DELANTERO', [])
+        formaciones_config = {
+            '4-4-2': {'DEF': 4, 'MED': 4, 'DEL': 2},
+            '4-3-3': {'DEF': 4, 'MED': 3, 'DEL': 3},
+            '3-5-2': {'DEF': 3, 'MED': 5, 'DEL': 2},
+            '4-2-3-1': {'DEF': 4, 'MED': 5, 'DEL': 1}
         }
 
-        formacion_actual = getattr(perfil, 'formacion', '4-4-2') or '4-4-2'
+        formacion_get = request.GET.get('formacion')
+        formacion_actual = formacion_get or getattr(perfil, 'formacion', '4-4-2') or '4-4-2'
+        config = formaciones_config.get(formacion_actual, formaciones_config['4-4-2'])
+
+        # Obtención de jugadores con ordenamiento manual
+        defensas = list(Jugador.objects.filter(equipo=equipo, posicion='DEF'))
+        mediocampistas = list(Jugador.objects.filter(equipo=equipo, posicion='MED'))
+        delanteros = list(Jugador.objects.filter(equipo=equipo, posicion='DEL'))
+
+        # Ordenar según posición específica
+        orden_posiciones = {
+            'DEF': ['LI', 'DC', 'LD'],
+            'MED': ['MCD', 'MC', 'MCO', 'EI', 'ED'],
+            'DEL': ['EI', 'CD', 'ED']
+        }
+
+        defensas.sort(key=lambda x: orden_posiciones['DEF'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['DEF'] else 99)
+        mediocampistas.sort(key=lambda x: orden_posiciones['MED'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['MED'] else 99)
+        delanteros.sort(key=lambda x: orden_posiciones['DEL'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['DEL'] else 99)
+
+        jugadores_por_posicion = {
+            'portero': Jugador.objects.filter(equipo=equipo, posicion='POR').first(),
+            'defensas': defensas[:config['DEF']],
+            'mediocampistas': mediocampistas[:config['MED']],
+            'delanteros': delanteros[:config['DEL']]
+        }
 
         return render(request, 'formacion_equipo.html', {
             'equipo': equipo,
             'jugadores_por_posicion': jugadores_por_posicion,
             'formacion_actual': formacion_actual
         })
-
 class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):
         perfil = request.user.userprofile
         formacion = request.POST.get('formacion')
+        formaciones_validas = ['4-4-2', '4-3-3', '3-5-2', '4-2-3-1']
 
-        if formacion in ['4-4-2', '4-3-3', '3-5-2', '4-2-3-1']:
+        if formacion in formaciones_validas:
             perfil.formacion = formacion
             perfil.save()
-            request.session['formacion_mensaje'] = f"Formación cambiada a {formacion}"
+            request.session['formacion_mensaje'] = f"✅ Formación actualizada a {formacion}"
         else:
-            request.session['formacion_mensaje'] = "Formación no válida"
+            request.session['formacion_mensaje'] = "❌ Formación no válida"
 
         return redirect('formacion_equipo')
 
@@ -325,7 +352,6 @@ class FinalizarTemporadaView(LoginRequiredMixin, View):
 
         return redirect('menu')
 
-
 class InformacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
@@ -379,29 +405,21 @@ class JugadoresEquipoView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         jugadores = self.get_queryset()
 
-        # Separar jugadores por posición base
-        porteros = list(jugadores.filter(posicion='POR'))
-        defensas_raw = list(jugadores.filter(posicion='DEF'))
-        mediocampistas_raw = list(jugadores.filter(posicion='MED'))
-        delanteros_raw = list(jugadores.filter(posicion='DEL'))
-
-        # 1. Mover defensas excedentes a mediocampistas
-        defensas_final = defensas_raw[:5]
-        mediocampistas_temp = mediocampistas_raw + defensas_raw[5:]  # Combinar con originales
-
-        # 2. Mover mediocampistas excedentes a delanteros
-        mediocampistas_final = mediocampistas_temp[:5]
-        delanteros_final = delanteros_raw + mediocampistas_temp[5:]  # Combinar con originales
+        porteros = jugadores.filter(posicion='POR').order_by('dorsal')
+        defensas = jugadores.filter(posicion='DEF').order_by('dorsal')
+        mediocampistas = jugadores.filter(posicion='MED').order_by('dorsal')
+        delanteros = jugadores.filter(posicion='DEL').order_by('dorsal')
 
         context.update({
             'equipo': self.request.user.userprofile.equipo_seleccionado,
             'porteros': porteros,
-            'defensas': defensas_final,
-            'mediocampistas': mediocampistas_final,
-            'delanteros': delanteros_final
+            'defensas': defensas,
+            'mediocampistas': mediocampistas,
+            'delanteros': delanteros,
         })
-
         return context
+
+
 
 class DetalleJugadorView(LoginRequiredMixin, DetailView):
     model = Jugador

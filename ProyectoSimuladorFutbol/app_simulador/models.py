@@ -12,7 +12,7 @@ class Equipo(models.Model):
     ciudad = models.CharField(max_length=100)
     estadio = models.CharField(max_length=100)
     ya_jugo = models.BooleanField(default=False)
-    fundacion = models.IntegerField(
+    fundacion = models.PositiveIntegerField(
         validators=[
             MinValueValidator(1800),
             MaxValueValidator(datetime.now().year)
@@ -60,7 +60,27 @@ class Jugador(models.Model):
         ('MED', 'Mediocampista'),
         ('DEL', 'Delantero')
     ]
-
+    POSICIONES_ESPECIFICAS = [
+        # Defensas
+        ('DC', 'Defensa Central'),
+        ('LD', 'Lateral Derecho'),
+        ('LI', 'Lateral Izquierdo'),
+        # Mediocampistas
+        ('MCD', 'Mediocentro Defensivo'),
+        ('MC', 'Mediocentro'),
+        ('MCO', 'Mediocentro Ofensivo'),
+        # Delanteros
+        ('CD', 'Centrodelantero'),
+        ('ED', 'Extremo Derecho'),
+        ('EI', 'Extremo Izquierdo'),
+        ('SD', 'Segundo Delantero')
+    ]
+    posicion_especifica = models.CharField(
+        max_length=3,
+        choices=POSICIONES_ESPECIFICAS,
+        default='DC'  # Asegurar un valor por defecto
+    )
+    posicion = models.CharField(max_length=3, choices=POSICIONES)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     edad = models.IntegerField(
@@ -70,7 +90,6 @@ class Jugador(models.Model):
         ]
     )
     nacionalidad = models.CharField(max_length=50)
-    posicion = models.CharField(max_length=3, choices=POSICIONES)
     valor_mercado = models.DecimalField(max_digits=10, decimal_places=2)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='jugadores')
     dorsal = models.IntegerField(
@@ -84,6 +103,12 @@ class Jugador(models.Model):
     lesionado = models.BooleanField(default=False)
     suspendido = models.BooleanField(default=False)
 
+    @property
+    def nombre_completo(self):
+        return f"{self.nombre} {self.apellido}"
+
+    def __str__(self):
+        return self.nombre_completo
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     equipo_seleccionado = models.ForeignKey(Equipo, on_delete=models.SET_NULL, null=True, blank=True)

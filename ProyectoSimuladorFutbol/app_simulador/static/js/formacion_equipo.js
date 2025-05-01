@@ -1,15 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listeners para los botones de formación
-    document.querySelectorAll('.btn-formacion').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const formacion = this.dataset.formacion;
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.btn-formacion').forEach(button => {
+        button.addEventListener('click', async () => {
+            const formacion = button.dataset.formacion;
+
+            // ACTUALIZA el input oculto del formulario
             document.getElementById('formacion-input').value = formacion;
 
-            document.querySelectorAll('.btn-formacion').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+            // AJAX: Carga dinámica de la cancha
+            try {
+                const response = await fetch(`?formacion=${formacion}`);
+                const html = await response.text();
 
-            const cancha = document.querySelector('.cancha');
-            cancha.className = 'cancha formacion-' + formacion;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const nuevaCancha = doc.querySelector('.cancha');
+                document.querySelector('.cancha').replaceWith(nuevaCancha);
+
+            } catch (error) {
+                console.error('Error al actualizar la formación:', error);
+            }
         });
     });
 });
