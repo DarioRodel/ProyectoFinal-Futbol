@@ -1,5 +1,6 @@
 import json
 import logging
+from collections import defaultdict
 from multiprocessing import Value
 
 from django.db.models import Q, When
@@ -387,7 +388,7 @@ class InformacionEquipoView(LoginRequiredMixin, View):
 
         return render(request, 'informacion_equipo.html', {
             'equipo': equipo,
-            'ruta_escudo': ruta_escudo
+            'ruta_escudo': ruta_escudo,
         })
 
 
