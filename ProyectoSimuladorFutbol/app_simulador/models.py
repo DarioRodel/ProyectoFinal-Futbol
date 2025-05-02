@@ -5,6 +5,7 @@ from django.core.validators import RegexValidator
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 
+
 class Equipo(models.Model):
     POSICIONES_LIGA = [(1, 'Primera División')]
 
@@ -52,6 +53,7 @@ class Equipo(models.Model):
 
     def __str__(self):
         return self.nombre
+
 
 class Jugador(models.Model):
     POSICIONES = [
@@ -109,6 +111,8 @@ class Jugador(models.Model):
 
     def __str__(self):
         return self.nombre_completo
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     equipo_seleccionado = models.ForeignKey(Equipo, on_delete=models.SET_NULL, null=True, blank=True)
@@ -126,6 +130,7 @@ class UserProfile(models.Model):
         ]
     )
 
+
 class Lesion(models.Model):
     TIPOS_LESION = [
         ('Muscular', 'Muscular'),
@@ -140,6 +145,7 @@ class Lesion(models.Model):
     gravedad = models.CharField(max_length=50, choices=[('Leve', 'Leve'), ('Grave', 'Grave')])
     tipo_lesion = models.CharField(max_length=50, choices=TIPOS_LESION, default='Muscular')
     descripcion = models.TextField()
+
 
 class Partido(models.Model):
     ESTADOS = [
@@ -161,6 +167,7 @@ class Partido(models.Model):
     def __str__(self):
         return f"{self.equipo_local} vs {self.equipo_visitante} (Jornada {self.jornada})"
 
+
 class Transferencia(models.Model):
     TIPOS_TRANSFERENCIA = [
         ('Compra', 'Compra'),
@@ -180,6 +187,7 @@ class Transferencia(models.Model):
     completada = models.BooleanField(default=False)
     tipo = models.CharField(max_length=50, choices=TIPOS_TRANSFERENCIA, default='Compra')
 
+
 class Logro(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
@@ -187,6 +195,8 @@ class Logro(models.Model):
     efecto_quimica = models.IntegerField(default=0)
     icono = models.CharField(max_length=100)
     nivel = models.IntegerField(default=1)
+
+
 class UsuarioLogro(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     logro = models.ForeignKey(Logro, on_delete=models.CASCADE)

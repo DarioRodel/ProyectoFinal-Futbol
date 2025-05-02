@@ -1,192 +1,192 @@
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'simular_partido.css' %}">
+    <link rel="stylesheet" href="{% static 'simular_partido.css' %}">
 
-<div class="result-card">
-    <div class="match-header">
-        <div class="team-container">
-            <div class="team-logo">
-                <img id="escudo-usuario" src="{{ escudo_usuario }}" alt="Escudo {{ equipo_usuario.nombre }}">
+    <div class="result-card">
+        <div class="match-header">
+            <div class="team-container">
+                <div class="team-logo">
+                    <img id="escudo-usuario" src="{{ escudo_usuario }}" alt="Escudo {{ equipo_usuario.nombre }}">
+                </div>
+                <h3>{{ equipo_usuario.nombre }}</h3>
             </div>
-            <h3>{{ equipo_usuario.nombre }}</h3>
-        </div>
 
-        <div class="score-display" id="score-display">
-            0 - 0
-        </div>
-
-        <div class="team-container">
-            <div class="team-logo">
-                <img id="escudo-oponente" src="{{ escudo_oponente }}" alt="Escudo rival">
+            <div class="score-display" id="score-display">
+                0 - 0
             </div>
-            <h3 id="nombre-oponente">{{ oponente.nombre }}</h3>
+
+            <div class="team-container">
+                <div class="team-logo">
+                    <img id="escudo-oponente" src="{{ escudo_oponente }}" alt="Escudo rival">
+                </div>
+                <h3 id="nombre-oponente">{{ oponente.nombre }}</h3>
+            </div>
         </div>
+
+        <div class="timeline-section">
+            <h4 class="timeline-header">📝 Cronología del Partido</h4>
+            <button id="iniciar-partido" class="btn-menu">Iniciar Partido</button>
+            <div id="tiempo-partido" class="tiempo-partido" style="font-size: 1.5rem; margin: 1rem 0;">⏱️ 00:00</div>
+            <div id="timeline-events" style="display:none;"></div>
+        </div>
+
+        <h4 class="timeline-header">📈 Estadísticas</h4>
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-item"><strong>Posesión:</strong> <span id="posesion">0% - 0%</span></div>
+            <div class="stat-item"><strong>Disparos:</strong> <span id="disparos">0 - 0</span></div>
+            <div class="stat-item"><strong>Faltas:</strong> <span id="faltas">0 - 0</span></div>
+            <div class="stat-item"><strong>Amarillas:</strong> <span id="amarillas">0 - 0</span></div>
+            <div class="stat-item"><strong>Rojas:</strong> <span id="rojas">0 - 0</span></div>
+            <div class="stat-item"><strong>Paradas:</strong> <span id="paradas">0 - 0</span></div>
+            <div class="stat-item"><strong>Córners:</strong> <span id="corners">0 - 0</span></div>
+        </div>
+        <div style="text-align: center">
+            <a href="{% url 'menu' %}" class="btn-menu">Volver al Menú Principal</a>
+        </div>
+
     </div>
 
-    <div class="timeline-section">
-        <h4 class="timeline-header">📝 Cronología del Partido</h4>
-        <button id="iniciar-partido" class="btn-menu">Iniciar Partido</button>
-        <div id="tiempo-partido" class="tiempo-partido" style="font-size: 1.5rem; margin: 1rem 0;">⏱️ 00:00</div>
-        <div id="timeline-events" style="display:none;"></div>
-    </div>
-
-    <h4 class="timeline-header">📈 Estadísticas</h4>
-    <div class="stats-grid" id="stats-grid">
-        <div class="stat-item"><strong>Posesión:</strong> <span id="posesion">0% - 0%</span></div>
-        <div class="stat-item"><strong>Disparos:</strong> <span id="disparos">0 - 0</span></div>
-        <div class="stat-item"><strong>Faltas:</strong> <span id="faltas">0 - 0</span></div>
-        <div class="stat-item"><strong>Amarillas:</strong> <span id="amarillas">0 - 0</span></div>
-        <div class="stat-item"><strong>Rojas:</strong> <span id="rojas">0 - 0</span></div>
-        <div class="stat-item"><strong>Paradas:</strong> <span id="paradas">0 - 0</span></div>
-        <div class="stat-item"><strong>Córners:</strong> <span id="corners">0 - 0</span></div>
-    </div>
-
-    <a href="{% url 'menu' %}" class="btn-menu">Volver al Menú Principal</a>
-
-
-</div>
-
-<script id="eventos-json" type="application/json">
+    <script id="eventos-json" type="application/json">
     {{ eventos_json|escapejs }}
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    let eventos = [];
-    let golesLocal = 0;
-    let golesVisitante = 0;
-    let minutos = 0;
-    const fin = 90;
-    let estadisticasPorMinuto = {};
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let eventos = [];
+            let golesLocal = 0;
+            let golesVisitante = 0;
+            let minutos = 0;
+            const fin = 90;
+            let estadisticasPorMinuto = {};
 
-    const container = document.getElementById('timeline-events');
-    const btnIniciar = document.getElementById('iniciar-partido');
-    const tiempo = document.getElementById('tiempo-partido');
-    const marcador = document.getElementById('score-display');
-    const escudoOponente = document.getElementById('escudo-oponente');
-    const nombreOponente = document.getElementById('nombre-oponente');
+            const container = document.getElementById('timeline-events');
+            const btnIniciar = document.getElementById('iniciar-partido');
+            const tiempo = document.getElementById('tiempo-partido');
+            const marcador = document.getElementById('score-display');
+            const escudoOponente = document.getElementById('escudo-oponente');
+            const nombreOponente = document.getElementById('nombre-oponente');
 
-    function actualizarEstadisticas(est) {
-        document.getElementById('posesion').textContent = `${est.posesion_local}% - ${est.posesion_visitante}%`;
-        document.getElementById('disparos').textContent = `${est.disparos_local} - ${est.disparos_visitante}`;
-        document.getElementById('faltas').textContent = `${est.faltas_local} - ${est.faltas_visitante}`;
-        document.getElementById('amarillas').textContent = `${est.amarillas_local} - ${est.amarillas_visitante}`;
-        document.getElementById('rojas').textContent = `${est.rojas_local} - ${est.rojas_visitante}`;
-        document.getElementById('paradas').textContent = `${est.paradas_local} - ${est.paradas_visitante}`;
-        document.getElementById('corners').textContent = `${est.corners_local} - ${est.corners_visitante}`;
-    }
+            function actualizarEstadisticas(est) {
+                document.getElementById('posesion').textContent = `${est.posesion_local}% - ${est.posesion_visitante}%`;
+                document.getElementById('disparos').textContent = `${est.disparos_local} - ${est.disparos_visitante}`;
+                document.getElementById('faltas').textContent = `${est.faltas_local} - ${est.faltas_visitante}`;
+                document.getElementById('amarillas').textContent = `${est.amarillas_local} - ${est.amarillas_visitante}`;
+                document.getElementById('rojas').textContent = `${est.rojas_local} - ${est.rojas_visitante}`;
+                document.getElementById('paradas').textContent = `${est.paradas_local} - ${est.paradas_visitante}`;
+                document.getElementById('corners').textContent = `${est.corners_local} - ${est.corners_visitante}`;
+            }
 
-    function renderEvent(evento) {
-        const eventDiv = document.createElement('div');
-        eventDiv.className = 'timeline-event ' + (evento.equipo === 'local' ? 'local-event' : 'visitante-event');
-        eventDiv.innerHTML = `
+            function renderEvent(evento) {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'timeline-event ' + (evento.equipo === 'local' ? 'local-event' : 'visitante-event');
+                eventDiv.innerHTML = `
             <span class="event-time">${evento.minuto}'</span>
             <div class="event-icon">${getIcon(evento.tipo)}</div>
             <div class="event-description">${getDescripcion(evento)}</div>
         `;
 
-        if (evento.tipo === 'gol') {
-            if (evento.equipo === 'local') golesLocal++;
-            else golesVisitante++;
-            marcador.textContent = `${golesLocal} - ${golesVisitante}`;
-        }
+                if (evento.tipo === 'gol') {
+                    if (evento.equipo === 'local') golesLocal++;
+                    else golesVisitante++;
+                    marcador.textContent = `${golesLocal} - ${golesVisitante}`;
+                }
 
-        container.appendChild(eventDiv);
-        container.scrollTop = container.scrollHeight;
-    }
-
-    function getIcon(tipo) {
-        const icons = {
-            'gol': '⚽',
-            'amarilla': '🟨',
-            'roja': '🟥',
-            'parada': '🧤',
-            'lesion': '🤕',
-            'poste': '🥅'
-        };
-        return icons[tipo] || '❓';
-    }
-
-    function getDescripcion(evento) {
-        const equipo = evento.equipo === 'local' ? "{{ equipo_usuario.nombre }}" : nombreOponente.textContent;
-        return `${evento.tipo === 'gol' ? "Gol de " : ""}${evento.jugador} (${equipo})`;
-    }
-
-    function actualizarTiempo() {
-        if (minutos <= fin) {
-            tiempo.textContent = `⏱️ ${minutos.toString().padStart(2, '0')}:00`;
-
-            if (estadisticasPorMinuto[minutos]) {
-                actualizarEstadisticas(estadisticasPorMinuto[minutos]);
+                container.appendChild(eventDiv);
+                container.scrollTop = container.scrollHeight;
             }
 
-            const eventosMinuto = eventos.filter(e => e.minuto === minutos);
-            eventosMinuto.forEach((evento, index) => {
-                setTimeout(() => {
-                    renderEvent(evento);
-                }, index * 500);
-            });
+            function getIcon(tipo) {
+                const icons = {
+                    'gol': '⚽',
+                    'amarilla': '🟨',
+                    'roja': '🟥',
+                    'parada': '🧤',
+                    'lesion': '🤕',
+                    'poste': '🥅'
+                };
+                return icons[tipo] || '❓';
+            }
 
-            minutos++;
-            setTimeout(actualizarTiempo, 1000);
-        } else {
-            tiempo.textContent = "🏁 ¡Final del Partido!";
-        }
-    }
+            function getDescripcion(evento) {
+                const equipo = evento.equipo === 'local' ? "{{ equipo_usuario.nombre }}" : nombreOponente.textContent;
+                return `${evento.tipo === 'gol' ? "Gol de " : ""}${evento.jugador} (${equipo})`;
+            }
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+            function actualizarTiempo() {
+                if (minutos <= fin) {
+                    tiempo.textContent = `⏱️ ${minutos.toString().padStart(2, '0')}:00`;
+
+                    if (estadisticasPorMinuto[minutos]) {
+                        actualizarEstadisticas(estadisticasPorMinuto[minutos]);
+                    }
+
+                    const eventosMinuto = eventos.filter(e => e.minuto === minutos);
+                    eventosMinuto.forEach((evento, index) => {
+                        setTimeout(() => {
+                            renderEvent(evento);
+                        }, index * 500);
+                    });
+
+                    minutos++;
+                    setTimeout(actualizarTiempo, 1000);
+                } else {
+                    tiempo.textContent = "🏁 ¡Final del Partido!";
                 }
             }
-        }
-        return cookieValue;
-    }
 
-    btnIniciar.addEventListener('click', () => {
-        btnIniciar.disabled = true;
-        fetch("", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: JSON.stringify({ iniciar: true })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'error') {
-                alert(data.message);
-                return;
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.startsWith(name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
             }
 
-            nombreOponente.textContent = data.oponente.nombre;
-            escudoOponente.src = data.oponente.escudo;
+            btnIniciar.addEventListener('click', () => {
+                btnIniciar.disabled = true;
+                fetch("", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCookie("csrftoken")
+                    },
+                    body: JSON.stringify({iniciar: true})
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'error') {
+                            alert(data.message);
+                            return;
+                        }
 
-            eventos = data.eventos;
-            estadisticasPorMinuto = data.estadisticas;
-            marcador.textContent = "0 - 0";
-            container.innerHTML = "";
-            container.style.display = 'block';
-            btnIniciar.style.display = 'none';
+                        nombreOponente.textContent = data.oponente.nombre;
+                        escudoOponente.src = data.oponente.escudo;
 
-            golesLocal = 0;
-            golesVisitante = 0;
-            minutos = 0;
-            actualizarTiempo();
-        })
-        .catch(err => {
-            console.error("Error en la simulación:", err);
-            alert("Error interno.");
+                        eventos = data.eventos;
+                        estadisticasPorMinuto = data.estadisticas;
+                        marcador.textContent = "0 - 0";
+                        container.innerHTML = "";
+                        container.style.display = 'block';
+                        btnIniciar.style.display = 'none';
+
+                        golesLocal = 0;
+                        golesVisitante = 0;
+                        minutos = 0;
+                        actualizarTiempo();
+                    })
+                    .catch(err => {
+                        console.error("Error en la simulación:", err);
+                        alert("Error interno.");
+                    });
+            });
         });
-    });
-});
-</script>
+    </script>
 
 {% endblock %}

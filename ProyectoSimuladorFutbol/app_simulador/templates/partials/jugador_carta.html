@@ -1,17 +1,25 @@
+<!-- Columna de ancho medio para el jugador, con margen inferior -->
 <div class="col-md-4 mb-3">
+
+    <!-- Tarjeta para mostrar información del jugador -->
+    <!-- Se aplica borde rojo si está lesionado o amarillo si está suspendido -->
     <div class="card h-100 {% if jugador.lesionado %}border-danger{% elif jugador.suspendido %}border-warning{% endif %}">
+
         <div class="card-body">
+
             <h5 class="card-title">
                 {{ jugador.nombre }} {{ jugador.apellido }}
             </h5>
-            
+
+            <!-- Datos del jugador -->
             <div class="card-text">
                 <p class="mb-1">
                     <strong>Edad:</strong> {{ jugador.edad }}<br>
                     <strong>Posición:</strong> {{ jugador.get_posicion_display }}<br>
                     <strong>Valor:</strong> €{{ jugador.valor_mercado|floatformat:2 }}M
                 </p>
-                
+
+                <!-- Badges para mostrar si el jugador está lesionado o suspendido -->
                 <div class="mt-2">
                     {% if jugador.lesionado %}
                         <span class="badge bg-danger">Lesionado</span>
@@ -20,7 +28,8 @@
                         <span class="badge bg-warning text-dark">Suspendido</span>
                     {% endif %}
                 </div>
-                
+
+                <!-- Botón para ver más detalles del jugador -->
                 <a href="{% url 'detalle_jugador' jugador.pk %}" class="btn btn-sm btn-primary mt-2">
                     Ver detalles
                 </a>

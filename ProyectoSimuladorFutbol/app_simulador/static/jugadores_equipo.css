@@ -1,10 +1,8 @@
-/* Fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Exo+2:wght@300;600&display=swap');
 
-/* Colores base */
 body {
     background: radial-gradient(circle at center, rgba(0, 18, 34, 0.95) 20%, rgba(0, 10, 20, 0.95)),
-                url('images/campo1.jpg') no-repeat center center fixed;
+    url('images/campo1.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     font-family: 'Exo 2', sans-serif;
@@ -15,7 +13,6 @@ body {
     padding: 15px;
 }
 
-/* Fondo matrix animado */
 body::before {
     content: '';
     position: fixed;
@@ -29,7 +26,6 @@ body::before {
     opacity: 0.3;
 }
 
-/* Tarjetas generales */
 .card {
     background: rgba(0, 34, 68, 0.8);
     border: 1px solid #00ff88;
@@ -48,7 +44,6 @@ body::before {
     box-shadow: 0 0 60px rgba(0, 255, 136, 0.2), inset 0 0 30px rgba(0, 255, 136, 0.1);
 }
 
-/* Efecto holográfico */
 .card::before {
     content: '';
     position: absolute;
@@ -59,11 +54,11 @@ body::before {
     background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
     transition: 0.5s;
 }
+
 .card:hover::before {
     left: 100%;
 }
 
-/* Encabezado de tarjeta */
 .card-header h2 {
     font-family: 'Audiowide', cursive;
     text-transform: uppercase;
@@ -72,6 +67,7 @@ body::before {
     position: relative;
     padding-bottom: 15px;
 }
+
 .card-header h2::after {
     content: '';
     position: absolute;
@@ -83,7 +79,6 @@ body::before {
     background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
 }
 
-/* Tabla */
 .jugadores-table {
     width: 100%;
     border-collapse: collapse;
@@ -109,11 +104,11 @@ body::before {
     border-bottom: 1px solid rgba(0, 255, 136, 0.1);
     transition: background 0.3s;
 }
+
 .jugadores-table tr:hover td {
     background: rgba(0, 255, 136, 0.03);
 }
 
-/* Badges */
 .badge {
     display: inline-block;
     font-weight: 600;
@@ -125,6 +120,7 @@ body::before {
     overflow: hidden;
     transition: all 0.3s;
 }
+
 .badge::before {
     content: '';
     position: absolute;
@@ -132,20 +128,24 @@ body::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: 0.5s;
 }
+
 .badge:hover::before {
     left: 100%;
 }
+
 .bg-danger {
     background: #ff1a4a;
     border-color: #ff1a4a;
 }
+
 .bg-success {
     background: #00cc66;
     border-color: #00cc66;
 }
+
 .posicion-titulo {
     color: #00ff88;
     font-size: 1.2rem;
@@ -155,11 +155,13 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .mb-4 {
     margin-bottom: 2rem !important;
     border-bottom: 1px solid rgba(0, 255, 136, 0.1);
     padding-bottom: 1.5rem;
 }
+
 .card {
     margin-bottom: 15px;
     transition: transform 0.3s;
@@ -168,7 +170,7 @@ body::before {
 .card:hover {
     transform: translateY(-3px);
 }
-/* Botón */
+
 .btn-primary {
     background: linear-gradient(45deg, #001220, #6a00ff);
     border: 1px solid #00ff88;
@@ -180,6 +182,7 @@ body::before {
     cursor: pointer;
     transition: all 0.3s;
 }
+
 .btn-primary::after {
     content: '';
     position: absolute;
@@ -191,12 +194,16 @@ body::before {
     transform: rotate(45deg);
     animation: btnGlow 3s infinite;
 }
+
 @keyframes btnGlow {
-    0% { transform: rotate(45deg) translateX(-200%); }
-    100% { transform: rotate(45deg) translateX(200%); }
+    0% {
+        transform: rotate(45deg) translateX(-200%);
+    }
+    100% {
+        transform: rotate(45deg) translateX(200%);
+    }
 }
 
-/* Otros estilos */
 .text-primary {
     text-shadow: 0 0 15px currentColor;
 }
@@ -204,10 +211,16 @@ body::before {
 .floating {
     animation: float 3s ease-in-out infinite;
 }
+
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
+
 .btn-volver-menu {
     background: linear-gradient(to right, #00cc6a, #00a855);
     color: #1f3a20;
@@ -246,6 +259,7 @@ body::before {
 .btn-volver-menu:hover i {
     transform: translateX(-5px);
 }
+
 /* Responsive */
 @media (max-width: 768px) {
     .card {

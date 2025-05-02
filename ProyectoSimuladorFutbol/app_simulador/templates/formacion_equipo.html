@@ -19,13 +19,17 @@
         <h4>Seleccionar Formación</h4>
         <div class="formaciones-grid">
             <button type="button" class="btn-formacion {% if formacion_actual == '4-4-2' %}active{% endif %}"
-                    data-formacion="4-4-2">4-4-2</button>
+                    data-formacion="4-4-2">4-4-2
+            </button>
             <button type="button" class="btn-formacion {% if formacion_actual == '4-3-3' %}active{% endif %}"
-                    data-formacion="4-3-3">4-3-3</button>
+                    data-formacion="4-3-3">4-3-3
+            </button>
             <button type="button" class="btn-formacion {% if formacion_actual == '3-5-2' %}active{% endif %}"
-                    data-formacion="3-5-2">3-5-2</button>
+                    data-formacion="3-5-2">3-5-2
+            </button>
             <button type="button" class="btn-formacion {% if formacion_actual == '4-2-3-1' %}active{% endif %}"
-                    data-formacion="4-2-3-1">4-2-3-1</button>
+                    data-formacion="4-2-3-1">4-2-3-1
+            </button>
         </div>
         <form method="post" action="{% url 'guardar_formacion' %}">
             {% csrf_token %}
@@ -36,7 +40,6 @@
         </form>
     </div>
 
-    <!-- Cancha con jugadores -->
     <div class="cancha-container">
         <h4><i class="fas fa-map-marked-alt"></i> Alineación Actual: {{ formacion_actual|default:"4-4-2" }}</h4>
         <div class="cancha formacion-{{ formacion_actual }}">
@@ -48,7 +51,7 @@
                         <span class="jugador-nombre">
                             {{ jugadores_por_posicion.portero.nombre }} {{ jugadores_por_posicion.portero.apellido }}
                         </span>
-                        
+
                         <span class="jugador-dorsal">{{ jugadores_por_posicion.portero.dorsal }}</span>
                     {% else %}
                         <span class="jugador-nombre">Sin portero</span>
@@ -58,32 +61,32 @@
 
             <!-- Defensas -->
             {% for def in jugadores_por_posicion.defensas %}
-            <div class="punto punto-defensa-{{ forloop.counter }}">
-                <div class="jugador-info">
-                    <span class="jugador-nombre">{{ def.nombre }} {{ def.apellido }}</span>
-                    <span class="jugador-dorsal">{{ def.dorsal }}</span>
+                <div class="punto punto-defensa-{{ forloop.counter }}">
+                    <div class="jugador-info">
+                        <span class="jugador-nombre">{{ def.nombre }} {{ def.apellido }}</span>
+                        <span class="jugador-dorsal">{{ def.dorsal }}</span>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
 
             <!-- Mediocampistas -->
             {% for med in jugadores_por_posicion.mediocampistas %}
-            <div class="punto punto-mediocampista-{{ forloop.counter }}">
-                <div class="jugador-info">
-                    <span class="jugador-nombre">{{ med.nombre }} {{ med.apellido }}</span>
-                    <span class="jugador-dorsal">{{ med.dorsal }}</span>
+                <div class="punto punto-mediocampista-{{ forloop.counter }}">
+                    <div class="jugador-info">
+                        <span class="jugador-nombre">{{ med.nombre }} {{ med.apellido }}</span>
+                        <span class="jugador-dorsal">{{ med.dorsal }}</span>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
 
             <!-- Delanteros -->
             {% for del in jugadores_por_posicion.delanteros %}
-            <div class="punto punto-delantero-{{ forloop.counter }}">
-                <div class="jugador-info">
-                    <span class="jugador-nombre">{{ del.nombre }} {{ del.apellido }}</span>
-                    <span class="jugador-dorsal">{{ del.dorsal }}</span>
+                <div class="punto punto-delantero-{{ forloop.counter }}">
+                    <div class="jugador-info">
+                        <span class="jugador-nombre">{{ del.nombre }} {{ del.apellido }}</span>
+                        <span class="jugador-dorsal">{{ del.dorsal }}</span>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
@@ -93,7 +96,6 @@
     <i class="fas fa-arrow-left"></i> Volver al Menú
 </a>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{% static 'js/formacion_equipo.js' %}"></script>
 </body>

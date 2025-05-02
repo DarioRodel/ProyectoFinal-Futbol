@@ -14,7 +14,7 @@
         <div class="card-body">
             <p>Actualmente tienes asignado: <strong>{{ equipo_actual.nombre }}</strong></p>
             <p>¿Estás seguro de que quieres cambiarlo por <strong>{{ nuevo_equipo.nombre }}</strong>?</p>
-            
+
             <div class="d-flex justify-content-between mt-4">
                 <a href="{% url 'menu' %}" class="btn btn-secondary">Cancelar</a>
                 <a href="{% url 'asignar_equipo' nuevo_equipo.id %}" class="btn btn-primary">Confirmar Cambio</a>

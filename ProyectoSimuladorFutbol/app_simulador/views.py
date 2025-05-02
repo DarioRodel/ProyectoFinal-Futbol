@@ -1,10 +1,5 @@
 import json
 import logging
-from collections import defaultdict
-from multiprocessing import Value
-
-from django.db.models import Q, When
-from django.forms import IntegerField
 from django.templatetags.static import static
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -14,12 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from django.views.generic import ListView, DetailView
-from sqlparse.sql import Case
-
 from .models import Equipo, UserProfile, UsuarioLogro, Jugador, Partido
 from .forms import CustomUserCreationForm
 import random
-from app_simulador.data.jugadores_equipos import jugadores as jugadores_equipos
 from .utils import otorgar_logro
 
 
@@ -211,6 +203,7 @@ class EliminarTemporadaView(LoginRequiredMixin, View):
 
         return redirect('seleccionar_equipo')
 
+
 class FormacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
@@ -242,9 +235,15 @@ class FormacionEquipoView(LoginRequiredMixin, View):
             'DEL': ['EI', 'CD', 'ED']
         }
 
-        defensas.sort(key=lambda x: orden_posiciones['DEF'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['DEF'] else 99)
-        mediocampistas.sort(key=lambda x: orden_posiciones['MED'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['MED'] else 99)
-        delanteros.sort(key=lambda x: orden_posiciones['DEL'].index(x.posicion_especifica) if x.posicion_especifica in orden_posiciones['DEL'] else 99)
+        defensas.sort(key=lambda x: orden_posiciones['DEF'].index(x.posicion_especifica) if x.posicion_especifica in
+                                                                                            orden_posiciones[
+                                                                                                'DEF'] else 99)
+        mediocampistas.sort(
+            key=lambda x: orden_posiciones['MED'].index(x.posicion_especifica) if x.posicion_especifica in
+                                                                                  orden_posiciones['MED'] else 99)
+        delanteros.sort(key=lambda x: orden_posiciones['DEL'].index(x.posicion_especifica) if x.posicion_especifica in
+                                                                                              orden_posiciones[
+                                                                                                  'DEL'] else 99)
 
         jugadores_por_posicion = {
             'portero': Jugador.objects.filter(equipo=equipo, posicion='POR').first(),
@@ -258,6 +257,8 @@ class FormacionEquipoView(LoginRequiredMixin, View):
             'jugadores_por_posicion': jugadores_por_posicion,
             'formacion_actual': formacion_actual
         })
+
+
 class GuardarFormacionView(LoginRequiredMixin, View):
     def post(self, request):
         perfil = request.user.userprofile
@@ -273,6 +274,7 @@ class GuardarFormacionView(LoginRequiredMixin, View):
 
         return redirect('formacion_equipo')
 
+
 # Vista para notificaciones
 class NotificacionesView(LoginRequiredMixin, View):
     def get(self, request):
@@ -281,6 +283,7 @@ class NotificacionesView(LoginRequiredMixin, View):
             'logros_obtenidos': logros,
             'mostrar_popup': False
         })
+
 
 # Vista para tabla de liga
 class TablaLigaView(LoginRequiredMixin, View):
@@ -293,7 +296,6 @@ class TablaLigaView(LoginRequiredMixin, View):
         if equipo_asignado and equipos.first() == equipo_asignado:
             otorgar_logro(request.user, "Líder de la Liga")
 
-        # Agregar escudos
         imagenes_escudos = {
             "Deportivo Alavés": "images/escudos/alaves.png",
             "Athletic Club": "images/escudos/bilbao.png",
@@ -353,6 +355,7 @@ class FinalizarTemporadaView(LoginRequiredMixin, View):
 
         return redirect('menu')
 
+
 class InformacionEquipoView(LoginRequiredMixin, View):
     def get(self, request):
         perfil = request.user.userprofile
@@ -361,7 +364,6 @@ class InformacionEquipoView(LoginRequiredMixin, View):
         if not equipo:
             return redirect('seleccionar_equipo')
 
-        # Obtener escudo del equipo
         imagenes_escudos = {
             "Deportivo Alavés": "images/escudos/alaves.png",
             "Athletic Club": "images/escudos/bilbao.png",
@@ -421,7 +423,6 @@ class JugadoresEquipoView(LoginRequiredMixin, ListView):
         return context
 
 
-
 class DetalleJugadorView(LoginRequiredMixin, DetailView):
     model = Jugador
     template_name = 'detalle_jugador.html'
@@ -431,9 +432,11 @@ class DetalleJugadorView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['equipo'] = self.request.user.userprofile.equipo_seleccionado
         return context
-# Vista para simular partido
+
 
 logger = logging.getLogger(__name__)
+
+
 class SimularPartidoView(LoginRequiredMixin, View):
     template_name = 'simular_partido.html'
     ESCUDOS_MAP = {
@@ -505,7 +508,6 @@ class SimularPartidoView(LoginRequiredMixin, View):
             if jornada_actual < 1:
                 perfil.jornada_actual = 1
                 perfil.save()
-
 
             if not oponente_id:
                 return JsonResponse({'status': 'error', 'message': 'No se encontró el oponente'}, status=400)
@@ -629,7 +631,8 @@ class SimularPartidoView(LoginRequiredMixin, View):
         # Además, generamos una posesión progresiva
         for m in range(1, 91):
             estadisticas_minuto_a_minuto[m]['posesion_local'] = random.randint(40, 60)
-            estadisticas_minuto_a_minuto[m]['posesion_visitante'] = 100 - estadisticas_minuto_a_minuto[m]['posesion_local']
+            estadisticas_minuto_a_minuto[m]['posesion_visitante'] = 100 - estadisticas_minuto_a_minuto[m][
+                'posesion_local']
 
         eventos = sorted(eventos, key=lambda e: e['minuto'])
         return {
@@ -668,15 +671,15 @@ class SimularPartidoView(LoginRequiredMixin, View):
 
         # Actualizar resultados
         if goles_local > goles_visitante:
-            local.puntos += 3  # Victoria
+            local.puntos += 3
             local.partidos_ganados += 1
             visitante.partidos_perdidos += 1
         elif goles_local < goles_visitante:
-            visitante.puntos += 3  # Victoria
+            visitante.puntos += 3
             visitante.partidos_ganados += 1
             local.partidos_perdidos += 1
         else:
-            local.puntos += 1  # Empate
+            local.puntos += 1
             visitante.puntos += 1
             local.partidos_empatados += 1
             visitante.partidos_empatados += 1

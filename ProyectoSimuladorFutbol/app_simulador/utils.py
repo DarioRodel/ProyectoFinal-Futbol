@@ -1,5 +1,6 @@
 from .models import Logro, UsuarioLogro
 
+
 def otorgar_logro(usuario, nombre_logro):
     try:
         logro = Logro.objects.get(nombre=nombre_logro)

@@ -1,6 +1,7 @@
-body{
+body {
     background: url('images/campo1.jpg') no-repeat center center fixed;
 }
+
 .btn-back {
     display: inline-block;
     margin-bottom: 20px;
@@ -132,6 +133,7 @@ body{
     color: #c0c0c0;
 }
 
+/*Responsive*/
 @media (max-width: 768px) {
     .team-header {
         flex-direction: column;

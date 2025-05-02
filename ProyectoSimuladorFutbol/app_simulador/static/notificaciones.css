@@ -8,8 +8,8 @@ body {
 }
 
 .notificaciones-container {
-    background-color: rgba(0, 51, 102, 0.8);/
-    border: 2px solid #c0c0c0;
+    background-color: rgba(0, 51, 102, 0.8);
+/ border: 2 px solid #c0c0c0;
     border-radius: 15px;
     padding: 20px;
     backdrop-filter: blur(5px);
@@ -136,8 +136,12 @@ body {
 }
 
 @keyframes brillo-btn {
-    0% { transform: rotate(45deg) translate(-30%, -30%); }
-    100% { transform: rotate(45deg) translate(30%, 30%); }
+    0% {
+        transform: rotate(45deg) translate(-30%, -30%);
+    }
+    100% {
+        transform: rotate(45deg) translate(30%, 30%);
+    }
 }
 
 .notificaciones-container {

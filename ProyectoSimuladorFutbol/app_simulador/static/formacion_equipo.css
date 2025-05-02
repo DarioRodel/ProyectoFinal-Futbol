@@ -140,10 +140,9 @@ body {
     border: 3px solid #00ff88;
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    background-color: #0a3a20;
     width: 800px;
     height: 500px;
-    background-size: 100% 100%;
+
 }
 
 
@@ -240,6 +239,7 @@ body {
     transform: translateX(-5px);
 }
 
+/* Responsive*/
 @media (max-width: 768px) {
     .formacion-container {
         padding: 20px;
@@ -293,6 +293,7 @@ body {
     }
 }
 
+/* Carga el portero en esa posicion cen todas las formaciones*/
 .punto-portero {
     bottom: 2%;
     left: 50%;

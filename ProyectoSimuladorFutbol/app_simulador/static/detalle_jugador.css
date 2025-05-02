@@ -1,9 +1,10 @@
-/* detalle_jugador.css */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@400;600;700&display=swap');
-body{
+
+body {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/campo1.jpg') no-repeat center center fixed;
 
 }
+
 .player-card {
     position: relative;
     border-radius: 20px;
@@ -389,7 +390,7 @@ body{
     letter-spacing: 1.5px;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
     .player-profile {
         grid-template-columns: 1fr;
