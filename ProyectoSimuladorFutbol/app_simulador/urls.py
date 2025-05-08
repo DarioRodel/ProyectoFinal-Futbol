@@ -4,6 +4,7 @@ from .views import (
     SeleccionarEquipoView, AsignarEquipoView, MenuView, FormacionEquipoView,
     NotificacionesView, SimularPartidoView, TablaLigaView, GuardarFormacionView,
     EliminarTemporadaView, ConfirmarCambioEquipoView, InformacionEquipoView, DetalleJugadorView, JugadoresEquipoView,
+    TemporadaFinalizadaView,
 )
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     path('equipo/jugadores/', JugadoresEquipoView.as_view(), name='jugadores_equipo'),
     path('jugador/<int:pk>/', DetalleJugadorView.as_view(), name='detalle_jugador'),
     path('simular-partido/', SimularPartidoView.as_view(), name='simular_partido'),
+    path('temporada-finalizada/', TemporadaFinalizadaView.as_view(), name='temporada_finalizada'),
 
 ]

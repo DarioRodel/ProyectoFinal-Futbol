@@ -22,12 +22,12 @@
     <div class="btn-eliminar-container">
         <form action="{% url 'eliminar_temporada' %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn-eliminar">
+            <button type="submit" class="btn-eliminar" >
                 <i class="fas fa-trash-alt"></i> Eliminar Temporada
             </button>
         </form>
     </div>
-
+    
     <header class="menu-header">
         <h1><i class="fas fa-futbol"></i> Simulador de Fútbol</h1>
         <p class="subtitle">Gestiona tu equipo y compite en la liga</p>

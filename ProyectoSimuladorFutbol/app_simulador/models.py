@@ -1,4 +1,4 @@
-from django.core.exceptions import ValidationError
+from django.db.models import JSONField
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
@@ -13,6 +13,7 @@ class Equipo(models.Model):
     ciudad = models.CharField(max_length=100)
     estadio = models.CharField(max_length=100)
     ya_jugo = models.BooleanField(default=False)
+    calendario = JSONField(default=list, blank=True)
     fundacion = models.PositiveIntegerField(
         validators=[
             MinValueValidator(1800),
@@ -47,8 +48,9 @@ class Equipo(models.Model):
     partidos_ganados = models.IntegerField(default=0)
     partidos_perdidos = models.IntegerField(default=0)
     partidos_empatados = models.IntegerField(default=0)
-    goles_favor = models.IntegerField(default=0)  # Goles a favor
-    goles_contra = models.IntegerField(default=0)  # Goles en contra
+    partidos_jugados_contra = models.ManyToManyField('self', through='Partido', symmetrical=False)
+    goles_favor = models.IntegerField(default=0)
+    goles_contra = models.IntegerField(default=0)
     temporada_finalizada = models.BooleanField(default=False)
 
     def __str__(self):
