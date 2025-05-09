@@ -300,11 +300,13 @@ class NotificacionesView(LoginRequiredMixin, View):
 # Vista para tabla de liga
 class TablaLigaView(LoginRequiredMixin, View):
     def get(self, request):
-        equipos = Equipo.objects.order_by('-puntos')
+        for equipo in Equipo.objects.all():
+            equipo.actualizar_estadisticas()
+
+        equipos = Equipo.objects.order_by('-puntos', '-goles_favor', 'goles_contra')
         perfil = request.user.userprofile
         equipo_asignado = perfil.equipo_seleccionado
 
-        # Verificar si el equipo del usuario está en primer lugar
         if equipo_asignado and equipos.first() == equipo_asignado:
             otorgar_logro(request.user, "Líder de la Liga")
 
@@ -480,14 +482,12 @@ class SimularPartidoView(LoginRequiredMixin, View):
 
             jornada_actual = perfil.jornada_actual
 
-            # Generar calendario si es la primera jornada
             if jornada_actual == 1 and not equipo.calendario:
                 oponentes = list(Equipo.objects.exclude(id=equipo.id).values_list('id', flat=True))
                 random.shuffle(oponentes)
                 equipo.calendario = oponentes
                 equipo.save()
 
-            # Seleccionar oponente según calendario
             oponente = self.obtener_oponente_calendario(equipo, jornada_actual)
             if not oponente:
                 return redirect('temporada_finalizada')
@@ -514,6 +514,12 @@ class SimularPartidoView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             perfil = request.user.userprofile
+            if perfil.jornada_actual > 38:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'La temporada ya ha finalizado'
+                }, status=400)
+
             equipo_usuario = perfil.equipo_seleccionado
             oponente_id = request.session.get('oponente_id')
 
@@ -523,7 +529,6 @@ class SimularPartidoView(LoginRequiredMixin, View):
             oponente = Equipo.objects.get(id=oponente_id)
             jornada_actual = perfil.jornada_actual
 
-            # Verificar máximo 2 partidos contra el mismo equipo
             partidos_previos = Partido.objects.filter(
                 Q(equipo_local=equipo_usuario, equipo_visitante=oponente) |
                 Q(equipo_local=oponente, equipo_visitante=equipo_usuario)
@@ -535,14 +540,13 @@ class SimularPartidoView(LoginRequiredMixin, View):
                     'message': 'Ya has jugado 2 veces contra este equipo esta temporada'
                 }, status=400)
 
-            # Simulación del partido
+            # Simulación del partido del usuario
             fuerza_local = self.calcular_fuerza(equipo_usuario, perfil.formacion)
             fuerza_visitante = self.calcular_fuerza(oponente, '4-4-2')
             goles_local = self.generar_goles(fuerza_local, fuerza_visitante)
             goles_visitante = self.generar_goles(fuerza_visitante, fuerza_local)
             eventos_data = self.simular_eventos(goles_local, goles_visitante)
 
-            # Registrar partido
             Partido.objects.create(
                 equipo_local=equipo_usuario,
                 equipo_visitante=oponente,
@@ -554,15 +558,12 @@ class SimularPartidoView(LoginRequiredMixin, View):
                 jornada=jornada_actual
             )
 
-            # Actualizar estadísticas solo si es válido
             if partidos_previos < 2:
                 self.actualizar_estadisticas_equipos(equipo_usuario, oponente, goles_local, goles_visitante)
 
-            # Actualizar jornada
+            # Simular jornada completa
+            self.simular_jornada_completa(jornada_actual, equipo_usuario, oponente)
 
-
-            # Verificar fin de temporada
-            respuesta = {}
             if jornada_actual == 38:
                 equipo_usuario.temporada_finalizada = True
                 equipo_usuario.save()
@@ -572,10 +573,11 @@ class SimularPartidoView(LoginRequiredMixin, View):
                     'status': 'redirect',
                     'redirect_url': reverse('temporada_finalizada')
                 })
+
             perfil.jornada_actual += 1
             perfil.save()
-            # Preparar respuesta
-            respuesta.update({
+
+            respuesta = {
                 'status': 'success',
                 'oponente': {
                     'nombre': oponente.nombre,
@@ -587,7 +589,7 @@ class SimularPartidoView(LoginRequiredMixin, View):
                 'estadisticas': eventos_data['estadisticas_minuto_a_minuto'],
                 'resultado': self.definir_resultado(goles_local, goles_visitante),
                 'jornada_actual': perfil.jornada_actual
-            })
+            }
 
             request.session.pop('oponente_id', None)
             return JsonResponse(respuesta, json_dumps_params={'ensure_ascii': False})
@@ -596,6 +598,47 @@ class SimularPartidoView(LoginRequiredMixin, View):
             logger.error(f"Error en POST: {str(e)}", exc_info=True)
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
+    def simular_jornada_completa(self, jornada, equipo_usuario, oponente_usuario):
+        equipos_restantes = list(
+            Equipo.objects.exclude(
+                Q(id=equipo_usuario.id) | Q(id=oponente_usuario.id)
+            ).all()
+        )
+
+        random.shuffle(equipos_restantes)
+
+        for i in range(0, len(equipos_restantes), 2):
+            if i + 1 >= len(equipos_restantes):
+                break
+
+            local = equipos_restantes[i]
+            visitante = equipos_restantes[i + 1]
+
+            partidos_previos = Partido.objects.filter(
+                Q(equipo_local=local, equipo_visitante=visitante) |
+                Q(equipo_local=visitante, equipo_visitante=local)
+            ).count()
+
+            if partidos_previos >= 2:
+                continue
+
+            fuerza_local = self.calcular_fuerza(local, '4-4-2')
+            fuerza_visitante = self.calcular_fuerza(visitante, '4-4-2')
+            goles_local = self.generar_goles(fuerza_local, fuerza_visitante)
+            goles_visitante = self.generar_goles(fuerza_visitante, fuerza_local)
+
+            Partido.objects.create(
+                equipo_local=local,
+                equipo_visitante=visitante,
+                goles_local=goles_local,
+                goles_visitante=goles_visitante,
+                jornada=jornada,
+                estado='finalizado',
+                eventos=[],
+                estadisticas={}
+            )
+
+            self.actualizar_estadisticas_equipos(local, visitante, goles_local, goles_visitante)
     def otorgar_logros_finales(self, usuario, equipo):
         """Otorga los logros al finalizar la temporada"""
         # Logro Temporada Completa
@@ -649,12 +692,22 @@ class SimularPartidoView(LoginRequiredMixin, View):
             return equipo_usuario.calendario[37 - jornada_actual]
 
     def calcular_fuerza(self, equipo, formacion):
-        bonificaciones = {'4-3-3': 10, '4-4-2': 8, '3-5-2': 7, '4-2-3-1': 9}
-        return 50 + bonificaciones.get(formacion, 5)
+        bonificaciones = {
+            '4-3-3': {'ataque': 12, 'defensa': 8},
+            '4-4-2': {'ataque': 9, 'defensa': 10},
+            '3-5-2': {'ataque': 10, 'defensa': 9},
+            '4-2-3-1': {'ataque': 11, 'defensa': 8}
+        }
+        formacion_data = bonificaciones.get(formacion, {'ataque': 5, 'defensa': 5})
+        return {
+            'ataque': 50 + formacion_data['ataque'],
+            'defensa': 50 + formacion_data['defensa']
+        }
 
-    def generar_goles(self, ataque, defensa):
-        ventaja = ataque - defensa
-        return max(0, (ventaja // 10) + random.randint(-1, 2))
+    def generar_goles(self, fuerza_ataque, fuerza_defensa):
+        diferencia = (fuerza_ataque['ataque'] - fuerza_defensa['defensa']) / 10
+        base_goles = max(0, int(diferencia))
+        return max(0, base_goles + random.randint(-1, 2))
 
     def simular_eventos(self, goles_local, goles_visitante):
         eventos = []
@@ -736,9 +789,13 @@ class SimularPartidoView(LoginRequiredMixin, View):
             estadisticas[mapeo[tipo]] += 1
 
     def actualizar_estadisticas_equipos(self, local, visitante, goles_local, goles_visitante):
-        # Mantener misma lógica que tenías originalmente
         local.partidos_jugados += 1
+        local.goles_favor += goles_local
+        local.goles_contra += goles_visitante
+
         visitante.partidos_jugados += 1
+        visitante.goles_favor += goles_visitante
+        visitante.goles_contra += goles_local
 
         if goles_local > goles_visitante:
             local.puntos += 3

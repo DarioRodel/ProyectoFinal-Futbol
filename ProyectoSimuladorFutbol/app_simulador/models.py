@@ -1,4 +1,4 @@
-from django.db.models import JSONField
+from django.db.models import JSONField, Q, F
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
@@ -48,11 +48,46 @@ class Equipo(models.Model):
     partidos_ganados = models.IntegerField(default=0)
     partidos_perdidos = models.IntegerField(default=0)
     partidos_empatados = models.IntegerField(default=0)
-    partidos_jugados_contra = models.ManyToManyField('self', through='Partido', symmetrical=False)
     goles_favor = models.IntegerField(default=0)
     goles_contra = models.IntegerField(default=0)
     temporada_finalizada = models.BooleanField(default=False)
 
+    def actualizar_estadisticas(self):
+        # Obtener todos los partidos donde el equipo participó
+        partidos_local = self.partidos_local.all()
+        partidos_visitante = self.partidos_visitante.all()
+        todos_partidos = partidos_local | partidos_visitante
+
+        self.partidos_jugados = todos_partidos.count()
+
+        self.partidos_ganados = 0
+        self.partidos_perdidos = 0
+        self.partidos_empatados = 0
+        self.goles_favor = 0
+        self.goles_contra = 0
+
+        for partido in todos_partidos:
+            if partido.equipo_local == self:
+                self.goles_favor += partido.goles_local
+                self.goles_contra += partido.goles_visitante
+                if partido.goles_local > partido.goles_visitante:
+                    self.partidos_ganados += 1
+                elif partido.goles_local < partido.goles_visitante:
+                    self.partidos_perdidos += 1
+                else:
+                    self.partidos_empatados += 1
+            else:
+                self.goles_favor += partido.goles_visitante
+                self.goles_contra += partido.goles_local
+                if partido.goles_visitante > partido.goles_local:
+                    self.partidos_ganados += 1
+                elif partido.goles_visitante < partido.goles_local:
+                    self.partidos_perdidos += 1
+                else:
+                    self.partidos_empatados += 1
+
+        self.puntos = (self.partidos_ganados * 3) + self.partidos_empatados
+        self.save()
     def __str__(self):
         return self.nombre
 
@@ -156,11 +191,20 @@ class Partido(models.Model):
         ('finalizado', 'Finalizado'),
     ]
 
-    equipo_local = models.ForeignKey('Equipo', on_delete=models.CASCADE, related_name='partidos_como_local')
-    equipo_visitante = models.ForeignKey('Equipo', on_delete=models.CASCADE, related_name='partidos_como_visitante')
+    equipo_local = models.ForeignKey(
+        Equipo,
+        on_delete=models.CASCADE,
+        related_name='partidos_local'
+    )
+    equipo_visitante = models.ForeignKey(
+        Equipo,
+        on_delete=models.CASCADE,
+        related_name='partidos_visitante'
+    )
+    goles_local = models.IntegerField(default=0)
+    goles_visitante = models.IntegerField(default=0)
     fecha = models.DateTimeField(auto_now_add=True)
-    goles_local = models.PositiveIntegerField(default=0)
-    goles_visitante = models.PositiveIntegerField(default=0)
+
     eventos = models.JSONField(default=dict, blank=True)
     estadisticas = models.JSONField(default=dict, blank=True)
     jornada = models.PositiveIntegerField(default=1)
