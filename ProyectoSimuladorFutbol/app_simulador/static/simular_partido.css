@@ -336,8 +336,6 @@ h3, .timeline-header {
     left: 100%;
 }
 
-
-/* ANIMACIONES */
 @keyframes eventAppear {
     to {
         opacity: 1;
