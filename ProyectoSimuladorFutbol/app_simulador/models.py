@@ -88,6 +88,11 @@ class Equipo(models.Model):
 
         self.puntos = (self.partidos_ganados * 3) + self.partidos_empatados
         self.save()
+
+    def equipos_rivales(self):
+        rivales_local = self.partidos_local.values_list('equipo_visitante', flat=True)
+        rivales_visitante = self.partidos_visitante.values_list('equipo_local', flat=True)
+        return list(rivales_local) + list(rivales_visitante)
     def __str__(self):
         return self.nombre
 
@@ -117,7 +122,7 @@ class Jugador(models.Model):
     posicion_especifica = models.CharField(
         max_length=3,
         choices=POSICIONES_ESPECIFICAS,
-        default='DC'  # Asegurar un valor por defecto
+        default='DC'
     )
     posicion = models.CharField(max_length=3, choices=POSICIONES)
     nombre = models.CharField(max_length=100)
@@ -210,6 +215,10 @@ class Partido(models.Model):
     jornada = models.PositiveIntegerField(default=1)
     estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
 
+    def obtener_rival(self, equipo):
+        if equipo == self.equipo_local:
+            return self.equipo_visitante
+        return self.equipo_local
     def __str__(self):
         return f"{self.equipo_local} vs {self.equipo_visitante} (Jornada {self.jornada})"
 

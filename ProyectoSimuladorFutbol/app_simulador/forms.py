@@ -45,11 +45,11 @@ class GestionarEquipoForm(forms.ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     # Campo para el nombre de usuario
     username = forms.CharField(
-        label="Nombreo",
+        label="Nombre",
         max_length=150,
         validators=[  # Validador para el nombre de usuario (solo letras, números y algunos caracteres especiales)
             RegexValidator(
-                regex='^[a-zA-Z0-9@.+-_]+$',  # Expresión regular para validar caracteres permitidos
+                regex='^[a-zA-Z0-9@.+-_]+$',
                 message='El nombre de usuario solo puede contener letras, números y los caracteres @/./+/-/_.',
             ),
         ],
