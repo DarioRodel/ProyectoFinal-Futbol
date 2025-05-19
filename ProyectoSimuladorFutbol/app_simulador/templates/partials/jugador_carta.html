@@ -24,11 +24,13 @@
                         <span class="badge bg-warning text-dark">Suspendido</span>
                     {% endif %}
                 </div>
-
+                <br>
                 <!-- Botón para ver más detalles del jugador -->
-                <a href="{% url 'detalle_jugador' jugador.pk %}" class="btn btn-sm btn-primary mt-2">
+                <a href="{% url 'detalle_jugador' jugador.pk %}" class="btn btn-sm btn-primary mt-2"
+                   style="text-decoration: none;">
                     Ver detalles
                 </a>
+
             </div>
         </div>
     </div>
