@@ -736,7 +736,7 @@ class SimularPartidoView(LoginRequiredMixin, View):
             'minuto': minuto,
             'tipo': tipo,
             'equipo': equipo,
-            'jugador': f"{jugador['nombre']} {jugador['apellido']}",
+            'jugador': f"{jugador['nombre']}",
             'dorsal': jugador['dorsal']
         }
 
@@ -744,7 +744,7 @@ class SimularPartidoView(LoginRequiredMixin, View):
         eventos = []
         estadisticas_minuto_a_minuto = []
         estadisticas_actual = self.estadisticas_base()
-        ultimo_evento_minuto = -20  # Para evitar eventos muy seguidos
+        ultimo_evento_minuto = -15  # Para evitar eventos muy seguidos
 
         # Generar eventos de goles
         for _ in range(goles_local):

@@ -28,6 +28,12 @@
             <button id="iniciar-partido" class="btn-menu">Iniciar Partido</button>
             <div id="tiempo-partido" class="tiempo-partido" style="font-size: 1.5rem; margin: 1rem 0;">⏱️ 00:00</div>
             <div id="timeline-events" style="display:none;"></div>
+            <h3>
+            Jornada {{ jornada_actual }}
+            {% if es_ultima_jornada %}
+                <span class="badge bg-danger">¡Última Jornada!</span>
+            {% endif %}
+        </h3>
         </div>
 
         <h4 class="timeline-header">📈 Estadísticas</h4>
@@ -43,12 +49,7 @@
         <div style="text-align: center">
             <a href="{% url 'menu' %}" class="btn-menu">Volver al Menú Principal</a>
         </div>
-        <h3>
-            Jornada {{ jornada_actual }}
-            {% if es_ultima_jornada %}
-                <span class="badge bg-danger">¡Última Jornada!</span>
-            {% endif %}
-        </h3>
+
     </div>
 
     <script id="eventos-json" type="application/json">
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nombreJugador = evento.jugador || "Jugador desconocido";
     const dorsal = evento.dorsal?.toString() || "??";
 
-    return `${iconos[evento.tipo]} ${nombreJugador} (${dorsal}) - ${equipo}`;
+    return ` ${nombreJugador} (${dorsal}) - ${equipo}`;
 }
 
     function actualizarTiempo() {

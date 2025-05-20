@@ -15,7 +15,7 @@ jugadores = {
              'valor_mercado': 25.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'LD'},
             {'nombre': 'Éder Militão', 'apellido': 'Militão', 'edad': 25, 'nacionalidad': 'Brasil',
-             'valor_mercado': 70.0, 'dorsal': 3, 'lesionado': True, 'suspendido': False,
+             'valor_mercado': 70.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'DC'},
             {'nombre': 'Antonio Rüdiger', 'apellido': 'Rüdiger', 'edad': 30, 'nacionalidad': 'Alemania',
              'valor_mercado': 40.0, 'dorsal': 22, 'lesionado': False, 'suspendido': False,
@@ -25,7 +25,7 @@ jugadores = {
              'posicion_especifica': 'LI'},
             {'nombre': 'David Alaba', 'apellido': 'Alaba', 'edad': 31, 'nacionalidad': 'Austria',
              'valor_mercado': 45.0,
-             'dorsal': 4, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'LI'}
+             'dorsal': 4, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'LI'}
         ],
         'MED': [
             {'nombre': 'Luka Modrić', 'apellido': 'Modrić', 'edad': 38, 'nacionalidad': 'Croacia',
@@ -89,7 +89,7 @@ jugadores = {
              'valor_mercado': 90.0, 'dorsal': 21, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'MCD'},
             {'nombre': 'Gavi', 'apellido': 'Gavi', 'edad': 19, 'nacionalidad': 'España', 'valor_mercado': 90.0,
-             'dorsal': 6, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'MC'},
+             'dorsal': 6, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'},
             {'nombre': 'Marc', 'apellido': 'Casadó', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 8.0,
              'dorsal': 33, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MCD'},
             {'nombre': 'Dani', 'apellido': 'Olmo', 'edad': 20, 'nacionalidad': 'España', 'valor_mercado': 8.0,
@@ -110,7 +110,7 @@ jugadores = {
              'posicion_especifica': 'EI'},
             {'nombre': 'Fermin', 'apellido': 'Lopez', 'edad': 19, 'nacionalidad': 'España',
              'valor_mercado': 50.0,
-             'dorsal': 20, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'MC'}
+             'dorsal': 20, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'MC'}
         ]
     },
     'Atlético de Madrid': {
@@ -134,7 +134,7 @@ jugadores = {
              'valor_mercado': 30.0, 'dorsal': 3, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'DC'},
             {'nombre': 'Reinildo Mandava', 'apellido': 'Reinildo', 'edad': 29, 'nacionalidad': 'Mozambique',
-             'valor_mercado': 20.0, 'dorsal': 23, 'lesionado': True, 'suspendido': False,
+             'valor_mercado': 20.0, 'dorsal': 23, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'LI'}
         ],
         'MED': [
@@ -181,7 +181,7 @@ jugadores = {
             {'nombre': 'Loïc Badé', 'apellido': 'Badé', 'edad': 23, 'nacionalidad': 'Francia', 'valor_mercado': 20.0,
              'dorsal': 22, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Marcão', 'apellido': 'Marcão', 'edad': 27, 'nacionalidad': 'Brasil', 'valor_mercado': 12.0,
-             'dorsal': 3, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'DC'},
+             'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
             {'nombre': 'Adrià Pedrosa', 'apellido': 'Pedrosa', 'edad': 25, 'nacionalidad': 'España',
              'valor_mercado': 10.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'LI'},
@@ -275,7 +275,7 @@ jugadores = {
         ],
         'DEF': [
             {'nombre': 'Juan Foyth', 'apellido': 'Foyth', 'edad': 25, 'nacionalidad': 'Argentina',
-             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': True, 'suspendido': False,
+             'valor_mercado': 35.0, 'dorsal': 2, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'LD'},
             {'nombre': 'Raúl Albiol', 'apellido': 'Albiol', 'edad': 38, 'nacionalidad': 'España', 'valor_mercado': 2.0,
              'dorsal': 3, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'DC'},
@@ -309,7 +309,7 @@ jugadores = {
              'posicion_especifica': 'DC'},
             {'nombre': 'Yeremy Pino', 'apellido': 'Pino', 'edad': 21, 'nacionalidad': 'España',
              'valor_mercado': 45.0,
-             'dorsal': 21, 'lesionado': True, 'suspendido': False, 'posicion_especifica': 'EI'},
+             'dorsal': 21, 'lesionado': False, 'suspendido': False, 'posicion_especifica': 'EI'},
             {'nombre': 'Ayoze Pérez', 'apellido': 'Pérez', 'edad': 30, 'nacionalidad': 'España',
              'valor_mercado': 15.0, 'dorsal': 10, 'lesionado': False, 'suspendido': False,
              'posicion_especifica': 'SD'},
