@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nombreJugador = evento.jugador || "Jugador desconocido";
     const dorsal = evento.dorsal?.toString() || "??";
 
-    return ` ${nombreJugador} (${dorsal}) - ${equipo}`;
+    return `${iconos[evento.tipo]} ${nombreJugador} (${dorsal}) - ${equipo}`;
 }
 
     function actualizarTiempo() {

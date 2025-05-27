@@ -1,254 +1,215 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/campo1.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), url('images/campo1.jpg') center/cover fixed;
+    color: #fff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.formacion-container {
-    background: linear-gradient(145deg, rgba(25, 48, 26, 0.95), rgba(15, 38, 16, 0.95));
-    border: 3px solid #00ff88;
-    border-radius: 25px;
-    padding: 35px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
     position: relative;
-    backdrop-filter: blur(5px);
+    overflow-x: hidden;
 }
 
+/* Contenedor principal */
+.formacion-container {
+    background: linear-gradient(145deg, rgba(15, 38, 16, 0.95), rgba(25, 48, 26, 0.95));
+    border: 3px solid #00ff88;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 95%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(8px);
+    position: relative;
+}
+
+/* Títulos */
 .formacion-container h2 {
     color: #00ff88;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 25px;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    gap: 1rem;
 }
 
-.formacion-container h2 i {
-    font-size: 1.8rem;
-}
-
+/* Selector de formación */
 .selector-formacion {
-    background: rgba(47, 90, 58, 0.6);
+    background: rgba(0, 40, 20, 0.8);
     border: 2px solid #00ff88;
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 30px;
-    box-shadow: inset 0 0 15px rgba(0, 255, 136, 0.1);
-}
-
-.selector-formacion h4 {
-    color: #00ff88;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.1);
 }
 
 .formaciones-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 .btn-formacion {
-    background: rgba(47, 90, 58, 0.8);
+    background: rgba(0, 80, 40, 0.8);
     border: 2px solid #00ff88;
     color: #00ff88;
-    padding: 12px 25px;
-    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    min-width: 100px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(4px);
 }
 
 .btn-formacion:hover, .btn-formacion.active {
     background: #00ff88;
-    color: #1f3a20;
-    border-color: #00ff88;
+    color: #002200;
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
 }
 
-.btn-guardar {
-    background: linear-gradient(to right, #00ff88, #00cc6a);
-    color: #1f3a20;
-    border: none;
-    padding: 14px 30px;
-    border-radius: 30px;
-    font-weight: 700;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn-guardar:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.6);
-}
-
-
+/* Cancha y jugadores */
 .cancha-container {
-    background: rgba(47, 90, 58, 0.6);
+    background: rgba(0, 30, 15, 0.8);
     border: 2px solid #00ff88;
-    border-radius: 18px;
-    padding: 30px;
-    margin-top: 30px;
-    box-shadow: inset 0 0 15px rgba(0, 255, 136, 0.1);
-    width: fit-content;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.cancha-container h4 {
-    color: #00ff88;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem auto;
+    position: relative;
+    max-width: 800px;
 }
 
 .cancha {
+    background: url('images/campo3.jpg') center/contain no-repeat;
+    aspect-ratio: 16/9;
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('images/campo3.jpg') no-repeat center center;
-    background-size: contain;
     margin: 0 auto;
-    border: 3px solid #00ff88;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    max-width: 365px; /* o el ancho real de tu imagen si lo conoces */
-    aspect-ratio: 1000 / 600;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.2));
 }
-
 
 .punto {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(145deg, #ffffff, #f8f8f8);
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(145deg, #ffffff, #e8ffe8);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    border: 3px solid #2c3e50;
-    z-index: 10;
+    border: 3px solid #00ff88;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 2px #00ff88;
+    cursor: pointer;
 }
 
 .punto:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(1.15) rotate(5deg);
+    z-index: 100;
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
 }
 
 .jugador-info {
     text-align: center;
-    width: 100%;
-    padding: 5px;
+    padding: 0.5rem;
 }
 
 .jugador-nombre {
-    font-size: 11px;
+    font-size: 0.7rem;
     font-weight: 700;
-    display: block;
-    margin-bottom: 5px;
+    color: #1a3a20;
     line-height: 1.2;
     text-transform: uppercase;
-    color: #1a3a20;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.3rem;
 }
 
 .jugador-dorsal {
-    font-size: 20px;
-    font-weight: bold;
-    background: linear-gradient(to bottom, #00ff88, #00cc6a);
-    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #00ff88, #00cc6a);
     width: 35px;
     height: 35px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    border: 2px solid #2c3e50;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fff;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.btn-volver-menu {
-    background: linear-gradient(to right, #00cc6a, #00a855);
-    color: #1f3a20;
+/* Botones */
+.btn-guardar {
+    background: linear-gradient(45deg, #00ff88, #00cc6a);
+    color: #002200;
     border: none;
-    padding: 14px 30px;
+    padding: 1rem 2.5rem;
     border-radius: 30px;
     font-weight: 700;
-    cursor: pointer;
     display: block;
-    margin: 20px auto 0;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    margin: 1.5rem auto 0;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 200, 106, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    text-align: center;
-    width: fit-content;
     position: relative;
     overflow: hidden;
 }
 
-.btn-volver-menu:hover {
-    background: linear-gradient(to right, #00ff88, #00cc6a);
+.btn-guardar:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.6);
-    color: #1f3a20;
+    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
 }
 
-.btn-volver-menu i {
-    margin-right: 8px;
+.btn-volver-menu {
+    background: linear-gradient(45deg, #00cc6a, #00a855);
+    color: #002200;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    margin: 2rem auto;
     transition: all 0.3s ease;
 }
 
-.btn-volver-menu:hover i {
-    transform: translateX(-5px);
+.btn-volver-menu:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
 }
 
-/* Responsive*/
+/* Animaciones */
+@keyframes glow {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.3; }
+}
+
+.cancha::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: glow 4s infinite;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .formacion-container {
-        padding: 20px;
-        width: 95%;
+        padding: 1.5rem;
+        width: 100%;
+        border-radius: 15px;
     }
 
     .cancha {
-        height: 350px;
+        width: 100%;
+        height: auto;
     }
 
     .punto {
@@ -259,41 +220,24 @@ body {
     .jugador-dorsal {
         width: 28px;
         height: 28px;
-        font-size: 16px;
-    }
-
-    .jugador-nombre {
-        font-size: 9px;
-    }
-
-    .btn-formacion {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-        min-width: 80px;
-    }
-
-    .btn-guardar, .btn-volver-menu {
-        padding: 12px 25px;
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .formaciones-grid {
-        gap: 10px;
+        grid-template-columns: 1fr 1fr;
     }
 
     .btn-formacion {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        min-width: 70px;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
     }
 
-    .formacion-container h2 {
-        font-size: 1.8rem;
+    .jugador-nombre {
+        font-size: 0.6rem;
     }
 }
-
 /* Carga el portero en esa posicion cen todas las formaciones*/
 .punto-portero {
     bottom: 2%;
