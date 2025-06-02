@@ -15,4 +15,4 @@ COPY .. .
 EXPOSE 8000
 
 # Comando para iniciar el servidor de desarrollo
-CMD ["python", "manage.py", "runserver", "localhost:8000"]
+CMD ["gunicorn","python", "manage.py", "runserver", "localhost:8000"]
