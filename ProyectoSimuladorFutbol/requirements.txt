@@ -4,4 +4,4 @@ django-crispy-forms==2.4
 pillow==11.1.0
 sqlparse==0.5.3
 tzdata==2025.2
-gunicorn
+gunicorn==21.2.0
