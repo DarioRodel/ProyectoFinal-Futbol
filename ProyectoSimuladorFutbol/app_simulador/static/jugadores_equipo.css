@@ -1,281 +1,226 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Exo+2:wght@300;600&display=swap');
-
-:root {
-    --neon-green: #00ff88;
-    --dark-bg: #001222;
-    --accent-blue: #0066ff;
-    --hover-glow: rgba(0, 255, 136, 0.3);
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo+2:wght@400;700&display=swap');
 
 body {
-    background: radial-gradient(circle at center,
-                rgba(0, 18, 34, 0.95) 20%,
-                rgba(0, 10, 20, 0.95)),
-                url('images/campo1.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
+    background: linear-gradient(135deg, #0a1832 0%, #003366 100%);
+    color: #e0e0e0;
     font-family: 'Exo 2', sans-serif;
     min-height: 100vh;
-    line-height: 1.7;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
-    padding: 15px;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1600px; /* Más ancho */
+    margin: 30px auto;
+    padding: 30px 10px; /* Menos padding lateral */
+    background: rgba(10, 24, 50, 0.85);
+    border-radius: 32px;
+    box-shadow: 0 8px 40px 0 rgba(0,255,136,0.10), 0 1.5px 8px 0 #00ff88;
+    backdrop-filter: blur(8px);
 }
 
 h2 {
-    font-family: 'Audiowide', cursive;
+    font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    position: relative;
-    padding-bottom: 15px;
-    text-shadow: 0 0 15px var(--neon-green);
+    letter-spacing: 4px;
+    color: #00ff88;
+    text-shadow: 0 0 18px #00ff88, 0 0 2px #fff;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
 }
 
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 3px;
-    background: linear-gradient(90deg,
-                transparent 0%,
-                var(--neon-green) 50%,
-                transparent 100%);
+.posicion-titulo {
+    font-family: 'Orbitron', sans-serif;
+    color: #00ccff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 30px 0 18px 0;
+    font-size: 1.3rem;
+    border-left: 6px solid #00ff88;
+    padding-left: 16px;
+    text-shadow: 0 0 8px #00ccff;
 }
 
-/* Tarjetas de Jugadores Mejoradas */
 .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
 }
 
 .card {
-    background: rgba(0, 34, 68, 0.9);
-    border: 1px solid var(--neon-green);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 0;
+    background: rgba(0, 18, 34, 0.85);
+    border-radius: 24px;
+    box-shadow: 0 0 24px 0 #00ff88, 0 2px 8px 0 #003366;
+    border: 2px solid #00ff88;
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    min-width: 270px;
+    flex: 1 1 300px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s ease;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(6px);
+    z-index: 1;
 }
 
 .card::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 255, 136, 0.2),
-        transparent
-    );
-    transition: 0.6s;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 80%);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 40px var(--hover-glow);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 40px 0 #00ff88, 0 4px 16px 0 #003366;
+    border-color: #00ccff;
 }
 
-.card:hover::before {
-    left: 100%;
-}
-
-/* Encabezado de Tarjeta */
 .card-header {
-    padding: 1rem 0;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    z-index: 2;
+    position: relative;
 }
 
 .card-header h3 {
-    color: var(--neon-green);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     margin: 0;
-    position: relative;
-    display: inline-block;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00ff88;
 }
 
-.card-header h3::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 40%;
-    height: 2px;
-    background: var(--neon-green);
-    transition: width 0.3s ease;
+.card-header .fa-user {
+    font-size: 2.2rem;
+    color: #00ff88;
+    text-shadow: 0 0 12px #00ff88;
 }
 
-.card:hover .card-header h3::after {
-    width: 100%;
-}
-
-/* Estadísticas del Jugador */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.8rem;
     margin-top: 1rem;
+    z-index: 2;
+    position: relative;
 }
 
 .stat-item {
-    background: rgba(0, 255, 136, 0.05);
-    padding: 0.8rem;
-    border-radius: 8px;
+    background: rgba(0, 255, 136, 0.10);
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
     text-align: center;
-    transition: background 0.3s ease;
-}
-
-.stat-item:hover {
-    background: rgba(0, 255, 136, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 0 8px #00ff8833;
+    border: 1px solid #00ff8844;
+    transition: background 0.3s;
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    color: var(--neon-green);
-    margin-bottom: 0.3rem;
+    color: #00ccff;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
 .stat-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 6px #00ff88;
+}
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
+    color: #0a1832;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    box-shadow: 0 0 8px #00ff88;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 2px #fff8;
+}
+
+.btn-volver-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #00ccff 0%, #00ff88 100%);
+    color: #0a1832;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 40px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 800;
+    box-shadow: 0 0 18px #00ff8899;
+    margin: 40px auto 0 auto;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+    letter-spacing: 2px;
+    text-decoration: none;
+    max-width: 320px;
+}
+
+.btn-volver-menu:hover {
+    background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
+    color: #fff;
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 0 32px #00ff88cc;
+}
+
+.btn-volver-menu i {
+    margin-right: 12px;
     font-size: 1.2rem;
-    font-weight: 600;
+    color: #0a1832;
+    transition: color 0.3s;
+}
+
+.btn-volver-menu:hover i {
     color: #fff;
 }
 
-/* Badges Mejorados */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid;
-    backdrop-filter: blur(4px);
-}
-
-.badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    transition: 0.5s;
-}
-
-.badge:hover::before {
-    left: 100%;
-}
-
-.bg-danger {
-    background: rgba(255, 26, 74, 0.2);
-    border-color: #ff1a4a;
-    color: #ff1a4a;
-}
-
-.bg-success {
-    background: rgba(0, 204, 102, 0.2);
-    border-color: #00cc66;
-    color: #00cc66;
-}
-
-/* Efectos Especiales */
-.glowing-border {
-    position: relative;
-}
-
-.glowing-border::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(
-        45deg,
-        var(--neon-green),
-        var(--accent-blue),
-        var(--neon-green)
-    );
-    z-index: -1;
-    animation: borderGlow 3s linear infinite;
-    background-size: 400%;
-    border-radius: inherit;
-}
-
-@keyframes borderGlow {
-    0% {
-        background-position: 0% 50%;
-        opacity: 0.8;
-    }
-    50% {
-        background-position: 100% 50%;
-        opacity: 1;
-    }
-    100% {
-        background-position: 0% 50%;
-        opacity: 0.8;
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 900px) {
     .row {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 1.5rem;
     }
-
-    .card {
-        padding: 1rem;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
+    .container {
+        padding: 18px 6px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .container {
+        padding: 8px 2px;
+    }
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
-
-    .card-header h3 {
-        font-size: 1.2rem;
+    .posicion-titulo {
+        font-size: 1.1rem;
     }
-
-    .stat-value {
+    .card {
+        padding: 1.1rem 0.7rem;
+    }
+    .btn-volver-menu {
+        width: 100%;
         font-size: 1rem;
+        padding: 12px 0;
     }
 }
