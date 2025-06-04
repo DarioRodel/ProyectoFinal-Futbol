@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from app_simulador.models import Jugador, Equipo
-# Importamos el diccionario de datos desde un archivo
 from app_simulador.data.jugadores_equipos import jugadores
 
 
@@ -29,7 +28,6 @@ class Command(BaseCommand):
             fundacion = equipo_data.get('fundacion', 1900)
             presupuesto = equipo_data.get('presupuesto', 100_000_000)
 
-            # Creamos el equipo si no existe, o lo obtenemos si ya está creado
             equipo, creado = Equipo.objects.get_or_create(
                 nombre=equipo_nombre,
                 defaults={
@@ -38,7 +36,6 @@ class Command(BaseCommand):
                 }
             )
 
-            # Informamos si se creó el equipo o si ya existía
             if creado:
                 self.stdout.write(self.style.SUCCESS(f'✅ Equipo creado: {equipo_nombre}'))
             else:
@@ -46,13 +43,12 @@ class Command(BaseCommand):
 
             # Iteramos sobre las claves del diccionario para encontrar posiciones de jugadores
             for clave, valor in equipo_data.items():
-                # Ignoramos claves que no son posiciones (ni fundación)
+                # Ignoramos claves que no son posiciones
                 if clave not in ['POR', 'DEF', 'MED', 'DEL']:
                     continue
 
                 # Iteramos sobre los jugadores de esa posición
                 for jugador_data in valor:
-                    # Procesamos el nombre completo separándolo en nombre y apellido
                     nombre_completo = jugador_data.get('nombre', '')
                     nombre_partes = nombre_completo.split(' ', 1)
                     nombre = nombre_partes[0]
@@ -73,12 +69,9 @@ class Command(BaseCommand):
                             'suspendido': jugador_data.get('suspendido', False)
                         }
                     )
-
-                    # Mostramos en consola si se creó o ya existía
                     if creado:
                         self.stdout.write(self.style.SUCCESS(f'  ✅ Jugador creado: {nombre_completo}'))
                     else:
                         self.stdout.write(f'  ⚠️ Jugador ya existía: {nombre_completo}')
 
-        # Mensaje final cuando todo se ha procesado correctamente
         self.stdout.write(self.style.SUCCESS('\n✅ Carga de datos completada exitosamente!'))

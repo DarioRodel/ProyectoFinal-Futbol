@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand
 from app_simulador.models import Logro
 
-
-# Comando para crear logros predefinidos en la base de datos
 class Command(BaseCommand):
     help = 'Crea los logros iniciales en la base de datos'
 
@@ -20,7 +18,6 @@ class Command(BaseCommand):
 
         # Iteramos sobre cada logro y lo creamos si no existe aún
         for logro_data in logros:
-            Logro.objects.get_or_create(**logro_data)  # Evitamos duplicados usando get_or_create
+            Logro.objects.get_or_create(**logro_data)
 
-        # Confirmación en consola
         self.stdout.write(self.style.SUCCESS('Logros creados exitosamente.'))

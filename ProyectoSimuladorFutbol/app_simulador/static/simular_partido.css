@@ -257,7 +257,7 @@ h3, .timeline-header {
     background: linear-gradient(90deg, rgba(0, 200, 255, 0.8) 0%, rgba(0, 100, 200, 0.8) 100%);
     border-color: #00ffff;
 }
-/* ESTADÍSTICAS MEJORADAS */
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

@@ -10,7 +10,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Contenedor principal */
 .formacion-container {
     background: linear-gradient(145deg, rgba(15, 38, 16, 0.95), rgba(25, 48, 26, 0.95));
     border: 3px solid #00ff88;
@@ -24,7 +23,6 @@ body {
     position: relative;
 }
 
-/* Títulos */
 .formacion-container h2 {
     color: #00ff88;
     font-size: 2.5rem;
@@ -37,7 +35,6 @@ body {
     gap: 1rem;
 }
 
-/* Selector de formación */
 .selector-formacion {
     background: rgba(0, 40, 20, 0.8);
     border: 2px solid #00ff88;
@@ -72,7 +69,6 @@ body {
     box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
 }
 
-/* Cancha y jugadores */
 .cancha-container {
     background: rgba(0, 30, 15, 0.8);
     border: 2px solid #00ff88;
@@ -142,7 +138,6 @@ body {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Botones */
 .btn-guardar {
     background: linear-gradient(45deg, #00ff88, #00cc6a);
     color: #002200;
@@ -176,7 +171,6 @@ body {
     box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
 }
 
-/* Animaciones */
 @keyframes glow {
     0% { opacity: 0.3; }
     50% { opacity: 0.7; }
@@ -199,7 +193,6 @@ body {
     animation: glow 4s infinite;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .formacion-container {
         padding: 1.5rem;
@@ -273,7 +266,6 @@ body {
     transform: translateX(-5px);
 }
 
-/* Efecto de brillo al hacer hover */
 .btn-volver-menu::after {
     content: '';
     position: absolute;

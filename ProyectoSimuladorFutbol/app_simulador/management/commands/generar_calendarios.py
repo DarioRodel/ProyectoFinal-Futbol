@@ -12,7 +12,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR('Debe haber exactamente 20 equipos'))
             return
 
-        # Generar calendario usando algoritmo round-robin mejorado
+        # Generar calendario usando algoritmo round-robin
         calendario_completo = self.generar_round_robin_mejorado(equipos)
 
         # Asignar calendario a cada equipo
@@ -33,11 +33,10 @@ class Command(BaseCommand):
         n = len(equipos)
         mitad = n // 2
         calendario = []
-        equipos_rotantes = equipos[1:]  # Excluir el primer equipo como pivote
+        equipos_rotantes = equipos[1:]  # Excluir el primer equipo
 
         for _ in range(n - 1):
             jornada = []
-            # Emparejar el equipo pivote con el último de la lista rotante
             jornada.append((equipos[0], equipos_rotantes[-1]))
 
             # Emparejar el resto

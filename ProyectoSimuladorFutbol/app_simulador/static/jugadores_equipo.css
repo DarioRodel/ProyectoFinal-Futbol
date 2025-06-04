@@ -11,9 +11,9 @@ body {
 }
 
 .container {
-    max-width: 1600px; /* Más ancho */
+    max-width: 1600px;
     margin: 30px auto;
-    padding: 30px 10px; /* Menos padding lateral */
+    padding: 30px 10px;
     background: rgba(10, 24, 50, 0.85);
     border-radius: 32px;
     box-shadow: 0 8px 40px 0 rgba(0,255,136,0.10), 0 1.5px 8px 0 #00ff88;

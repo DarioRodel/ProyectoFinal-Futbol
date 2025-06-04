@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand
 from app_simulador.models import Equipo
 
-
-# Comando personalizado para cargar equipos de La Liga con datos reales
 class Command(BaseCommand):
     help = 'Carga los equipos de La Liga con datos reales'
 
@@ -193,12 +191,10 @@ class Command(BaseCommand):
 
         # Iteramos por cada diccionario de equipo
         for datos in equipos:
-            # Usamos update_or_create para evitar duplicados:
             # Si el equipo ya existe (por nombre), lo actualiza. Si no, lo crea.
             Equipo.objects.update_or_create(
-                nombre=datos['nombre'],  # Condición para buscar el equipo
+                nombre=datos['nombre'],
                 defaults=datos  # Si se encuentra, se actualiza con estos valores; si no, se usa para crear uno nuevo
             )
 
-        # Mostramos un mensaje por consola indicando que todo fue exitoso
         self.stdout.write(self.style.SUCCESS('Equipos cargados exitosamente!'))

@@ -1,6 +1,5 @@
-/* Fondo general y tipografía */
+
 body {
-    background: url('../images/campo1.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -8,7 +7,6 @@ body {
     position: relative;
 }
 
-/* Filtro oscuro sobre el fondo */
 body::before {
     content: '';
     position: fixed;
@@ -20,13 +18,11 @@ body::before {
     z-index: -1;
 }
 
-/* Contenedor principal */
 .container {
     animation: fadeIn 1s ease;
     padding: 2rem;
 }
 
-/* Título principal */
 h1 {
     font-size: 3rem;
     font-weight: bold;
@@ -48,7 +44,6 @@ h1::after {
     background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 170, 0.4) 50%, transparent 100%);
 }
 
-/* Tarjetas de estadísticas */
 .stat-card {
     background: linear-gradient(135deg, rgba(0, 30, 60, 0.9) 0%, rgba(0, 0, 20, 0.9) 100%);
     border: 3px solid #1a3a5a;
@@ -93,7 +88,6 @@ h1::after {
     -webkit-text-fill-color: transparent;
 }
 
-/* Botón Volver al Menú */
 .btn-primary {
     background: linear-gradient(135deg, #00ffaa 0%, #00bcd4 100%);
     border: none;
@@ -127,7 +121,6 @@ h1::after {
     left: 100%;
 }
 
-/* Logros y mensajes de alerta */
 .alert {
     background: linear-gradient(135deg, rgba(0, 50, 100, 0.9) 0%, rgba(0, 20, 40, 0.9) 100%);
     border: 2px solid #1a3a5a;
@@ -155,7 +148,6 @@ h1::after {
     background: radial-gradient(circle at 50% 50%, rgba(0, 255, 170, 0.1) 0%, transparent 60%);
 }
 
-/* Tarjeta resumen */
 .card {
     background: linear-gradient(135deg, rgba(0, 30, 60, 0.95) 0%, rgba(0, 0, 20, 0.95) 100%);
     border: 3px solid #1a3a5a;
@@ -210,7 +202,7 @@ h1::after {
     }
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
     h1 {
         font-size: 2.2rem;
