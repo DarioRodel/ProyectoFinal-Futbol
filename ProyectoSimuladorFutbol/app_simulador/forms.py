@@ -9,7 +9,7 @@ from .models import Equipo, UserProfile
 class SeleccionEquipoForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['equipo_seleccionado']  # Campo que será mostrado en el formulario
+        fields = ['equipo_seleccionado']
 
     # Modificar la consulta para 'equipo_seleccionado', mostrando todos los equipos disponibles
     def __init__(self, *args, **kwargs):
@@ -22,12 +22,11 @@ class EditarEquipoForm(forms.ModelForm):
     class Meta:
         model = Equipo
         fields = [
-            'presupuesto',  # Campo para modificar el presupuesto del equipo
-            'equipacion_principal',  # Campo para la equipación principal
-            'equipacion_alternativa'  # Campo para la equipación alternativa
+            'presupuesto',
+            'equipacion_principal',
+            'equipacion_alternativa'
         ]
 
-        # Etiquetas personalizadas para los campos
         labels = {
             'equipacion_principal': 'Equipación Titular',
             'equipacion_alternativa': 'Equipación Alternativa'
@@ -47,7 +46,7 @@ class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
         label="Nombre",
         max_length=150,
-        validators=[  # Validador para el nombre de usuario (solo letras, números y algunos caracteres especiales)
+        validators=[  # Validador para el nombre de usuario
             RegexValidator(
                 regex='^[a-zA-Z0-9@.+-_]+$',
                 message='El nombre de usuario solo puede contener letras, números y los caracteres @/./+/-/_.',
@@ -62,17 +61,17 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
     )
 
-    # Campo para la contraseña (Primera contraseña)
+    # Campo para la contraseña
     password1 = forms.CharField(
-        label="Contraseña",  # Título del campo
+        label="Contraseña",
         strip=False,  # Elimina espacios antes o después de la contraseña
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),  # Estilo del campo
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
     )
 
     # Campo para la confirmación de la contraseña
     password2 = forms.CharField(
         label="Confirmar contraseña",
-        strip=False,  # Elimina espacios antes o después
+        strip=False,
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirmar contraseña'}),
         help_text="Introduce la misma contraseña para verificación.",
     )

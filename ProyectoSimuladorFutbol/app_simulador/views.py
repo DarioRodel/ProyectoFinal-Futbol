@@ -11,7 +11,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-
 from .data.jugadores_equipos import jugadores
 from .models import Equipo, UserProfile, UsuarioLogro, Jugador, Partido
 from .forms import CustomUserCreationForm
@@ -634,7 +633,7 @@ class SimularPartidoView(LoginRequiredMixin, View):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
     def simular_jornada_completa(self, jornada, equipo_usuario, oponente_usuario):
-        # Simular todos los partidos de la jornada excepto el del usuario
+        # Simular todos los partidos de la jornada excepto el propio equipo
         equipos = Equipo.objects.all()
 
         for equipo in equipos:
@@ -642,7 +641,7 @@ class SimularPartidoView(LoginRequiredMixin, View):
                 oponente_id = equipo.calendario[jornada - 1]
                 oponente = Equipo.objects.get(id=oponente_id)
 
-                # Saltar si es el partido del usuario
+                # Saltar si es el partido del mismo equipo
                 if {equipo.id, oponente.id} == {equipo_usuario.id, oponente_usuario.id}:
                     continue
 
@@ -673,11 +672,9 @@ class SimularPartidoView(LoginRequiredMixin, View):
                 continue
 
     def otorgar_logros_finales(self, usuario, equipo):
-        """Otorga los logros al finalizar la temporada"""
-        # Logro Temporada Completa
+
         otorgar_logro(usuario, "Temporada Completa")
 
-        # Logro Campeón de Liga
         equipos_ordenados = Equipo.objects.order_by('-puntos')
         if equipos_ordenados.first() == equipo:
             otorgar_logro(usuario, "Campeón de la Liga")
@@ -767,7 +764,6 @@ class SimularPartidoView(LoginRequiredMixin, View):
 
             # Solo generar eventos nuevos si ha pasado tiempo desde el último
             if minuto - ultimo_evento_minuto >= 2:
-                # Probabilidades de eventos
                 if random.random() < 0.10:  # Faltas
                     equipo = random.choice(['local', 'visitante'])
                     tipo = 'falta'

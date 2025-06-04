@@ -24,7 +24,7 @@ def generar_calendario_round_robin(equipos):
     n = len(equipos)
     jornadas = {}
 
-    equipos = list(equipos)  # Se asegura de tener una lista mutable
+    equipos = list(equipos)
     if n % 2:
         equipos.append(None)  # Si hay un número impar de equipos, se agrega un equipo ficticio (descanso)
 
