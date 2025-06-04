@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo+2:wght@400;700&display=swap');
-
+* {
+    box-sizing: border-box;
+}
 body {
-    background: linear-gradient(135deg, #0a1832 0%, #003366 100%);
+    background: radial-gradient(circle at top left, #0a1832 0%, #003366 100%);
+    animation: gradientShift 10s ease infinite;
     color: #e0e0e0;
     font-family: 'Exo 2', sans-serif;
     min-height: 100vh;
@@ -16,7 +19,7 @@ body {
     padding: 30px 10px;
     background: rgba(10, 24, 50, 0.85);
     border-radius: 32px;
-    box-shadow: 0 8px 40px 0 rgba(0,255,136,0.10), 0 1.5px 8px 0 #00ff88;
+    box-shadow: 0 8px 40px 0 rgba(0, 255, 136, 0.10), 0 1.5px 8px 0 #00ff88;
     backdrop-filter: blur(8px);
 }
 
@@ -43,7 +46,7 @@ h2 {
     text-shadow: 0 0 8px #00ccff;
 }
 
-.row {
+.fila-jugadores {
     display: flex;
     flex-wrap: wrap;
     gap: 2.5rem;
@@ -60,7 +63,7 @@ h2 {
     flex: 1 1 300px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     backdrop-filter: blur(6px);
     z-index: 1;
 }
@@ -72,13 +75,13 @@ h2 {
     left: -40%;
     width: 180%;
     height: 180%;
-    background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 80%);
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 80%);
     z-index: 0;
     pointer-events: none;
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.03);
+    transform: translateY(-10px);
     box-shadow: 0 0 40px 0 #00ff88, 0 4px 16px 0 #003366;
     border-color: #00ccff;
 }
@@ -154,6 +157,11 @@ h2 {
     letter-spacing: 1px;
     text-shadow: 0 1px 2px #fff8;
 }
+.stat-item:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: scale(1.03);
+    transition: all 0.3s ease;
+}
 
 .btn-volver-menu {
     display: flex;
@@ -161,6 +169,7 @@ h2 {
     justify-content: center;
     background: linear-gradient(90deg, #00ccff 0%, #00ff88 100%);
     color: #0a1832;
+    transition: all 0.3s ease-in-out;
     border: none;
     padding: 14px 36px;
     border-radius: 40px;
@@ -170,7 +179,6 @@ h2 {
     box-shadow: 0 0 18px #00ff8899;
     margin: 40px auto 0 auto;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s, transform 0.2s;
     letter-spacing: 2px;
     text-decoration: none;
     max-width: 320px;
@@ -193,6 +201,16 @@ h2 {
 .btn-volver-menu:hover i {
     color: #fff;
 }
+body {
+    background: radial-gradient(circle at top left, #0a1832 0%, #003366 100%);
+    animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -200,6 +218,7 @@ h2 {
         flex-direction: column;
         gap: 1.5rem;
     }
+
     .container {
         padding: 18px 6px;
     }
@@ -209,15 +228,19 @@ h2 {
     .container {
         padding: 8px 2px;
     }
+
     h2 {
         font-size: 1.3rem;
     }
+
     .posicion-titulo {
         font-size: 1.1rem;
     }
+
     .card {
         padding: 1.1rem 0.7rem;
     }
+
     .btn-volver-menu {
         width: 100%;
         font-size: 1rem;
