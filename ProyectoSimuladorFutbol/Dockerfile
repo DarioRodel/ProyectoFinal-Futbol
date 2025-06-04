@@ -15,4 +15,4 @@ COPY .. .
 EXPOSE 8000
 
 # Comando para iniciar el servidor de desarrollo
-CMD ["gunicorn","python", "manage.py", "runserver", "localhost:8000"]
+CMD ["gunicorn", "ProyectoSimuladorFutbol.wsgi:application", "--bind", "0.0.0.0:8000"]
