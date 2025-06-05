@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), url('images/campo1.jpg') center/cover fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), url('../images/campo1.jpg') center/cover fixed;
     color: #fff;
     min-height: 100vh;
     display: flex;
@@ -80,7 +80,7 @@ body {
 }
 
 .cancha {
-    background: url('images/campo3.jpg') center/contain no-repeat;
+    background: url('../images/campo3.jpg') center/contain no-repeat;
     aspect-ratio: 16/9;
     position: relative;
     margin: 0 auto;

@@ -1,5 +1,5 @@
 body {
-    background: url('images/campo1.jpg') no-repeat center center fixed;
+    background: url('../images/campo1.jpg') no-repeat center center fixed;
 }
 
 .btn-back {
